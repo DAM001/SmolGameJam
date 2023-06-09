@@ -22,8 +22,5 @@ public class CameraPlayer : MonoBehaviour
         Vector3 desiredPosition = _target.transform.position + _cameraPosition;
         Vector3 smoothedPostion = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);
         transform.position = smoothedPostion;
-
-        //transform.LookAt(_target.transform);
-        //transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z / 2, 1);
     }
 }
