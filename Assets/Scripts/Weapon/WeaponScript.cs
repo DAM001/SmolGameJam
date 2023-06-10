@@ -8,6 +8,7 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] private GameObject _bullet;
 
     [Header("Weapon data:")]
+    [SerializeField] private float _damage = 30f;
     [SerializeField] private float _fireRate = .1f;
     [SerializeField] private float _accuracy = 5f;
     [SerializeField] private bool _fullAuto = true;
@@ -17,6 +18,10 @@ public class WeaponScript : MonoBehaviour
     private bool _fireDown = false;
     private bool _nextFireEnabled = true;
 
+    private GameObject _parent;
+
+
+    public float Damage { get => _damage; }
 
     private void Start()
     {
@@ -51,11 +56,19 @@ public class WeaponScript : MonoBehaviour
         FireAccuracy(_accuracy);
         var bullet = Instantiate(_bullet, _firePoint.transform);
         bullet.transform.SetParent(null);
+
+        if (_parent == null) return;
+        _parent.GetComponent<CharacterHandItemMovement>().FireEffect();
     }
 
     private void FireAccuracy(float accuracy)
     {
         _firePoint.transform.rotation = transform.rotation;
         _firePoint.transform.Rotate(0f, Random.Range(-accuracy, accuracy), 0f, Space.Self);
+    }
+
+    public void SetParent(GameObject parent)
+    {
+        _parent = parent;
     }
 }

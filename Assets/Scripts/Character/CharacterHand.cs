@@ -4,24 +4,50 @@ using UnityEngine;
 
 public class CharacterHand : MonoBehaviour
 {
+    private GameObject _currentWeapon;
+
+    public GameObject Weapon { get => _currentWeapon; }
+
+    private void Start()
+    {
+        if (transform.childCount == 0) return;
+        OnEquip();
+    }
 
     public WeaponScript GetWeapon()
     {
-        if (transform.childCount == 0) return null;
-        return transform.GetChild(0).GetComponent<WeaponScript>();
+        if (_currentWeapon == null) return null;
+        return _currentWeapon.GetComponent<WeaponScript>();
+    }
+
+    public InventoryItem GetInventoryItem()
+    {
+        if (_currentWeapon == null) return null;
+        return _currentWeapon.GetComponent<InventoryItem>();
     }
 
     public void OnFireDown()
     {
-        if (GetWeapon() == null) return;
-
+        if (_currentWeapon == null) return;
         GetWeapon().FireDown();
     }
 
     public void OnFireUp()
     {
-        if (GetWeapon() == null) return;
-
+        if (_currentWeapon == null) return;
         GetWeapon().FireUp();
+    }
+
+    public void OnEquip()
+    {
+        _currentWeapon = transform.GetChild(0).gameObject;
+        GetInventoryItem().Equip();
+        GetWeapon().SetParent(gameObject);
+    }
+
+    public void OnThrow()
+    {
+        if (_currentWeapon == null) return;
+        GetInventoryItem().Throw();
     }
 }
