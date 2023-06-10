@@ -18,6 +18,8 @@ public class CharacterHandItemMovement : MonoBehaviour
         Transform itemTransform = _characterHand.CurrentItem.transform;
         Move(itemTransform);
         Rotate(itemTransform);
+
+        if (Vector3.Distance(itemTransform.position, transform.position) > 5f) ResetPosition();
     }
 
     private void Move(Transform itemTransform)
@@ -39,6 +41,12 @@ public class CharacterHandItemMovement : MonoBehaviour
         float multiplier = _characterHand.GetWeapon().Damage / 10f;
 
         itemTransform.position -= itemTransform.forward * Random.Range(.05f, .2f) * multiplier;
-        itemTransform.Rotate(Random.Range(-1f, -5f) * multiplier, Random.Range(-10f, 10f) * multiplier, 0f, Space.Self);
+        itemTransform.Rotate(Random.Range(-1f, -5f) * multiplier, Random.Range(-1f, 1f) * multiplier, 0f, Space.Self);
+    }
+
+    public void ResetPosition()
+    {
+        _characterHand.CurrentItem.transform.position = transform.position;
+        _characterHand.CurrentItem.transform.rotation = transform.rotation;
     }
 }

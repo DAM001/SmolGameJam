@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5baa33ead99a68342890311dc5ab1901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponType: 0
 --- !u!114 &1927063270505557456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +64,8 @@ MonoBehaviour:
   _boxCollider: {fileID: 3247414788920711010}
   _rigidbody: {fileID: 3247414788920711011}
   _itemType: 3
-  _throwForce: 5000
+  _throwForce: 2000
+  _inventoryIcon: {fileID: 6631512171280777701, guid: 921fa7185e406624a8b9fcd7d90db97f, type: 3}
 --- !u!65 &3247414788920711010
 BoxCollider:
   m_ObjectHideFlags: 0

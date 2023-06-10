@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterHand : MonoBehaviour
 {
+    [SerializeField] private Inventory _inventory;
+    [Header("Properties:")]
     [SerializeField] private float _pickupDistance = 3f;
 
     private GameObject _currentItem;
@@ -37,13 +39,13 @@ public class CharacterHand : MonoBehaviour
     public void OnFireDown()
     {
         if (_currentItem == null) return;
-        GetWeapon().FireDown();
+        if (IsWeapon()) GetWeapon().FireDown();
     }
 
     public void OnFireUp()
     {
         if (_currentItem == null) return;
-        GetWeapon().FireUp();
+        if (IsWeapon()) GetWeapon().FireUp();
     }
 
     public void OnEquip()
@@ -54,6 +56,7 @@ public class CharacterHand : MonoBehaviour
 
         _currentItem = item;
         GetInventoryItem().Equip();
+        _inventory.AddItem(item);
         if (IsWeapon()) GetWeapon().SetParent(gameObject);
     }
 
@@ -63,6 +66,24 @@ public class CharacterHand : MonoBehaviour
         GetInventoryItem().Throw();
         if (IsWeapon()) GetWeapon().FireUp();
 
+        _inventory.ThrowItem();
         _currentItem = null;
+    }
+
+    public void ChangeInventoryIndex(int index)
+    {
+        _currentItem = _inventory.ChangeActive(index);
+    }
+
+    public void UseAmmo()
+    {
+        if (!IsWeapon()) return;
+        _inventory.UseAmmo(GetWeapon().WeaponType);
+    }
+
+    public bool HasAmmo()
+    {
+        if (!IsWeapon()) return false;
+        return _inventory.HasAmmo(GetWeapon().WeaponType);
     }
 }

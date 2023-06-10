@@ -9,8 +9,11 @@ public class InventoryItem : MonoBehaviour
     [Header("Properties:")]
     [SerializeField] private InventoryItemType _itemType;
     [SerializeField] private float _throwForce = 1000f;
+    [Header("UI:")]
+    [SerializeField] private GameObject _inventoryIcon;
 
     public InventoryItemType ItemType { get => _itemType; }
+    public GameObject InventoryIcon { get => _inventoryIcon; }
 
     public void Equip()
     {

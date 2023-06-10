@@ -11,9 +11,12 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private float _aliveTime = 3f;
     [SerializeField] private float _impactForce = 1000f;
 
+    public float Damage { set => _damage = value; }
+    public float Speed { set => _speed = value; }
 
     private void Start()
     {
+        transform.parent = null;
         Destroy(gameObject, _aliveTime);
     }
 

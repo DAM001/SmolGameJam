@@ -42,31 +42,41 @@ public class PlayerController : MonoBehaviour
 
     private void OnItem0()
     {
-
+        _characterHand.ChangeInventoryIndex(0);
     }
 
     private void OnItem1()
     {
-
+        _characterHand.ChangeInventoryIndex(1);
     }
 
     private void OnItem2()
     {
-
+        _characterHand.ChangeInventoryIndex(2);
     }
 
     private void OnItem3()
     {
-
+        _characterHand.ChangeInventoryIndex(3);
     }
 
     private void OnItem4()
     {
-
+        _characterHand.ChangeInventoryIndex(4);
     }
 
     private void OnItem5()
     {
+        _characterHand.ChangeInventoryIndex(5);
+    }
 
+    private void OnScrollUp()
+    {
+        Debug.Log("up");
+    }
+
+    private void OnScrollDown()
+    {
+        Debug.Log("down");
     }
 }

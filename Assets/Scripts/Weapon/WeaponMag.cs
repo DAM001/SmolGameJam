@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class WeaponMag : MonoBehaviour
 {
+    [SerializeField] private WeaponScript _weaponScript;
+
     [SerializeField] private int _magSize = 30;
     [SerializeField] private float _reloadTime = 2f;
-    [SerializeField] private int _maxNumberOfMags = 4;
-    [SerializeField] private int _numberOfMags = 3;
 
     private int _numberOfRoundsLeft = 0;
     private bool _isReloading = false;
@@ -16,7 +16,7 @@ public class WeaponMag : MonoBehaviour
 
     private void Start()
     {
-        Reload();
+        _numberOfRoundsLeft = _magSize;
     }
 
     public bool OnFire()
@@ -30,16 +30,10 @@ public class WeaponMag : MonoBehaviour
         OnReload();
         return false;
     }
-
-    public void AddMag()
-    {
-        if (_maxNumberOfMags <= _numberOfMags) return;
-        _numberOfMags++;
-    }
     
     public void OnReload()
     {
-        if (_numberOfMags <= 0) return;
+        if (!_weaponScript.Parent.GetComponent<CharacterHand>().HasAmmo()) return;
         if (_isReloading) return;
         StartCoroutine(ReloadHandler());
     }
@@ -47,7 +41,7 @@ public class WeaponMag : MonoBehaviour
     private void Reload()
     {
         _numberOfRoundsLeft = _magSize;
-        _numberOfMags--;
+        _weaponScript.Parent.GetComponent<CharacterHand>().UseAmmo();
     }
 
     private IEnumerator ReloadHandler()
@@ -56,5 +50,10 @@ public class WeaponMag : MonoBehaviour
         yield return new WaitForSeconds(_reloadTime);
         _isReloading = false;
         Reload();
+    }
+
+    public float AmmoInPercentage()
+    {
+        return _numberOfRoundsLeft / _magSize;
     }
 }

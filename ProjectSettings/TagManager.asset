@@ -7,6 +7,7 @@ TagManager:
   - Cursor
   - Item
   - GameManager
+  - Canvas
   layers:
   - Default
   - TransparentFX

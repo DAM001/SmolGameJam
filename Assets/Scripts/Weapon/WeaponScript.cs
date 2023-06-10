@@ -10,20 +10,23 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] private WeaponMag _mag;
 
     [Header("Weapon data:")]
-    [SerializeField] private float _damage = 30f;
+    [SerializeField] private WeaponType _weaponType;
     [SerializeField] private float _fireRate = .1f;
     [SerializeField] private float _accuracy = 5f;
     [SerializeField] private bool _fullAuto = true;
+    [Header("Bullet properties:")]
+    [SerializeField] private float _damage = 30f;
+    [SerializeField] private float _speed = 1f;
 
     private GameObject _firePoint;
     private float _nextTimeFire = 0f;
     private bool _fireDown = false;
     private bool _nextFireEnabled = true;
-
     private GameObject _parent;
 
-
     public float Damage { get => _damage; }
+    public WeaponType WeaponType { get => _weaponType; }
+    public GameObject Parent { get => _parent; }
 
     private void Start()
     {
@@ -58,7 +61,8 @@ public class WeaponScript : MonoBehaviour
     {
         FireAccuracy(_accuracy);
         var bullet = Instantiate(_bullet, _firePoint.transform);
-        bullet.transform.SetParent(null);
+        bullet.GetComponent<BulletScript>().Damage = _damage;
+        bullet.GetComponent<BulletScript>().Speed = _speed;
 
         if (_parent == null) return;
         _parent.GetComponent<CharacterHandItemMovement>().FireEffect();
