@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 3463684100463376727}
   - component: {fileID: 624834902433639225}
   m_Layer: 0
-  m_Name: Weapon
+  m_Name: WeaponBase
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -388,6 +388,7 @@ MonoBehaviour:
   _fireRate: 0.1
   _accuracy: 5
   _fullAuto: 1
+  _numberOfBullets: 1
   _damage: 30
   _speed: 1
 --- !u!114 &607558756718742500
@@ -748,7 +749,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8fb50321d1bc70d4c9997369759d64ae, type: 2}
+  - {fileID: 2100000, guid: 9dedbc54991ee104f8929cbfd7bdbaa4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -863,7 +864,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8fb50321d1bc70d4c9997369759d64ae, type: 2}
+  - {fileID: 2100000, guid: 9dedbc54991ee104f8929cbfd7bdbaa4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

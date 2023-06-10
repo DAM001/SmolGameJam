@@ -14,6 +14,7 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] private float _fireRate = .1f;
     [SerializeField] private float _accuracy = 5f;
     [SerializeField] private bool _fullAuto = true;
+    [SerializeField] private int _numberOfBullets = 1;
     [Header("Bullet properties:")]
     [SerializeField] private float _damage = 30f;
     [SerializeField] private float _speed = 1f;
@@ -33,6 +34,12 @@ public class WeaponScript : MonoBehaviour
         _firePoint = transform.GetChild(0).gameObject;
     }
 
+    public void Activate()
+    {
+        _mag.Activate();
+    }
+
+
     private void Update()
     {
         if (!_fireDown) return;
@@ -42,13 +49,13 @@ public class WeaponScript : MonoBehaviour
             if (!_mag.OnFire()) return;
             _nextTimeFire = Time.time + _fireRate;
             FireFunction();
+            if (!_fullAuto) _nextFireEnabled = false;
         }
     }
 
     public void FireDown()
     {
         _fireDown = true;
-        if (!_fullAuto) _nextFireEnabled = false;
     }
 
     public void FireUp()
@@ -59,10 +66,13 @@ public class WeaponScript : MonoBehaviour
 
     private void FireFunction()
     {
-        FireAccuracy(_accuracy);
-        var bullet = Instantiate(_bullet, _firePoint.transform);
-        bullet.GetComponent<BulletScript>().Damage = _damage;
-        bullet.GetComponent<BulletScript>().Speed = _speed;
+        for (int i = 0; i < _numberOfBullets; i++)
+        {
+            FireAccuracy(_accuracy);
+            var bullet = Instantiate(_bullet, _firePoint.transform);
+            bullet.GetComponent<BulletScript>().Damage = _damage;
+            bullet.GetComponent<BulletScript>().Speed = _speed;
+        }
 
         if (_parent == null) return;
         _parent.GetComponent<CharacterHandItemMovement>().FireEffect();
@@ -70,7 +80,7 @@ public class WeaponScript : MonoBehaviour
 
     private void FireAccuracy(float accuracy)
     {
-        _firePoint.transform.rotation = transform.rotation;
+        _firePoint.transform.rotation = Quaternion.Euler(0f, transform.localEulerAngles.y, 0f); ;
         _firePoint.transform.Rotate(0f, Random.Range(-accuracy, accuracy), 0f, Space.Self);
     }
 

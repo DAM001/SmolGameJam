@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3247414788920711008}
-  - component: {fileID: 2107857883952698756}
   - component: {fileID: 1927063270505557456}
   - component: {fileID: 3247414788920711010}
   - component: {fileID: 3247414788920711011}
+  - component: {fileID: 1314721854216188198}
   m_Layer: 0
   m_Name: AmmoBox
   m_TagString: Item
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3247414788920711009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 68.68646, y: 1.27, z: -246.03}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36,19 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2107857883952698756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3247414788920711009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5baa33ead99a68342890311dc5ab1901, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponType: 0
 --- !u!114 &1927063270505557456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +52,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 3247414788920711011}
   _itemType: 3
   _throwForce: 2000
-  _inventoryIcon: {fileID: 6631512171280777701, guid: 921fa7185e406624a8b9fcd7d90db97f, type: 3}
+  _inventoryIcon: {fileID: 7808762001856901641, guid: 0af247ca030e538438d18f0982916ccf, type: 3}
 --- !u!65 &3247414788920711010
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -95,6 +82,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1314721854216188198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247414788920711009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e91a15ce27d0b94398251e849a4dc87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponType: 0
 --- !u!1 &3247414789748962738
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dedbc54991ee104f8929cbfd7bdbaa4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -17,6 +17,8 @@ public class InventoryItem : MonoBehaviour
 
     public void Equip()
     {
+        gameObject.tag = "Untagged";
+
         _rigidbody.isKinematic = true;
         _boxCollider.enabled = false;
         transform.parent = null;
@@ -24,6 +26,8 @@ public class InventoryItem : MonoBehaviour
 
     public void Throw()
     {
+        gameObject.tag = "Item";
+
         _rigidbody.isKinematic = false;
         _boxCollider.enabled = true;
         _rigidbody.AddForce(transform.forward * _throwForce + transform.up * _throwForce / 5f);

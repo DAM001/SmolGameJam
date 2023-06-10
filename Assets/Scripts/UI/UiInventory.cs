@@ -41,4 +41,10 @@ public class UiInventory : MonoBehaviour
     {
         return _inventory.GetChild(index).GetChild(1).GetComponent<RectTransform>();
     }
+
+    public GameObject GetItem(int index)
+    {
+        if (_inventory.GetChild(index).GetChild(1).childCount == 0) return null;
+        return _inventory.GetChild(index).GetChild(1).GetChild(0).gameObject;
+    }
 }

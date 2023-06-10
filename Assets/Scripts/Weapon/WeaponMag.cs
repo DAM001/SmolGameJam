@@ -19,6 +19,12 @@ public class WeaponMag : MonoBehaviour
         _numberOfRoundsLeft = _magSize;
     }
 
+    public void Activate()
+    {
+        _isReloading = false;
+        if (_numberOfRoundsLeft == 0) OnReload();
+    }
+
     public bool OnFire()
     {
         if (_numberOfRoundsLeft > 0)
@@ -40,8 +46,8 @@ public class WeaponMag : MonoBehaviour
 
     private void Reload()
     {
-        _numberOfRoundsLeft = _magSize;
         _weaponScript.Parent.GetComponent<CharacterHand>().UseAmmo();
+        _numberOfRoundsLeft = _magSize;
     }
 
     private IEnumerator ReloadHandler()

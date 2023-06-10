@@ -10,6 +10,8 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int _maxInventorySlots = 6;
     [SerializeField] private int _availableInventorySlots = 3;
+    [Header("Player:")]
+    [SerializeField] private bool _isPlayer = false;
 
     private readonly int _maxNumberOfWeapons = 2;
 
@@ -17,10 +19,12 @@ public class Inventory : MonoBehaviour
     private int _numberOfWeapons = 0;
     private int _activeIndex = 0;
 
+    public int ActiveIndex { get => _activeIndex; }
+
     private void Start()
     {
         _items = new GameObject[_maxInventorySlots];
-        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>().SetInventorySize(_availableInventorySlots);
+        if (_isPlayer) GetUi().SetInventorySize(_availableInventorySlots);
     }
 
     public GameObject ChangeActive(int index)
@@ -38,42 +42,90 @@ public class Inventory : MonoBehaviour
     {
         if (_availableInventorySlots >= _maxInventorySlots) return;
         _availableInventorySlots++;
-        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>().SetInventorySize(_availableInventorySlots);
+        if (_isPlayer) GetUi().SetInventorySize(_availableInventorySlots);
     }
 
     public void AddItem(GameObject item)
     {
         if (item.GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon && _numberOfWeapons >= _maxNumberOfWeapons) return;
-
-        if (_items[_activeIndex] == null)
+        if (item.GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
         {
-            _items[_activeIndex] = item;
-            if (item.GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon) _numberOfWeapons++;
-            GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>().UpdateItem(_activeIndex, item.GetComponent<InventoryItem>().InventoryIcon);
-            return;
+            if (AddAmmoItem(item)) return;
         }
+
+        for (int i = 0; i < _availableInventorySlots; i++)
+        {
+            if (_items[i] == null)
+            {
+                _items[i] = item;
+                if (item.GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon) _numberOfWeapons++;
+                if (_isPlayer) GetUi().UpdateItem(i, item.GetComponent<InventoryItem>().InventoryIcon);
+                
+                if (item.GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
+                {
+                    if (_isPlayer) GetUi().GetItem(i).GetComponent<UiAmmo>().UpdateValue(item.GetComponent<AmmoItem>().CurrentAmmo);
+                }
+                return;
+            }
+        }
+    }
+
+    private bool AddAmmoItem(GameObject item)
+    {
+        WeaponType weaponType = item.GetComponent<AmmoItem>().WeaponType;
+        if (HasAmmo(weaponType))
+        {
+            if (item.GetComponent<AmmoItem>().AddAmmo())
+            {
+                Destroy(item);
+                _items[GetAmmoIndex(weaponType)].GetComponent<AmmoItem>().AddAmmo();
+                if (_isPlayer) GetUi().GetItem(GetAmmoIndex(weaponType)).GetComponent<UiAmmo>().UpdateValue(_items[GetAmmoIndex(weaponType)].GetComponent<AmmoItem>().CurrentAmmo);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void ThrowItem()
     {
-        if (_items[_activeIndex] == null) return;
-        if (_items[_activeIndex].GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon) _numberOfWeapons--;
-        _items[_activeIndex] = null;
-        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>().ClearItem(_activeIndex);
+        ThrowItemWithIndex(_activeIndex);
+    }
+
+    private void ThrowItemWithIndex(int index)
+    {
+        if (_items[index] == null) return;
+        if (_items[index].GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon) _numberOfWeapons--;
+        _items[index] = null;
+        if (_isPlayer) GetUi().ClearItem(index);
     }
 
     public void UseAmmo(WeaponType weaponType)
+    {
+        int ammoIdx = GetAmmoIndex(weaponType);
+        if (ammoIdx == -1) return;
+
+        int ammoLeft = _items[ammoIdx].GetComponent<AmmoItem>().UseAmmo();
+        if (_isPlayer) GetUi().GetItem(GetAmmoIndex(weaponType)).GetComponent<UiAmmo>().UpdateValue(_items[ammoIdx].GetComponent<AmmoItem>().CurrentAmmo);
+
+        if (ammoLeft != 0) return;
+        GameObject emptyAmmo = _items[ammoIdx];
+        ThrowItemWithIndex(ammoIdx);
+        Destroy(emptyAmmo);
+    }
+
+    private int GetAmmoIndex(WeaponType weaponType)
     {
         for (int i = 0; i < _availableInventorySlots; i++)
         {
             if (_items[i] != null && _items[i].GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
             {
-                if (_items[i].GetComponent<AmmoBox>().WeaponType == weaponType)
+                if (_items[i].GetComponent<AmmoItem>().WeaponType == weaponType)
                 {
-                    Debug.Log("Do the ammo stuffs here");
+                    return i;
                 }
             }
         }
+        return -1;
     }
 
     public bool HasAmmo(WeaponType weaponType)
@@ -82,7 +134,7 @@ public class Inventory : MonoBehaviour
         {
             if (_items[i] != null && _items[i].GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
             {
-                if (_items[i].GetComponent<AmmoBox>().WeaponType == weaponType)
+                if (_items[i].GetComponent<AmmoItem>().WeaponType == weaponType)
                 {
                     return true;
                 }
@@ -106,7 +158,12 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>().SelectItem(index);
+        if (_isPlayer) GetUi().SelectItem(index);
         return _items[index];
+    }
+
+    private UiInventory GetUi()
+    {
+        return GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>();
     }
 }

@@ -21,6 +21,7 @@ public class CharacterHand : MonoBehaviour
 
     public bool IsWeapon()
     {
+        if (_currentItem == null) return false;
         return _currentItem.GetComponent<WeaponScript>() != null;
     }
 
@@ -58,6 +59,7 @@ public class CharacterHand : MonoBehaviour
         GetInventoryItem().Equip();
         _inventory.AddItem(item);
         if (IsWeapon()) GetWeapon().SetParent(gameObject);
+        ChangeInventoryIndex(_inventory.ActiveIndex);
     }
 
     public void OnThrow()
@@ -73,6 +75,7 @@ public class CharacterHand : MonoBehaviour
     public void ChangeInventoryIndex(int index)
     {
         _currentItem = _inventory.ChangeActive(index);
+        if (IsWeapon()) GetWeapon().Activate();
     }
 
     public void UseAmmo()
