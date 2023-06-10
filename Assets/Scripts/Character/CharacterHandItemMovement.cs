@@ -38,7 +38,7 @@ public class CharacterHandItemMovement : MonoBehaviour
         Transform itemTransform = _characterHand.Weapon.transform;
         float multiplier = _characterHand.GetWeapon().Damage / 10f;
 
-        itemTransform.forward -= itemTransform.forward * Random.Range(1f, 5f) * multiplier;
+        itemTransform.position -= itemTransform.forward * Random.Range(.05f, .2f) * multiplier;
         itemTransform.Rotate(Random.Range(-1f, -5f) * multiplier, Random.Range(-10f, 10f) * multiplier, 0f, Space.Self);
     }
 }
