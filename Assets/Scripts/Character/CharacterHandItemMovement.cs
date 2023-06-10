@@ -19,7 +19,7 @@ public class CharacterHandItemMovement : MonoBehaviour
         Move(itemTransform);
         Rotate(itemTransform);
 
-        if (Vector3.Distance(itemTransform.position, transform.position) > 5f) ResetPosition();
+        if (Vector3.Distance(itemTransform.position, transform.position) > 2f) ResetPosition();
     }
 
     private void Move(Transform itemTransform)

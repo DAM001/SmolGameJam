@@ -33,6 +33,11 @@ public class BulletScript : MonoBehaviour
 
     private void Collide(GameObject hitObj, Vector3 hitPos)
     {
+        if (hitObj.GetComponent<CharacterHealth>() != null)
+        {
+            hitObj.GetComponent<CharacterHealth>().Damage(_damage);
+        }
+
         if (hitObj.GetComponent<Rigidbody>() != null)
         {
             hitObj.GetComponent<Rigidbody>().AddForce(transform.forward * _impactForce);

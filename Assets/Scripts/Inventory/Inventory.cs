@@ -75,13 +75,13 @@ public class Inventory : MonoBehaviour
         WeaponType weaponType = item.GetComponent<AmmoItem>().WeaponType;
         if (HasAmmo(weaponType))
         {
-            if (item.GetComponent<AmmoItem>().AddAmmo())
-            {
-                Destroy(item);
-                _items[GetAmmoIndex(weaponType)].GetComponent<AmmoItem>().AddAmmo();
-                if (_isPlayer) GetUi().GetItem(GetAmmoIndex(weaponType)).GetComponent<UiAmmo>().UpdateValue(_items[GetAmmoIndex(weaponType)].GetComponent<AmmoItem>().CurrentAmmo);
-                return true;
-            }
+            int index = GetNotFullAmmoIndex(weaponType);
+            if (index == -1) return false;
+
+            Destroy(item);
+            _items[index].GetComponent<AmmoItem>().AddAmmo();
+            if (_isPlayer) GetUi().GetItem(index).GetComponent<UiAmmo>().UpdateValue(_items[index].GetComponent<AmmoItem>().CurrentAmmo);
+            return true;
         }
         return false;
     }
@@ -122,6 +122,24 @@ public class Inventory : MonoBehaviour
                 if (_items[i].GetComponent<AmmoItem>().WeaponType == weaponType)
                 {
                     return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private int GetNotFullAmmoIndex(WeaponType weaponType)
+    {
+        for (int i = 0; i < _availableInventorySlots; i++)
+        {
+            if (_items[i] != null && _items[i].GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
+            {
+                if (_items[i].GetComponent<AmmoItem>().WeaponType == weaponType)
+                {
+                    if (_items[i].GetComponent<AmmoItem>().CurrentAmmo < 3)
+                    {
+                        return i;
+                    }
                 }
             }
         }
