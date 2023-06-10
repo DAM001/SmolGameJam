@@ -342,12 +342,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4547234119849987334}
   - component: {fileID: 6294086146242964677}
+  - component: {fileID: 607558756718742500}
   - component: {fileID: 2517314627603396285}
   - component: {fileID: 3463684100463376727}
   - component: {fileID: 624834902433639225}
   m_Layer: 0
   m_Name: Weapon
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -382,9 +383,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bullet: {fileID: 4122685758868025121, guid: bbbcf8fa0516d7741b5eae326897ba9e, type: 3}
+  _mag: {fileID: 607558756718742500}
+  _damage: 30
   _fireRate: 0.1
   _accuracy: 5
   _fullAuto: 1
+--- !u!114 &607558756718742500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989073586844102621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e28ddda409e86e44eb6ca8b0fde6147c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _magSize: 30
+  _reloadTime: 2
 --- !u!114 &2517314627603396285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +417,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 3463684100463376727}
   _rigidbody: {fileID: 624834902433639225}
   _itemType: 0
-  _throwForce: 1000
+  _throwForce: 5000
 --- !u!65 &3463684100463376727
 BoxCollider:
   m_ObjectHideFlags: 0

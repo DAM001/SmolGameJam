@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "AimMouse",
-                    "type": "Value",
-                    "id": "9e8cf291-64ee-43aa-8da3-18e4ca8a748b",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "FireDown",
                     "type": "Button",
                     "id": "bf3d0d41-e037-4da9-ae34-660240e27299",
@@ -40,20 +31,81 @@
                     "processors": "",
                     "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Interaction",
+                    "type": "Button",
+                    "id": "d2d15a95-1551-41fd-a377-074b8cf841ed",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrowActiveItem",
+                    "type": "Button",
+                    "id": "b46b182d-c88c-40b3-848d-76d4e33326ff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Item0",
+                    "type": "Button",
+                    "id": "8a00cda2-29f0-4815-b27c-226af42e3672",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Item1",
+                    "type": "Button",
+                    "id": "8f90975e-51f7-4243-8cc9-1902c0779370",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Item2",
+                    "type": "Button",
+                    "id": "c53e8314-19cb-400e-aec4-55bdddd05255",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Item3",
+                    "type": "Button",
+                    "id": "9ba6e3f6-5a0c-47d2-b6cb-db08a0958f7e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Item4",
+                    "type": "Button",
+                    "id": "4728f52c-b978-45b2-b7e7-9e2d4d2213f7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Item5",
+                    "type": "Button",
+                    "id": "71c5ad0b-49b5-4324-b396-ea805b8db6f7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "106da15b-54d3-4e06-b1b8-336b7396dc35",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AimMouse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "WASD",
                     "id": "0d4bd95a-f707-42dc-9fb5-ceeedcaa55e5",
@@ -128,6 +180,94 @@
                     "processors": "",
                     "groups": "",
                     "action": "FireUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ffaeac94-9bb3-4a88-8bb4-7c625555293c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9b300e93-cc42-479b-9d25-78bd339c6c23",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowActiveItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e643e67a-b659-43f5-8bfc-715c25fd29fd",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Item0",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93a8a84b-4739-4508-a98a-d75ecc5062e2",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Item1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f73ce41d-42c6-43e4-a7ea-03e0512fd7a6",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Item2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a05ce60b-9ada-4050-9aea-7904a46133b8",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Item3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "899d48e3-839b-4222-9aaa-9c8edec3b307",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Item4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c42e945c-b4d8-4b54-a272-c358de78da17",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Item5",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

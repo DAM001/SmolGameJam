@@ -13,9 +13,9 @@ public class CharacterHandItemMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_characterHand.Weapon == null) return;
+        if (_characterHand.CurrentItem == null) return;
 
-        Transform itemTransform = _characterHand.Weapon.transform;
+        Transform itemTransform = _characterHand.CurrentItem.transform;
         Move(itemTransform);
         Rotate(itemTransform);
     }
@@ -34,8 +34,8 @@ public class CharacterHandItemMovement : MonoBehaviour
 
     public void FireEffect()
     {
-        if (_characterHand.Weapon == null) return;
-        Transform itemTransform = _characterHand.Weapon.transform;
+        if (_characterHand.CurrentItem == null) return;
+        Transform itemTransform = _characterHand.CurrentItem.transform;
         float multiplier = _characterHand.GetWeapon().Damage / 10f;
 
         itemTransform.position -= itemTransform.forward * Random.Range(.05f, .2f) * multiplier;

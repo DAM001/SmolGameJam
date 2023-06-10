@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType { Light, Heavy, Shotgun, Sniper }
+
 public class WeaponScript : MonoBehaviour
 {
-    [Header("Bullet:")]
     [SerializeField] private GameObject _bullet;
+    [SerializeField] private WeaponMag _mag;
 
     [Header("Weapon data:")]
     [SerializeField] private float _damage = 30f;
@@ -34,6 +36,7 @@ public class WeaponScript : MonoBehaviour
 
         if (Time.time >= _nextTimeFire && _nextFireEnabled)
         {
+            if (!_mag.OnFire()) return;
             _nextTimeFire = Time.time + _fireRate;
             FireFunction();
         }

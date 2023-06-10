@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
@@ -29,10 +28,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        Vector3 targetVelocity = _moveDirection * _moveSpeed;
+        Vector3 targetVelocity = _moveDirection;
         _velocity = Vector3.Lerp(_velocity, targetVelocity, _acceleration * Time.deltaTime);
-
-        //Vector3 moveDirection = Vector3.SmoothDamp(transform.position, _moveDirection, ref _velocity, _acceleration);
         _characterController.Move(_velocity * Time.deltaTime);
+
+        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
     }
 }

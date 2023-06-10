@@ -20,11 +20,6 @@ public class PlayerController : MonoBehaviour
         _characterMovement.Move(inputValue.Get<Vector2>());
     }
 
-    private void OnAimMouse(InputValue inputValue)
-    {
-
-    }
-
     private void OnFireDown()
     {
         _characterHand.OnFireDown();
@@ -33,5 +28,45 @@ public class PlayerController : MonoBehaviour
     private void OnFireUp()
     {
         _characterHand.OnFireUp();
+    }
+
+    private void OnInteraction()
+    {
+        _characterHand.OnEquip();
+    }
+
+    private void OnThrowActiveItem()
+    {
+        _characterHand.OnThrow();
+    }
+
+    private void OnItem0()
+    {
+
+    }
+
+    private void OnItem1()
+    {
+
+    }
+
+    private void OnItem2()
+    {
+
+    }
+
+    private void OnItem3()
+    {
+
+    }
+
+    private void OnItem4()
+    {
+
+    }
+
+    private void OnItem5()
+    {
+
     }
 }
