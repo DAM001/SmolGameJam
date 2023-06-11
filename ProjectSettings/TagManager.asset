@@ -8,6 +8,7 @@ TagManager:
   - Item
   - GameManager
   - Canvas
+  - Character
   layers:
   - Default
   - TransparentFX

@@ -15,6 +15,11 @@ public class InventoryItem : MonoBehaviour
     public InventoryItemType ItemType { get => _itemType; }
     public GameObject InventoryIcon { get => _inventoryIcon; }
 
+    private void Start()
+    {
+        transform.parent = null;
+    }
+
     public void Equip()
     {
         gameObject.tag = "Untagged";

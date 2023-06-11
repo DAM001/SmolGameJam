@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -191,5 +192,10 @@ public class Inventory : MonoBehaviour
     private UiInventory GetUi()
     {
         return GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>();
+    }
+
+    public void UpdateWEaponUi(float value)
+    {
+        if (_isPlayer) GetUi().GetItem(_activeIndex).GetComponent<UiWeapon>().UpdateAmmo(value);
     }
 }

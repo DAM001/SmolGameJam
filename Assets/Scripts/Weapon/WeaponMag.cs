@@ -11,6 +11,7 @@ public class WeaponMag : MonoBehaviour
 
     private int _numberOfRoundsLeft = 0;
     private bool _isReloading = false;
+    private float _reloadTimeSlider = 0f;
 
     public bool IsReloading { get => _isReloading; }
 
@@ -30,10 +31,10 @@ public class WeaponMag : MonoBehaviour
         if (_numberOfRoundsLeft > 0)
         {
             _numberOfRoundsLeft--;
+            if (_numberOfRoundsLeft == 0) OnReload();
             return true;
         }
  
-        OnReload();
         return false;
     }
     
@@ -55,12 +56,19 @@ public class WeaponMag : MonoBehaviour
     private IEnumerator ReloadHandler()
     {
         _isReloading = true;
-        yield return new WaitForSeconds(_reloadTime);
+        _reloadTimeSlider = 0f;
+        while (_reloadTimeSlider < _reloadTime)
+        {
+            yield return new WaitForSeconds(.1f);
+            _reloadTimeSlider += .1f;
+        }
         Reload();
     }
 
     public float AmmoInPercentage()
     {
-        return _numberOfRoundsLeft / _magSize;
+        float ammo = (float)_numberOfRoundsLeft / (float)_magSize * 100f;
+        float reloadTime = _reloadTimeSlider / _reloadTime * 100f;
+        return _isReloading ? reloadTime : ammo;
     }
 }

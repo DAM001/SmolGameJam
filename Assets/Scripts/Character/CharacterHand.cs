@@ -19,10 +19,22 @@ public class CharacterHand : MonoBehaviour
         OnEquip();
     }
 
+    private void FixedUpdate()
+    {
+        if (!IsWeapon()) return;
+        _inventory.UpdateWEaponUi(_currentItem.GetComponent<WeaponMag>().AmmoInPercentage());
+    }
+
     public bool IsWeapon()
     {
         if (_currentItem == null) return false;
         return _currentItem.GetComponent<WeaponScript>() != null;
+    }
+
+    public bool IsGrenade()
+    {
+        if (_currentItem == null) return false;
+        return _currentItem.GetComponent<Grenade>() != null;
     }
 
     public WeaponScript GetWeapon()
@@ -47,6 +59,12 @@ public class CharacterHand : MonoBehaviour
     {
         if (_currentItem == null) return;
         if (IsWeapon()) GetWeapon().FireUp();
+        if (IsGrenade())
+        {
+            GameObject grenade = _currentItem;
+            OnThrow();
+            grenade.GetComponent<Grenade>().Throw();
+        }
     }
 
     public void OnEquip()
@@ -74,6 +92,11 @@ public class CharacterHand : MonoBehaviour
 
     public void ChangeInventoryIndex(int index)
     {
+        if (IsWeapon())
+        {
+            if (_currentItem.GetComponent<WeaponMag>().IsReloading) _inventory.UpdateWEaponUi(0f);
+        }
+
         _currentItem = _inventory.ChangeActive(index);
         if (IsWeapon()) GetWeapon().Activate();
     }
