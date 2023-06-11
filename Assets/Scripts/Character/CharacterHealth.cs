@@ -11,6 +11,8 @@ public class CharacterHealth : MonoBehaviour
 
     private float _currentHealth;
     private float _currentShield;
+    private bool _inCircle = true;
+    private float _circleDamage = 0f;
 
     private void Start()
     {
@@ -18,6 +20,20 @@ public class CharacterHealth : MonoBehaviour
         _currentShield = _maxShield / 3f;
 
         UpdateUi();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_inCircle) return;
+        DamageHealth(_circleDamage * Time.fixedDeltaTime);
+    }
+
+    public void InCircle(bool inCircle, float damage)
+    {
+        _inCircle = inCircle;
+        _circleDamage = damage;
+
+        if (_manager.IsPlayer) GetUi().GetComponent<UiHealthAndShield>().OutFromCircle(!inCircle);
     }
 
     public bool CanShield()
@@ -45,6 +61,8 @@ public class CharacterHealth : MonoBehaviour
 
     public void Damage(float damage)
     {
+        if (_manager.IsPlayer) GetUi().GetComponent<UiHealthAndShield>().DamageShield();
+
         if (_currentShield > 0f)
         {
             if (_currentShield < damage)
@@ -59,6 +77,13 @@ public class CharacterHealth : MonoBehaviour
                 return;
             }
         }
+
+        DamageHealth(damage);
+    }
+
+    private void DamageHealth(float damage)
+    {
+        if (_manager.IsPlayer) GetUi().GetComponent<UiHealthAndShield>().DamageHealth();
 
         _currentHealth -= damage;
         if (_currentHealth < 0f) _currentHealth = 0f;

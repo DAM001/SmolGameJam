@@ -72,11 +72,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnScrollUp()
     {
-        Debug.Log("up");
+        //Debug.Log("up");
     }
 
     private void OnScrollDown()
     {
-        Debug.Log("down");
+        //Debug.Log("down");
     }
 }
