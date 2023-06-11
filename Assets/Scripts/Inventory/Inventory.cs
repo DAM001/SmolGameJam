@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public enum InventoryItemType { Weapon, Shield, Heal, Ammo, Grenade }
+public enum InventoryItemType { Weapon, Shield, Heal, Ammo, Grenade, BackpackUpgrade }
 
 public class Inventory : MonoBehaviour
 {
@@ -13,10 +13,10 @@ public class Inventory : MonoBehaviour
     [Header("Player:")]
     [SerializeField] private bool _isPlayer = false;
 
-    private readonly int _maxNumberOfWeapons = 2;
+    //private readonly int _maxNumberOfWeapons = 2;
 
     private GameObject[] _items;
-    private int _numberOfWeapons = 0;
+    //private int _numberOfWeapons = 0;
     private int _activeIndex = 0;
 
     public int ActiveIndex { get => _activeIndex; }
@@ -38,19 +38,27 @@ public class Inventory : MonoBehaviour
         return ChangeItem(index);
     }
 
-    public void UpgradeBackpack()
+    public void UpgradeBackpack(GameObject item)
     {
         if (_availableInventorySlots >= _maxInventorySlots) return;
         _availableInventorySlots++;
+        Destroy(item);
         if (_isPlayer) GetUi().SetInventorySize(_availableInventorySlots);
     }
 
     public void AddItem(GameObject item)
     {
-        if (item.GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon && _numberOfWeapons >= _maxNumberOfWeapons) return;
-        if (item.GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
+        switch(item.GetComponent<InventoryItem>().ItemType)
         {
-            if (AddAmmoItem(item)) return;
+            case InventoryItemType.BackpackUpgrade:
+                UpgradeBackpack(item);
+                return;
+            case InventoryItemType.Weapon:
+                //if (_numberOfWeapons >= _maxNumberOfWeapons) return;
+                break;
+            case InventoryItemType.Ammo:
+                if (AddAmmoItem(item)) return;
+                break;
         }
 
         for (int i = 0; i < _availableInventorySlots; i++)
@@ -58,7 +66,7 @@ public class Inventory : MonoBehaviour
             if (_items[i] == null)
             {
                 _items[i] = item;
-                if (item.GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon) _numberOfWeapons++;
+                //if (item.GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon) _numberOfWeapons++;
                 if (_isPlayer) GetUi().UpdateItem(i, item.GetComponent<InventoryItem>().InventoryIcon);
                 
                 if (item.GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
@@ -94,7 +102,7 @@ public class Inventory : MonoBehaviour
     private void ThrowItemWithIndex(int index)
     {
         if (_items[index] == null) return;
-        if (_items[index].GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon) _numberOfWeapons--;
+        //if (_items[index].GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon) _numberOfWeapons--;
         _items[index] = null;
         if (_isPlayer) GetUi().ClearItem(index);
     }

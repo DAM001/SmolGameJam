@@ -5,14 +5,17 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     [Header("Parameters:")]
-    [SerializeField] private float _damage = 50f;
-    [SerializeField] private float _speed = .5f;
-    [Space(10)]
     [SerializeField] private float _aliveTime = 3f;
     [SerializeField] private float _impactForce = 1000f;
 
+    private float _damage = 0f;
+    private float _speed = 0f;
+    private float _distance = 0f;
+    private float _distanceSoFar = 0f;
+
     public float Damage { set => _damage = value; }
     public float Speed { set => _speed = value; }
+    public float Distance { set => _distance = value; }
 
     private void Start()
     {
@@ -28,7 +31,10 @@ public class BulletScript : MonoBehaviour
             Collide(hit.transform.gameObject, hit.point);
         }
 
+        _distanceSoFar += _speed;
         transform.position += transform.forward * _speed;
+
+        if (_distanceSoFar > _distance) Destroy(gameObject);
     }
 
     private void Collide(GameObject hitObj, Vector3 hitPos)

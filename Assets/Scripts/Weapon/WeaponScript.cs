@@ -18,6 +18,7 @@ public class WeaponScript : MonoBehaviour
     [Header("Bullet properties:")]
     [SerializeField] private float _damage = 30f;
     [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _distance = 20f;
 
     private GameObject _firePoint;
     private float _nextTimeFire = 0f;
@@ -66,16 +67,24 @@ public class WeaponScript : MonoBehaviour
 
     private void FireFunction()
     {
+        StartCoroutine(CreateBullet());
+
+        if (_parent == null) return;
+        _parent.GetComponent<CharacterHandItemMovement>().FireEffect();
+    }
+
+    private IEnumerator CreateBullet()
+    {
         for (int i = 0; i < _numberOfBullets; i++)
         {
             FireAccuracy(_accuracy);
             var bullet = Instantiate(_bullet, _firePoint.transform);
-            bullet.GetComponent<BulletScript>().Damage = _damage;
-            bullet.GetComponent<BulletScript>().Speed = _speed;
-        }
+            bullet.GetComponent<BulletScript>().Damage = _damage * Random.Range(.8f, 1.1f);
+            bullet.GetComponent<BulletScript>().Speed = _speed * Random.Range(.8f, 1.1f);
+            bullet.GetComponent<BulletScript>().Distance = _distance * Random.Range(.8f, 1.1f);
 
-        if (_parent == null) return;
-        _parent.GetComponent<CharacterHandItemMovement>().FireEffect();
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     private void FireAccuracy(float accuracy)

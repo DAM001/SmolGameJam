@@ -12,9 +12,9 @@ public class UiInventory : MonoBehaviour
 
     public void SetInventorySize(int size)
     {
-        for (int i = _inventory.childCount - 1; i >= size; i--)
+        for (int i = _maxItems - 1; i >= 0; i--)
         {
-            _inventory.GetChild(i).gameObject.SetActive(false);
+            _inventory.GetChild(i).gameObject.SetActive(i < size);
         }
     }
 

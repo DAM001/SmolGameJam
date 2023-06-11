@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 50
   _speed: 1
-  _aliveTime: 3
+  _aliveTime: 1
   _impactForce: 1000
 --- !u!1 &4122685759175156301
 GameObject:
