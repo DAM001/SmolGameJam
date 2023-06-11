@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    
+    [SerializeField] private bool _isPlayer;
+
+    public bool IsPlayer { get => _isPlayer; }
 }

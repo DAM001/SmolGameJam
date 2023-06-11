@@ -200,6 +200,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P2020 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4366306275128859667, guid: fcf9c3e9b2c7433489b6edce5042a14e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5082709
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcf9c3e9b2c7433489b6edce5042a14e, type: 3}
 --- !u!224 &1316910059879251894 stripped

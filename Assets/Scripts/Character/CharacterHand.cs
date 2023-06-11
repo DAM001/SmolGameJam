@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterHand : MonoBehaviour
 {
     [SerializeField] private Inventory _inventory;
+    [SerializeField] private CharacterHealth _health;
     [Header("Properties:")]
     [SerializeField] private float _pickupDistance = 3f;
 
@@ -21,8 +22,8 @@ public class CharacterHand : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsWeapon()) return;
-        _inventory.UpdateWEaponUi(_currentItem.GetComponent<WeaponMag>().AmmoInPercentage());
+        if (IsWeapon()) _inventory.UpdateProgress(_currentItem.GetComponent<WeaponMag>().AmmoInPercentage());
+        if (IsHealthItem()) _inventory.UpdateProgress(_currentItem.GetComponent<HealthItem>().Progress());
     }
 
     public bool IsWeapon()
@@ -35,6 +36,12 @@ public class CharacterHand : MonoBehaviour
     {
         if (_currentItem == null) return false;
         return _currentItem.GetComponent<Grenade>() != null;
+    }
+
+    public bool IsHealthItem()
+    {
+        if (_currentItem == null) return false;
+        return _currentItem.GetComponent<HealthItem>() != null;
     }
 
     public WeaponScript GetWeapon()
@@ -53,18 +60,27 @@ public class CharacterHand : MonoBehaviour
     {
         if (_currentItem == null) return;
         if (IsWeapon()) GetWeapon().FireDown();
+        else if (IsHealthItem())
+        {
+            _currentItem.GetComponent<HealthItem>().OnUse();
+        }
     }
 
     public void OnFireUp()
     {
         if (_currentItem == null) return;
         if (IsWeapon()) GetWeapon().FireUp();
-        if (IsGrenade())
+        else if (IsGrenade())
         {
-            GameObject grenade = _currentItem;
-            OnThrow();
-            grenade.GetComponent<Grenade>().Throw();
+            UsedUpItem().GetComponent<Grenade>().Throw();
         }
+    }
+
+    public GameObject UsedUpItem()
+    {
+        GameObject item = _currentItem;
+        OnThrow();
+        return item;
     }
 
     public void OnEquip()
@@ -84,7 +100,11 @@ public class CharacterHand : MonoBehaviour
     {
         if (_currentItem == null) return;
         GetInventoryItem().Throw();
-        if (IsWeapon()) GetWeapon().FireUp();
+        if (IsWeapon())
+        {
+            GetWeapon().FireUp();
+            GetWeapon().SetParent(null);
+        }
 
         _inventory.ThrowItem();
         _currentItem = null;
@@ -94,11 +114,16 @@ public class CharacterHand : MonoBehaviour
     {
         if (IsWeapon())
         {
-            if (_currentItem.GetComponent<WeaponMag>().IsReloading) _inventory.UpdateWEaponUi(0f);
+            if (_currentItem.GetComponent<WeaponMag>().IsReloading) _inventory.UpdateProgress(0f);
+        }
+        else if (IsHealthItem())
+        {
+            if (_currentItem.GetComponent<HealthItem>().IsUsing) _inventory.UpdateProgress(0f);
         }
 
         _currentItem = _inventory.ChangeActive(index);
         if (IsWeapon()) GetWeapon().Activate();
+        if (IsHealthItem()) _currentItem.GetComponent<HealthItem>().Activate(GetComponent<CharacterHand>(), _health);
     }
 
     public void UseAmmo()
