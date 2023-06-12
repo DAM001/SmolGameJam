@@ -12,6 +12,8 @@ public class Grenade : MonoBehaviour
     [SerializeField] private float _damageRange = 5f;
     [Space(10)]
     [SerializeField] private float _explotionForce = 1000f;
+    [Header("Visuals:")]
+    [SerializeField] private GameObject _explotionEffect;
 
     public void Throw()
     {
@@ -41,6 +43,7 @@ public class Grenade : MonoBehaviour
         }
 
         ExplotionForce(_explotionForce);
+        ExplotionEffect();
 
         Destroy(gameObject);
     }
@@ -62,5 +65,14 @@ public class Grenade : MonoBehaviour
             Rigidbody rb = hit.GetComponent<Rigidbody>();
             if (rb != null) rb.AddExplosionForce(force, explosionPos, _damageRange, 3f);
         }
+    }
+
+    private void ExplotionEffect()
+    {
+        GameObject hitEffect = Instantiate(_explotionEffect, transform);
+        hitEffect.transform.rotation = transform.rotation;
+        hitEffect.transform.parent = null;
+        hitEffect.transform.position += Vector3.up;
+        Destroy(hitEffect, 5f);
     }
 }

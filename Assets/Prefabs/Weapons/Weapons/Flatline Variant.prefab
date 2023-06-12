@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: _magSize
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 2033546503821645118, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2517314627603396285, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _inventoryIcon
       value: 

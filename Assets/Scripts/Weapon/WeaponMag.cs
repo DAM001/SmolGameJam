@@ -42,6 +42,7 @@ public class WeaponMag : MonoBehaviour
     {
         if (_weaponScript.Parent == null || !_weaponScript.Parent.GetComponent<CharacterHand>().HasAmmo()) return;
         if (_isReloading) return;
+        _numberOfRoundsLeft = 0;
         StartCoroutine(ReloadHandler());
     }
 

@@ -30,6 +30,11 @@ public class PlayerController : MonoBehaviour
         _characterHand.OnFireUp();
     }
 
+    private void OnReload()
+    {
+        _characterHand.Reload();
+    }
+
     private void OnInteraction()
     {
         _characterHand.OnEquip();

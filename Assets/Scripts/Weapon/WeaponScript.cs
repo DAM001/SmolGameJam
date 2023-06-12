@@ -19,6 +19,8 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] private float _damage = 30f;
     [SerializeField] private float _speed = 1f;
     [SerializeField] private float _distance = 20f;
+    [Header("Visuals:")]
+    [SerializeField] private GameObject _shell;
 
     private GameObject _firePoint;
     private float _nextTimeFire = 0f;
@@ -38,6 +40,12 @@ public class WeaponScript : MonoBehaviour
     public void Activate()
     {
         _mag.Activate();
+    }
+
+    public void Reload()
+    {
+        _mag.OnReload();
+        Debug.Log("Reload");
     }
 
 
@@ -71,6 +79,28 @@ public class WeaponScript : MonoBehaviour
 
         if (_parent == null) return;
         _parent.GetComponent<CharacterHandItemMovement>().FireEffect();
+        StartCoroutine(FireEffect());
+        CreateShell();
+    }
+
+    private IEnumerator FireEffect()
+    {
+        _firePoint.transform.GetChild(0).gameObject.SetActive(true);
+        _firePoint.transform.GetChild(0).Rotate(0f, 0f, Random.Range(-45f, 45f));
+        float scale = Random.Range(.5f, 1f);
+        _firePoint.transform.GetChild(0).localScale = new Vector3(scale, scale, .1f);
+        yield return new WaitForSeconds(Random.Range(.03f, .08f));
+        _firePoint.transform.GetChild(0).gameObject.SetActive(false);
+    }
+
+    private void CreateShell()
+    {
+        GameObject shell = Instantiate(_shell, _firePoint.transform);
+        shell.transform.parent = null;
+        shell.transform.position = _firePoint.transform.position + transform.forward * -.6f + transform.right * .3f;
+        shell.transform.Rotate(Random.Range(2f, 15f), Random.Range(-15f, 15f), 0f);
+        shell.GetComponent<Rigidbody>().AddForce(shell.transform.right * Random.Range(200f, 500f));
+        Destroy(shell, 5f);
     }
 
     private IEnumerator CreateBullet()

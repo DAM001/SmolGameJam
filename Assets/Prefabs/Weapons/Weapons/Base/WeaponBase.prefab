@@ -142,6 +142,8 @@ MonoBehaviour:
   _numberOfBullets: 1
   _damage: 30
   _speed: 1
+  _distance: 20
+  _shell: {fileID: 790694832672616819, guid: 7d0e061ca3bad6545be537ced49c4001, type: 3}
 --- !u!114 &607558756718742500
 MonoBehaviour:
   m_ObjectHideFlags: 0

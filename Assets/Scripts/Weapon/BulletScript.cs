@@ -7,6 +7,8 @@ public class BulletScript : MonoBehaviour
     [Header("Parameters:")]
     [SerializeField] private float _aliveTime = 3f;
     [SerializeField] private float _impactForce = 1000f;
+    [Header("Visuals:")]
+    [SerializeField] private GameObject _hitEffect;
 
     private float _damage = 0f;
     private float _speed = 0f;
@@ -44,6 +46,7 @@ public class BulletScript : MonoBehaviour
         if (hitObj.GetComponent<CharacterHealth>() != null)
         {
             hitObj.GetComponent<CharacterHealth>().Damage(_damage);
+            OnCharacterHit();
         }
 
         if (hitObj.GetComponent<Rigidbody>() != null)
@@ -52,5 +55,14 @@ public class BulletScript : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private void OnCharacterHit()
+    {
+        GameObject hitEffect = Instantiate(_hitEffect, transform);
+        hitEffect.transform.rotation = transform.rotation;
+        hitEffect.transform.Rotate(0f, 180f, 0f);
+        hitEffect.transform.parent = null;
+        Destroy(hitEffect, 5f);
     }
 }

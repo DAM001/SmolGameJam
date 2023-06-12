@@ -76,6 +76,12 @@ public class CharacterHand : MonoBehaviour
         }
     }
 
+    public void Reload()
+    {
+        if (!IsWeapon()) return;
+        GetWeapon().Reload();
+    }
+
     public GameObject UsedUpItem()
     {
         GameObject item = _currentItem;

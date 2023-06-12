@@ -222,6 +222,7 @@ MonoBehaviour:
   _damage: 100
   _damageRange: 8
   _explotionForce: 3000
+  _explotionEffect: {fileID: 684845760705067805, guid: 0ba66a59b205c334b8393878c5cb6b06, type: 3}
 --- !u!114 &5432924828152670768
 MonoBehaviour:
   m_ObjectHideFlags: 0

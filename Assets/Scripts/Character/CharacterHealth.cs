@@ -9,6 +9,8 @@ public class CharacterHealth : MonoBehaviour
     [Space(10)]
     [SerializeField] private float _maxHealth = 100f;
     [SerializeField] private float _maxShield = 150f;
+    [Header("Visuals:")]
+    [SerializeField] private GameObject _dieEffect;
 
     private float _currentHealth;
     private float _currentShield;
@@ -96,6 +98,8 @@ public class CharacterHealth : MonoBehaviour
 
     public void Die()
     {
+        DieEffect();
+
         Destroy(gameObject);
     }
 
@@ -117,5 +121,14 @@ public class CharacterHealth : MonoBehaviour
         GameObject popup = Instantiate(_damagePopup, transform);
         popup.transform.position = transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 1f), Random.Range(-2f, 2f));
         popup.GetComponent<DamagePopup>().Damage((int)damage);
+    }
+
+    private void DieEffect()
+    {
+        GameObject hitEffect = Instantiate(_dieEffect, transform);
+        hitEffect.transform.rotation = transform.rotation;
+        hitEffect.transform.parent = null;
+        hitEffect.transform.position += Vector3.up;
+        Destroy(hitEffect, 5f);
     }
 }
