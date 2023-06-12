@@ -9,6 +9,7 @@ TagManager:
   - GameManager
   - Canvas
   - Character
+  - Circle
   layers:
   - Default
   - TransparentFX

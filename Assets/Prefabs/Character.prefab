@@ -375,6 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _manager: {fileID: 3172157587475421191}
+  _damagePopup: {fileID: 150377463960279157, guid: dda692b3269a8f34fb016504464bf463, type: 3}
   _maxHealth: 100
   _maxShield: 150
 --- !u!143 &1085993950949405565

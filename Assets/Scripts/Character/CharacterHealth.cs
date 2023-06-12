@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterHealth : MonoBehaviour
 {
     [SerializeField] private CharacterManager _manager;
+    [SerializeField] private GameObject _damagePopup;
     [Space(10)]
     [SerializeField] private float _maxHealth = 100f;
     [SerializeField] private float _maxShield = 150f;
@@ -61,6 +62,8 @@ public class CharacterHealth : MonoBehaviour
 
     public void Damage(float damage)
     {
+        CreateDamagePopup(damage);
+
         if (_manager.IsPlayer) GetUi().GetComponent<UiHealthAndShield>().DamageShield();
 
         if (_currentShield > 0f)
@@ -107,5 +110,12 @@ public class CharacterHealth : MonoBehaviour
     private UiInventory GetUi()
     {
         return GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>();
+    }
+
+    private void CreateDamagePopup(float damage)
+    {
+        GameObject popup = Instantiate(_damagePopup, transform);
+        popup.transform.position = transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 1f), Random.Range(-2f, 2f));
+        popup.GetComponent<DamagePopup>().Damage((int)damage);
     }
 }

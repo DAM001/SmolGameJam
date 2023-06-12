@@ -53,8 +53,10 @@ public class Circle : MonoBehaviour
         {
             float size = (_height - _currentLevel) / 3f;
             SetDestination(transform.position + new Vector3(UnityEngine.Random.Range(-size, size), 0f, UnityEngine.Random.Range(-size, size)));
+            Notify("More soap in " + _data[_currentStep].RestTime + " seconds!");
             yield return new WaitForSeconds(_data[_currentStep].RestTime);
             _move = true;
+            Notify("Soap is coming!");
             yield return new WaitForSeconds(_data[_currentStep].ShrinkTime);
             _move = false;
             _currentStep++;
@@ -77,5 +79,10 @@ public class Circle : MonoBehaviour
         {
             other.gameObject.GetComponent<CharacterHealth>().InCircle(false, _data[_currentStep].Damage);
         }
+    }
+
+    private void Notify(string info)
+    {
+        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiNotifications>().Notify(info);
     }
 }

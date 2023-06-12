@@ -39,6 +39,8 @@ public class BulletScript : MonoBehaviour
 
     private void Collide(GameObject hitObj, Vector3 hitPos)
     {
+        if (hitObj.gameObject.tag == "Circle") return;
+
         if (hitObj.GetComponent<CharacterHealth>() != null)
         {
             hitObj.GetComponent<CharacterHealth>().Damage(_damage);
