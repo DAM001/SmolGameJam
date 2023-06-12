@@ -99,7 +99,14 @@ public class CharacterHealth : MonoBehaviour
     public void Die()
     {
         DieEffect();
+        Notify("A Bobterium died!");
 
+        StartCoroutine(DestroyHandler());
+    }
+
+    private IEnumerator DestroyHandler()
+    {
+        yield return new WaitForFixedUpdate();
         Destroy(gameObject);
     }
 
@@ -114,6 +121,11 @@ public class CharacterHealth : MonoBehaviour
     private UiInventory GetUi()
     {
         return GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>();
+    }
+
+    private void Notify(string info)
+    {
+        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiNotifications>().Notify(info);
     }
 
     private void CreateDamagePopup(float damage)
