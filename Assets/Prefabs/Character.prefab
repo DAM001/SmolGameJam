@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterController: {fileID: 1085993950949405565}
-  _moveSpeed: 15
+  _moveSpeed: 12
   _rotationSpeed: 500
   _minDistance: 0.5
   _acceleration: 10
@@ -463,6 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _manager: {fileID: 3172157587475421191}
+  _hand: {fileID: 4111606004990453289}
   _damagePopup: {fileID: 150377463960279157, guid: dda692b3269a8f34fb016504464bf463, type: 3}
   _maxHealth: 100
   _maxShield: 150

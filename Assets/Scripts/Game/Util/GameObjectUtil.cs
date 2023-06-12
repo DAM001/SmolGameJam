@@ -10,12 +10,15 @@ public class GameObjectUtil : MonoBehaviour
         float distance = Mathf.Infinity;
         foreach (GameObject obj in objects)
         {
-            Vector3 diff = obj.transform.position - position;
-            float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
+            if (obj != null)
             {
-                closest = obj;
-                distance = curDistance;
+                Vector3 diff = obj.transform.position - position;
+                float curDistance = diff.sqrMagnitude;
+                if (curDistance < distance)
+                {
+                    closest = obj;
+                    distance = curDistance;
+                }
             }
         }
         return closest;

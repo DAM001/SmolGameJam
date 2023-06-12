@@ -91,15 +91,22 @@ public class CharacterHand : MonoBehaviour
 
     public void OnEquip()
     {
-        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
-        GameObject item = GameObjectUtil.FindClosest(items, transform.position);
-        if (Vector3.Distance(item.transform.position, transform.position) > _pickupDistance) return;
+        GameObject item = EquipableItem();
+        if (item == null) return;
 
         _currentItem = item;
         GetInventoryItem().Equip();
         _inventory.AddItem(item);
         if (IsWeapon()) GetWeapon().SetParent(gameObject);
         ChangeInventoryIndex(_inventory.ActiveIndex);
+    }
+
+    public GameObject EquipableItem()
+    {
+        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+        GameObject item = GameObjectUtil.FindClosest(items, transform.position);
+        if (Vector3.Distance(item.transform.position, transform.position) > _pickupDistance) return null;
+        return item;
     }
 
     public void OnThrow()
@@ -142,5 +149,14 @@ public class CharacterHand : MonoBehaviour
     {
         if (!IsWeapon()) return false;
         return _inventory.HasAmmo(GetWeapon().WeaponType);
+    }
+
+    public void ThrowEverything()
+    {
+        for (int i = 0; i < _inventory.MaxInventory; i++)
+        {
+            ChangeInventoryIndex(i);
+            OnThrow();
+        }
     }
 }

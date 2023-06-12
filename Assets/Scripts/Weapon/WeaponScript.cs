@@ -127,4 +127,9 @@ public class WeaponScript : MonoBehaviour
     {
         _parent = parent;
     }
+
+    public bool HasAmmo()
+    {
+        return _mag.AmmoInPercentage() > 0f;
+    }
 }

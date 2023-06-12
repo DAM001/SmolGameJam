@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public enum InventoryItemType { Weapon, Shield, Health, Ammo, Grenade, BackpackUpgrade }
 
@@ -18,6 +16,7 @@ public class Inventory : MonoBehaviour
     private int _activeIndex = 0;
 
     public int ActiveIndex { get => _activeIndex; }
+    public int MaxInventory { get => _availableInventorySlots; }
 
     private void Start()
     {

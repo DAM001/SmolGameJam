@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterHealth : MonoBehaviour
 {
     [SerializeField] private CharacterManager _manager;
+    [SerializeField] private CharacterHand _hand;
     [SerializeField] private GameObject _damagePopup;
     [Space(10)]
     [SerializeField] private float _maxHealth = 100f;
@@ -100,6 +101,7 @@ public class CharacterHealth : MonoBehaviour
     {
         DieEffect();
         Notify("A Bobterium died!");
+        _hand.ThrowEverything();
 
         StartCoroutine(DestroyHandler());
     }

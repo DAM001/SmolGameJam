@@ -1724,7 +1724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _notification: {fileID: 8282089646786192164, guid: 694834d4ff94b914cba7408c4e8e7023, type: 3}
   _notificationHolder: {fileID: 2192004088686719026}
-  _displayTimer: 5
+  _displayTimer: 10
 --- !u!1 &2192004089168952342
 GameObject:
   m_ObjectHideFlags: 0
