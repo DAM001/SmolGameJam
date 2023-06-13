@@ -87,7 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movement: {fileID: 6857224575369671900}
   _characterHand: {fileID: 7820382269763178517}
-  characterHealth: {fileID: 1187814640846814747}
+  _characterHealth: {fileID: 1187814640846814747}
   _range: 50
 --- !u!114 &6857224575369671900 stripped
 MonoBehaviour:

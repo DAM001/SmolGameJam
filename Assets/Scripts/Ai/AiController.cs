@@ -6,7 +6,7 @@ public class AiController : MonoBehaviour
 {
     [SerializeField] private CharacterMovement _movement;
     [SerializeField] private CharacterHand _characterHand;
-    [SerializeField] private CharacterHealth characterHealth;
+    [SerializeField] private CharacterHealth _characterHealth;
     [Space(10)]
     [SerializeField] private float _range = 30f;
 
@@ -38,6 +38,12 @@ public class AiController : MonoBehaviour
 
     private void UpdateLogic()
     {
+        if (Vector3.Distance(transform.position, Camera.main.transform.position) > 100f
+            || !_characterHealth.IsInCircle)
+        {
+            return;
+        }
+
         switch (_logicPhase)
         {
             case 0:
@@ -119,13 +125,15 @@ public class AiController : MonoBehaviour
         InventoryItemType type = item.GetComponent<InventoryItem>().ItemType;
         if (type == InventoryItemType.Health)
         {
-            characterHealth.UseHeal();
+            _characterHealth.UseHeal();
+            Data.Items.Remove(item);
             Destroy(item);
             return;
         }
         if (type == InventoryItemType.Shield)
         {
-            characterHealth.UseShield();
+            _characterHealth.UseShield();
+            Data.Items.Remove(item);
             Destroy(item);
             return;
         }
@@ -136,6 +144,7 @@ public class AiController : MonoBehaviour
         }
         if (type == InventoryItemType.BackpackUpgrade)
         {
+            Data.Items.Remove(item);
             Destroy(item);
             return;
         }
@@ -176,14 +185,14 @@ public class AiController : MonoBehaviour
 
     private GameObject FindNearestPlayer()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Character");
-        for (int i = 0; i < players.Length; i++)
+        GameObject[] players = Data.Characters.ToArray();
+        for (int i = 0; i < Data.Characters.Count; i++)
         {
-            if (players[i] == gameObject)
+            if (Data.Characters[i] == null)
             {
-                players[i] = GameObject.FindGameObjectWithTag("Player");
-                break;
+                Data.Characters.Remove(Data.Characters[i]);
             }
+            else if (players[i] == gameObject) players[i] = null;
         }
 
         return GameObjectUtil.FindClosest(players, transform.position);
@@ -191,35 +200,40 @@ public class AiController : MonoBehaviour
 
     private GameObject FindNearestWeapon()
     {
-        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
         List<GameObject> weapons = new List<GameObject>();
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < Data.Items.Count; i++)
         {
-            if (items[i].GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon)
+            if (Data.Items[i] == null)
             {
-                if (items[i].GetComponent<WeaponScript>().HasAmmo() 
-                    && items[i].GetComponent<WeaponScript>().Parent == null)
+                Data.Items.Remove(Data.Items[i]);
+            }
+            else if (Data.Items[i].GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon)
+            {
+                if (Data.Items[i].GetComponent<WeaponScript>().HasAmmo() 
+                    && Data.Items[i].GetComponent<WeaponScript>().Parent == null)
                 {
-                    weapons.Add(items[i]);
+                    weapons.Add(Data.Items[i]);
                 }
             }
         }
-
         return GameObjectUtil.FindClosest(weapons.ToArray(), transform.position);
     }
 
     private GameObject FindNearestAmmo()
     {
-        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
         List<GameObject> ammos = new List<GameObject>();
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < Data.Items.Count; i++)
         {
-            if (items[i].GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
+            if (Data.Items[i] == null)
+            {
+                Data.Items.Remove(Data.Items[i]);
+            }
+            else if (Data.Items[i].GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
             {
                 if (_characterHand.IsWeapon()
-                    && items[i].GetComponent<AmmoItem>().WeaponType == _characterHand.GetWeapon().WeaponType)
+                    && Data.Items[i].GetComponent<AmmoItem>().WeaponType == _characterHand.GetWeapon().WeaponType)
                 {
-                    ammos.Add(items[i]);
+                    ammos.Add(Data.Items[i]);
                 }
             }
         }

@@ -9,6 +9,6 @@ public class UiRoundInfo : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _alive.text = "Alive: " + GameObject.FindGameObjectsWithTag("Character").Length;
+        _alive.text = "Alive: " + Data.Characters.Count;
     }
 }

@@ -18,6 +18,8 @@ public class CharacterHealth : MonoBehaviour
     private bool _inCircle = true;
     private float _circleDamage = 0f;
 
+    public bool IsInCircle { get => _inCircle; }
+
     private void Start()
     {
         _currentHealth = _maxHealth;
