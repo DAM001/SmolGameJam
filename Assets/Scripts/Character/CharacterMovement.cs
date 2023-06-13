@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController _characterController;
+    [SerializeField] private Animator _animator;
     [Header("Properties:")]
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _rotationSpeed = 10f;
@@ -33,5 +34,12 @@ public class CharacterMovement : MonoBehaviour
         _characterController.Move(_velocity * Time.deltaTime);
 
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+
+        Anim();
+    }
+
+    private void Anim()
+    {
+        _animator.speed = _characterController.velocity.magnitude / _moveSpeed;
     }
 }

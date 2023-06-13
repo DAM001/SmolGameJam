@@ -17,7 +17,11 @@ public class CameraPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (_target == null) return;
+        if (_target == null)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Character");
+            _target = players[Random.Range(0, players.Length)];
+        }
 
         Vector3 desiredPosition = _target.transform.position + _cameraPosition;
         Vector3 smoothedPostion = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);

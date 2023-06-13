@@ -7,6 +7,7 @@ public class LootGenerator : MonoBehaviour
     [SerializeField] private GameObject _loot;
     [SerializeField] private int _numberOfLoot = 30;
     [SerializeField] private float _distance = 150f;
+    [SerializeField] private bool _rotate = false;
 
     private void Start()
     {
@@ -21,7 +22,8 @@ public class LootGenerator : MonoBehaviour
         GameObject item = Instantiate(_loot);
         item.transform.parent = null;
         item.transform.Rotate(0, Random.Range(-1000f, 1000f), 0);
-        item.transform.position = transform.position + item.transform.forward * Random.Range(10f, _distance);
+        item.transform.position = transform.position + item.transform.forward * Random.Range(15f, _distance);
+        if (_rotate) item.transform.GetChild(0).Rotate(0f, Random.Range(0f, 360f), 0f);
         return item;
     }
 }

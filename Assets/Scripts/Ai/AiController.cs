@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class AiController : MonoBehaviour
 {
     [SerializeField] private CharacterMovement _movement;
     [SerializeField] private CharacterHand _characterHand;
+    [SerializeField] private CharacterHealth characterHealth;
     [Space(10)]
     [SerializeField] private float _range = 30f;
 
@@ -44,31 +43,53 @@ public class AiController : MonoBehaviour
             case 0:
                 _targetIsPlayer = false;
                 _hasWeapon = false;
-                if (_target == null) _target = FindNearestWeapon();
+                _target = FindNearestWeapon();
                 break;
             case 1:
-                _targetIsPlayer = false;
-                _hasWeapon = true;
-                _target = FindNearestAmmo();
-                if (_target == null && _characterHand.IsWeapon()
-                    && !_characterHand.GetWeapon().HasAmmo())
-                {
-                    _characterHand.OnThrow();
-                    _logicPhase--;
-                }
-                if (_characterHand.HasAmmo()) _logicPhase++;
+                Phase1();
                 break;
             case 2:
                 Phase2();
                 break;
             case 3:
-                
+                _logicPhase--;
+                _target = FindNearestPlayer();
                 break;
         }
 
         Movement();
         HandleItems();
         HandleWeapon();
+
+
+    }
+
+    private void Phase1()
+    {
+        if (_characterHand.IsWeapon() && !_characterHand.CurrentItem.GetComponent<WeaponScript>().HasAmmo())
+        {
+            _target = FindNearestAmmo();
+            _targetIsPlayer = false;
+            _hasWeapon = true;
+            return;
+        }
+
+        if (_characterHand.HasAmmo()) _logicPhase++;
+
+        GameObject ammo = FindNearestAmmo();
+        GameObject player = FindNearestPlayer();
+        float distanceAmmo = ammo == null ? Mathf.Infinity : Vector3.Distance(ammo.transform.position, transform.position);
+        float distancePlayer = Vector3.Distance(player.transform.position, transform.position);
+        if (distanceAmmo > distancePlayer && distancePlayer < _range)
+        {
+            _target = player;
+            _targetIsPlayer = true;
+        }
+        else
+        {
+            _target = ammo;
+            _targetIsPlayer = false;
+        }
     }
 
     private void Phase2()
@@ -78,7 +99,7 @@ public class AiController : MonoBehaviour
         GameObject player = FindNearestPlayer();
         float distanceAmmo = ammo == null ? Mathf.Infinity : Vector3.Distance(ammo.transform.position, transform.position);
         float distancePlayer = Vector3.Distance(player.transform.position, transform.position);
-        if (distanceAmmo > distancePlayer && distancePlayer > _range / 2f)
+        if (distanceAmmo < distancePlayer && distancePlayer > _range / 2f)
         {
             _targetIsPlayer = false;
             _target = ammo;
@@ -93,6 +114,31 @@ public class AiController : MonoBehaviour
     private void HandleItems()
     {
         GameObject item = _characterHand.EquipableItem();
+        if (item == null) return;
+
+        InventoryItemType type = item.GetComponent<InventoryItem>().ItemType;
+        if (type == InventoryItemType.Health)
+        {
+            characterHealth.UseHeal();
+            Destroy(item);
+            return;
+        }
+        if (type == InventoryItemType.Shield)
+        {
+            characterHealth.UseShield();
+            Destroy(item);
+            return;
+        }
+        if (type == InventoryItemType.Grenade)
+        {
+            _characterHand.OnEquip();
+            return;
+        }
+        if (type == InventoryItemType.BackpackUpgrade)
+        {
+            Destroy(item);
+            return;
+        }
         if (item != _target) return;
 
         _characterHand.OnEquip();
@@ -103,10 +149,10 @@ public class AiController : MonoBehaviour
     {
         if (_target == null) return;
         float distance = Vector3.Distance(transform.position, _target.transform.position);
-        float speed = distance > _range ? 1f : distance / _range + .1f;
-        if (!_targetIsPlayer && distance < _range / 10f) speed = .3f;
-        else if (_hasWeapon && _targetIsPlayer && distance < 10f) speed = -.5f;
-        _movement.Move(new Vector2(transform.forward.x * speed, transform.forward.z * speed));
+        float speed = 1f;
+        if (_targetIsPlayer && distance < 15f) speed = -.5f;
+        else if (!_targetIsPlayer && distance < .5f) speed = -.5f;
+        _movement.Move(new Vector2(transform.forward.x * speed / .8f, transform.forward.z * speed));
     }
 
     private void HandleWeapon()
@@ -124,7 +170,7 @@ public class AiController : MonoBehaviour
     private IEnumerator ReleaseFireHandler()
     {
         _characterHand.OnFireDown();
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(.1f);
         _characterHand.OnFireUp();
     }
 
@@ -151,7 +197,8 @@ public class AiController : MonoBehaviour
         {
             if (items[i].GetComponent<InventoryItem>().ItemType == InventoryItemType.Weapon)
             {
-                if (items[i].GetComponent<WeaponScript>().HasAmmo())
+                if (items[i].GetComponent<WeaponScript>().HasAmmo() 
+                    && items[i].GetComponent<WeaponScript>().Parent == null)
                 {
                     weapons.Add(items[i]);
                 }
@@ -169,8 +216,8 @@ public class AiController : MonoBehaviour
         {
             if (items[i].GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
             {
-                if (_characterHand.IsWeapon() &&
-                    items[i].GetComponent<AmmoItem>().WeaponType == _characterHand.GetWeapon().WeaponType)
+                if (_characterHand.IsWeapon()
+                    && items[i].GetComponent<AmmoItem>().WeaponType == _characterHand.GetWeapon().WeaponType)
                 {
                     ammos.Add(items[i]);
                 }

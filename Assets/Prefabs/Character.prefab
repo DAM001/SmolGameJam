@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 5040434816877611047}
   - component: {fileID: 1085993950949405565}
   - component: {fileID: 6326336460815126061}
+  - component: {fileID: 3043767271084044836}
   m_Layer: 0
   m_Name: Character
   m_TagString: Character
@@ -431,6 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterController: {fileID: 1085993950949405565}
+  _animator: {fileID: 3043767271084044836}
   _moveSpeed: 12
   _rotationSpeed: 500
   _minDistance: 0.5
@@ -502,6 +504,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &3043767271084044836
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482262065337802497}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d8457ddcb2ca78e4a8734736db0e1f65, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5936633567770698446
 GameObject:
   m_ObjectHideFlags: 0

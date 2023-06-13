@@ -48,10 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _data:
-  - RestTime: 30
+  - RestTime: 10
     ShrinkTime: 30
     Damage: 2
-  - RestTime: 20
+  - RestTime: 10
     ShrinkTime: 30
     Damage: 4
   - RestTime: 10
