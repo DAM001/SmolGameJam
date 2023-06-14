@@ -8,6 +8,7 @@ public class WeaponScript : MonoBehaviour
 {
     [SerializeField] private GameObject _bullet;
     [SerializeField] private WeaponMag _mag;
+    [SerializeField] private AudioSource _audioSource;
 
     [Header("Weapon data:")]
     [SerializeField] private WeaponType _weaponType;
@@ -21,6 +22,9 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] private float _distance = 20f;
     [Header("Visuals:")]
     [SerializeField] private GameObject _shell;
+    [Header("Sounds:")]
+    [SerializeField] private AudioClip _shootSound;
+    [SerializeField] private AudioClip _equipSound;
 
     private GameObject _firePoint;
     private float _nextTimeFire = 0f;
@@ -40,6 +44,7 @@ public class WeaponScript : MonoBehaviour
     public void Activate()
     {
         _mag.Activate();
+        EquipSound();
     }
 
     public void Reload()
@@ -81,6 +86,21 @@ public class WeaponScript : MonoBehaviour
         _parent.GetComponent<CharacterHandItemMovement>().FireEffect();
         StartCoroutine(FireEffect());
         CreateShell();
+        FireSound();
+    }
+
+    private void FireSound()
+    {
+        _audioSource.clip = _shootSound;
+        _audioSource.pitch = Random.Range(.8f, 1.1f);
+        _audioSource.Play();
+    }
+
+    private void EquipSound()
+    {
+        _audioSource.clip = _equipSound;
+        _audioSource.pitch = Random.Range(.8f, 1.1f);
+        _audioSource.Play();
     }
 
     private IEnumerator FireEffect()

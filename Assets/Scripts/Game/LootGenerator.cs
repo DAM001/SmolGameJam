@@ -17,6 +17,16 @@ public class LootGenerator : MonoBehaviour
         }
     }
 
+    public void Spawn(int number)
+    {
+        _numberOfLoot = number;
+
+        for (int i = 0; i < _numberOfLoot; i++)
+        {
+            CreateItem();
+        }
+    }
+
     private GameObject CreateItem()
     {
         GameObject item = Instantiate(_loot);

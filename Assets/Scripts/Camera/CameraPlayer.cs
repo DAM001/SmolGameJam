@@ -10,21 +10,34 @@ public class CameraPlayer : MonoBehaviour
 
     private GameObject _target;
 
-    private void Start()
-    {
-        _target = GameObject.FindGameObjectWithTag("Player");
-    }
-
     private void Update()
     {
         if (_target == null)
         {
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Character");
-            _target = players[Random.Range(0, players.Length)];
+            FindNewTarget();
+            return;
         }
 
         Vector3 desiredPosition = _target.transform.position + _cameraPosition;
         Vector3 smoothedPostion = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);
         transform.position = smoothedPostion;
+    }
+
+    public void FindNewTarget()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            _target = player;
+            return;
+        }
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Character");
+        if (players.Length == 0) return;
+        _target = players[Random.Range(0, players.Length)];
+    }
+
+    public void SetTarget(GameObject target)
+    {
+        _target = target;
     }
 }

@@ -161,4 +161,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 4297299592668791733}
-  _numberOfLoot: 6
+  _numberOfLoot: 8

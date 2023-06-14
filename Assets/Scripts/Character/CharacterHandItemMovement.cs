@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterHandItemMovement : MonoBehaviour
 {
     [SerializeField] private CharacterHand _characterHand;
+    [SerializeField] private CharacterMovement _movement;
     [Header("Properties:")]
     [SerializeField] private float _movementSpeed = 10f;
     [SerializeField] private float _rotationSpeed = 10f;
@@ -40,6 +41,7 @@ public class CharacterHandItemMovement : MonoBehaviour
 
         itemTransform.position -= itemTransform.forward * Random.Range(.05f, .2f) * multiplier;
         //itemTransform.Rotate(Random.Range(-1f, -5f) * multiplier, Random.Range(-1f, 1f) * multiplier, 0f, Space.Self);
+        _movement.KnockBack(_characterHand.GetWeapon().Damage / 100f);
     }
 
     public void ResetPosition()

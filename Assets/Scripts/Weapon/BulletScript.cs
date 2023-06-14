@@ -46,7 +46,7 @@ public class BulletScript : MonoBehaviour
         if (hitObj.GetComponent<CharacterHealth>() != null)
         {
             float damage = _damage;
-            if (hitObj.GetComponent<CharacterManager>().IsPlayer) damage *= Random.Range(1f, 1.3f);
+            if (hitObj.GetComponent<CharacterManager>().IsPlayer) damage *= Random.Range(.5f, .7f);
             hitObj.GetComponent<CharacterHealth>().Damage(damage);
             OnCharacterHit();
         }

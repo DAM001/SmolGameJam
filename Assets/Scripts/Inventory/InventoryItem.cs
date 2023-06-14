@@ -15,6 +15,8 @@ public class InventoryItem : MonoBehaviour
     public InventoryItemType ItemType { get => _itemType; }
     public GameObject InventoryIcon { get => _inventoryIcon; }
 
+    public bool Equipped { get; set; }
+
     private void Start()
     {
         transform.parent = null;
@@ -23,6 +25,7 @@ public class InventoryItem : MonoBehaviour
     public void Equip()
     {
         gameObject.tag = "Untagged";
+        Equipped = true;
 
         _rigidbody.isKinematic = true;
         _boxCollider.enabled = false;
@@ -32,6 +35,7 @@ public class InventoryItem : MonoBehaviour
     public void Throw()
     {
         gameObject.tag = "Item";
+        Equipped = false;
 
         _rigidbody.isKinematic = false;
         _boxCollider.enabled = true;

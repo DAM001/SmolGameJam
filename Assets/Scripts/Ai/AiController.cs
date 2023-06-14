@@ -14,6 +14,8 @@ public class AiController : MonoBehaviour
     private int _logicPhase = 0;
     private bool _targetIsPlayer = false;
     private bool _hasWeapon = false;
+    private bool _isFireDown = false;
+    private float _sideMoveSpeed = 0f;
 
     private void Start()
     {
@@ -38,8 +40,13 @@ public class AiController : MonoBehaviour
 
     private void UpdateLogic()
     {
-        if (Vector3.Distance(transform.position, Camera.main.transform.position) > 100f
-            || !_characterHealth.IsInCircle)
+        if (!_characterHealth.IsInCircle)
+        {
+            OutFromCircle();
+            return;
+        }
+
+        if (Vector3.Distance(transform.position, Camera.main.transform.position) > 100f)
         {
             return;
         }
@@ -61,13 +68,29 @@ public class AiController : MonoBehaviour
                 _logicPhase--;
                 _target = FindNearestPlayer();
                 break;
+            default: 
+                _logicPhase = 0;
+                break;
         }
 
         Movement();
         HandleItems();
         HandleWeapon();
+    }
 
+    private void OutFromCircle()
+    {
+        if (!_characterHand.HasAmmo()) _logicPhase--;
+        GameObject player = FindNearestPlayer();
+        float distancePlayer = Vector3.Distance(player.transform.position, transform.position);
+        if (_logicPhase >= 1 && _hasWeapon && distancePlayer < _range / 2f)
+        {
+            _target = player;
+            _targetIsPlayer = true;
+        }
+        else _target = GameObject.FindGameObjectWithTag("Circle");
 
+        Movement();
     }
 
     private void Phase1()
@@ -121,6 +144,7 @@ public class AiController : MonoBehaviour
     {
         GameObject item = _characterHand.EquipableItem();
         if (item == null) return;
+        if (item.tag != "Item") return;
 
         InventoryItemType type = item.GetComponent<InventoryItem>().ItemType;
         if (type == InventoryItemType.Health)
@@ -159,9 +183,12 @@ public class AiController : MonoBehaviour
         if (_target == null) return;
         float distance = Vector3.Distance(transform.position, _target.transform.position);
         float speed = 1f;
-        if (_targetIsPlayer && distance < 15f) speed = -.5f;
-        else if (!_targetIsPlayer && distance < .5f) speed = -.5f;
-        _movement.Move(new Vector2(transform.forward.x * speed / .8f, transform.forward.z * speed));
+        if ((_targetIsPlayer && distance < 15f) || (!_targetIsPlayer && distance < .5f))
+        {
+            _sideMoveSpeed = Random.Range(-.2f, .2f);
+            speed = -.5f;
+        }
+        _movement.Move(new Vector2(transform.forward.x * speed + transform.right.x * _sideMoveSpeed, transform.forward.z * speed + transform.right.z * _sideMoveSpeed));
     }
 
     private void HandleWeapon()
@@ -169,7 +196,7 @@ public class AiController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + transform.up * 1f + transform.forward * .5f, transform.forward, out hit, _range))
         {
-            if (hit.transform.gameObject == _target)
+            if (hit.transform.gameObject == _target && !_isFireDown)
             {
                 StartCoroutine(ReleaseFireHandler());
             }
@@ -179,8 +206,10 @@ public class AiController : MonoBehaviour
     private IEnumerator ReleaseFireHandler()
     {
         _characterHand.OnFireDown();
-        yield return new WaitForSeconds(.1f);
+        _isFireDown = true;
+        yield return new WaitForSeconds(Random.Range(.3f, 1f));
         _characterHand.OnFireUp();
+        _isFireDown = false;
     }
 
     private GameObject FindNearestPlayer()
@@ -203,7 +232,7 @@ public class AiController : MonoBehaviour
         List<GameObject> weapons = new List<GameObject>();
         for (int i = 0; i < Data.Items.Count; i++)
         {
-            if (Data.Items[i] == null)
+            if (Data.Items[i] == null || Data.Items[i].GetComponent<InventoryItem>() == null)
             {
                 Data.Items.Remove(Data.Items[i]);
             }
@@ -224,7 +253,7 @@ public class AiController : MonoBehaviour
         List<GameObject> ammos = new List<GameObject>();
         for (int i = 0; i < Data.Items.Count; i++)
         {
-            if (Data.Items[i] == null)
+            if (Data.Items[i] == null || Data.Items[i].GetComponent<InventoryItem>() == null)
             {
                 Data.Items.Remove(Data.Items[i]);
             }

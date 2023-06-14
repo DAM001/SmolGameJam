@@ -14,7 +14,7 @@ public class LootBox : MonoBehaviour
         for (int i = 0; i < items.Length; i++)
         {
             float distance = 3f;
-            items[i].transform.position = transform.position + new Vector3(Random.Range(-distance, distance), 1f, Random.Range(-distance, distance));
+            items[i].transform.position = transform.position + new Vector3(Random.Range(-distance, distance), 5f, Random.Range(-distance, distance));
         }
     }
 }

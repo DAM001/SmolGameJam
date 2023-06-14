@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public void Notify(string info)
+    public void Notify(string info, float time)
     {
-        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiNotifications>().Notify(info);
+        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiNotifications>().Notify(info, time);
     }
 }

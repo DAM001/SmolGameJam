@@ -64,6 +64,10 @@ PrefabInstance:
       value: P2020 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: _speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _accuracy
       value: 5
       objectReference: {fileID: 0}
@@ -73,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _fireRate
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _fullAuto

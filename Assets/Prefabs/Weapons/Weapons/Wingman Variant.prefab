@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 607558756718742500, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _magSize
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 607558756718742500, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _reloadTime
@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _speed
-      value: 1.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _damage
@@ -89,12 +89,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _fireRate
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _fullAuto
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: _shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7c6868379f4b5ce4b93ff39392ff97ab, type: 3}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _weaponType
       value: 3

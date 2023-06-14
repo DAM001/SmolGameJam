@@ -9,11 +9,11 @@ public class UiNotifications : MonoBehaviour
     [Header("Properties:")]
     [SerializeField] private float _displayTimer = 3f;
 
-    public void Notify(string text)
+    public void Notify(string text, float time)
     {
         GameObject notification = Instantiate(_notification, _notificationHolder.transform);
         notification.transform.parent = _notificationHolder.transform;
         notification.GetComponent<Notification>().SetInfo(text);
-        Destroy(notification, _displayTimer);
+        Destroy(notification, time);
     }
 }

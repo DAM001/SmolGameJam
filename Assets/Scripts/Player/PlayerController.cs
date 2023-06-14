@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (_cursor == null) _cursor = GameObject.FindGameObjectWithTag("Cursor");
         _characterMovement.LookAt(_cursor.transform.position);
     }
 

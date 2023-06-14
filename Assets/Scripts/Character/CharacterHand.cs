@@ -92,7 +92,8 @@ public class CharacterHand : MonoBehaviour
     public void OnEquip()
     {
         GameObject item = EquipableItem();
-        if (item == null) return;
+        InventoryItemType itemType = item.GetComponent<InventoryItem>().ItemType;
+        if (item == null || (!_inventory.HasEmptySlot() && itemType != InventoryItemType.Ammo)) return;
 
         _currentItem = item;
         GetInventoryItem().Equip();

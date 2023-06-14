@@ -202,4 +202,14 @@ public class Inventory : MonoBehaviour
     {
         if (_manager.IsPlayer) GetUi().GetItem(_activeIndex).GetComponent<UiProgress>().UpdateProgress(value);
     }
+
+    public bool HasEmptySlot()
+    {
+        for (int i = 0; i < _availableInventorySlots; i++)
+        {
+            if (_items[i] == null) return true;
+        }
+
+        return false;
+    }
 }

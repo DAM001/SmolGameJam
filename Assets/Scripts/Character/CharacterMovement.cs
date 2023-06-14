@@ -22,6 +22,7 @@ public class CharacterMovement : MonoBehaviour
 
     public void LookAt(Vector3 pos)
     {
+        pos = new Vector3(pos.x, 0f, pos.z);
         if (Vector3.Distance(transform.position, pos) < _minDistance) return;
         Quaternion targetRot = Quaternion.LookRotation(pos - transform.position, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, _rotationSpeed * Time.deltaTime);
@@ -41,5 +42,10 @@ public class CharacterMovement : MonoBehaviour
     private void Anim()
     {
         _animator.speed = _characterController.velocity.magnitude / _moveSpeed;
+    }
+
+    public void KnockBack(float power)
+    {
+        _velocity *= -power;
     }
 }

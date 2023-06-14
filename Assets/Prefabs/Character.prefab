@@ -264,7 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inventory: {fileID: 1726194327236291656}
   _health: {fileID: 5040434816877611047}
-  _pickupDistance: 3
+  _pickupDistance: 5
 --- !u!114 &7054301832699142880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterHand: {fileID: 4111606004990453289}
+  _movement: {fileID: 765909588168016608}
   _movementSpeed: 50
   _rotationSpeed: 20
 --- !u!1 &5189217117749697566

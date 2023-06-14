@@ -102,10 +102,12 @@ public class CharacterHealth : MonoBehaviour
     public void Die()
     {
         DieEffect();
-        Notify("A Bobterium died!");
+        Notify(Data.Names[Random.Range(0, Data.Names.Length)] + " died!");
         _hand.ThrowEverything();
 
         StartCoroutine(DestroyHandler());
+
+        if (_manager.IsPlayer) GetUiManager().Spectate();
     }
 
     private IEnumerator DestroyHandler()
@@ -127,9 +129,14 @@ public class CharacterHealth : MonoBehaviour
         return GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>();
     }
 
+    private UiManager GetUiManager()
+    {
+        return GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiManager>();
+    }
+
     private void Notify(string info)
     {
-        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiNotifications>().Notify(info);
+        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiNotifications>().Notify(info, 3f);
     }
 
     private void CreateDamagePopup(float damage)
