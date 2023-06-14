@@ -147,7 +147,7 @@ public class AiController : MonoBehaviour
         if (item.tag != "Item") return;
 
         InventoryItemType type = item.GetComponent<InventoryItem>().ItemType;
-        if (type == InventoryItemType.Health)
+        if (type == InventoryItemType.Health && _characterHealth.NeedsHeal())
         {
             _characterHealth.UseHeal();
             Data.Items.Remove(item);

@@ -154,4 +154,14 @@ public class CharacterHealth : MonoBehaviour
         hitEffect.transform.position += Vector3.up;
         Destroy(hitEffect, 5f);
     }
+
+    public bool NeedsHeal()
+    {
+        return _currentHealth != _maxHealth;
+    }
+
+    public bool IsAlive()
+    {
+        return _currentHealth != 0f;
+    }
 }

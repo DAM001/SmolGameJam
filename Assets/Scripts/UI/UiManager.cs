@@ -24,6 +24,7 @@ public class UiManager : MonoBehaviour
     {
         _plyerInfo.SetActive(true);
         _spectateScreen.SetActive(false);
+        Cursor.visible = false;
 
         SetScreen(1);
     }
@@ -35,6 +36,7 @@ public class UiManager : MonoBehaviour
 
     public void Spectate()
     {
+        Cursor.visible = true;
         GameObject.FindGameObjectWithTag("Cursor").SetActive(false);
         _plyerInfo.SetActive(false);
         _spectateScreen.SetActive(true);

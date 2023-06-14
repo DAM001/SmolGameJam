@@ -14,6 +14,6 @@ public class UiNotifications : MonoBehaviour
         GameObject notification = Instantiate(_notification, _notificationHolder.transform);
         notification.transform.parent = _notificationHolder.transform;
         notification.GetComponent<Notification>().SetInfo(text);
-        Destroy(notification, time);
+        notification.GetComponent<Notification>().SetTimer(time);
     }
 }

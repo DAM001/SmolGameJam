@@ -18,6 +18,7 @@ public class BulletScript : MonoBehaviour
     public float Damage { set => _damage = value; }
     public float Speed { set => _speed = value; }
     public float Distance { set => _distance = value; }
+    public bool IsPlayer { get; set; }
 
     private void Start()
     {
@@ -49,6 +50,12 @@ public class BulletScript : MonoBehaviour
             if (hitObj.GetComponent<CharacterManager>().IsPlayer) damage *= Random.Range(.5f, .7f);
             hitObj.GetComponent<CharacterHealth>().Damage(damage);
             OnCharacterHit();
+
+            if (IsPlayer)
+            {
+                GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiRoundInfo>().Damage(damage);
+                if (!hitObj.GetComponent<CharacterHealth>().IsAlive()) GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiRoundInfo>().Kills(1);
+            }
         }
 
         if (hitObj.GetComponent<Rigidbody>() != null)

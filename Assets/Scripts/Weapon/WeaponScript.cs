@@ -132,7 +132,7 @@ public class WeaponScript : MonoBehaviour
             bullet.GetComponent<BulletScript>().Damage = _damage * Random.Range(.8f, 1.1f);
             bullet.GetComponent<BulletScript>().Speed = _speed * Random.Range(.8f, 1.1f);
             bullet.GetComponent<BulletScript>().Distance = _distance * Random.Range(.8f, 1.1f);
-
+            if (Parent.transform.root.GetComponent<CharacterManager>().IsPlayer) bullet.GetComponent<BulletScript>().IsPlayer = true;
             yield return new WaitForFixedUpdate();
         }
     }
