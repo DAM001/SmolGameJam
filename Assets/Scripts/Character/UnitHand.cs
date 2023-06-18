@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterHand : MonoBehaviour
+public class UnitHand : MonoBehaviour
 {
     [SerializeField] private Inventory _inventory;
-    [SerializeField] private CharacterHealth _health;
+    [SerializeField] private UnitHealth _health;
     [Header("Properties:")]
     [SerializeField] private float _pickupDistance = 3f;
 
@@ -137,7 +137,7 @@ public class CharacterHand : MonoBehaviour
 
         _currentItem = _inventory.ChangeActive(index);
         if (IsWeapon()) GetWeapon().Activate();
-        if (IsHealthItem()) _currentItem.GetComponent<HealthItem>().Activate(GetComponent<CharacterHand>(), _health);
+        if (IsHealthItem()) _currentItem.GetComponent<HealthItem>().Activate(GetComponent<UnitHand>(), _health);
     }
 
     public void UseAmmo()

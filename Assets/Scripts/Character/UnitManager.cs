@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManager : MonoBehaviour
+public class UnitManager : MonoBehaviour
 {
     [SerializeField] private bool _isPlayer;
 

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterHandItemMovement : MonoBehaviour
+public class UnitHandItemMovement : MonoBehaviour
 {
-    [SerializeField] private CharacterHand _characterHand;
-    [SerializeField] private CharacterMovement _movement;
+    [SerializeField] private UnitHand _characterHand;
+    [SerializeField] private UnitMovement _movement;
     [Header("Properties:")]
     [SerializeField] private float _movementSpeed = 10f;
     [SerializeField] private float _rotationSpeed = 10f;

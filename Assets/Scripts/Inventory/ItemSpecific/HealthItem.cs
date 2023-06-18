@@ -10,12 +10,12 @@ public class HealthItem : MonoBehaviour
     private bool _isUsing = false;
     private float _useTimeSlider = 0f;
 
-    private CharacterHealth _health;
-    private CharacterHand _hand;
+    private UnitHealth _health;
+    private UnitHand _hand;
 
     public bool IsUsing { get => _isUsing; }
 
-    public void Activate(CharacterHand hand, CharacterHealth health)
+    public void Activate(UnitHand hand, UnitHealth health)
     {
         _health = health;
         _hand = hand;

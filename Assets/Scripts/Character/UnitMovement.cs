@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class UnitMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private Animator _animator;

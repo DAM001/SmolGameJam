@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterHealth : MonoBehaviour
+public class UnitHealth : MonoBehaviour
 {
-    [SerializeField] private CharacterManager _manager;
-    [SerializeField] private CharacterHand _hand;
+    [SerializeField] private UnitManager _manager;
+    [SerializeField] private UnitHand _hand;
     [SerializeField] private GameObject _damagePopup;
     [Space(10)]
     [SerializeField] private float _maxHealth = 100f;

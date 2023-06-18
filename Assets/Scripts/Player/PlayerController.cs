@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private CharacterMovement _characterMovement;
-    [SerializeField] private CharacterHand _characterHand;
+    [SerializeField] private UnitMovement _characterMovement;
+    [SerializeField] private UnitHand _characterHand;
     [Space(10)]
     [SerializeField] private GameObject _cursor;
 

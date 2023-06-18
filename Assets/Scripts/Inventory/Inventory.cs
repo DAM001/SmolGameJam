@@ -7,7 +7,7 @@ public enum InventoryItemType { Weapon, Shield, Health, Ammo, Grenade, BackpackU
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private CharacterManager _manager;
+    [SerializeField] private UnitManager _manager;
     [Space(10)]
     [SerializeField] private int _maxInventorySlots = 6;
     [SerializeField] private int _availableInventorySlots = 3;

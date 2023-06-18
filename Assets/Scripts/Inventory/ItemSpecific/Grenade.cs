@@ -53,7 +53,7 @@ public class Grenade : MonoBehaviour
         if (character == null) return;
         if (Vector3.Distance(character.transform.position, transform.position) < _damageRange)
         {
-            character.GetComponent<CharacterHealth>().Damage(_damage * Random.Range(.7f, 1.3f));
+            character.GetComponent<UnitHealth>().Damage(_damage * Random.Range(.7f, 1.3f));
         }
     }
 

@@ -34,7 +34,7 @@ public class UiRoundInfo : MonoBehaviour
     {
         if (Data.Characters.Count == 1)
         {
-            Data.Characters[0].GetComponent<CharacterHealth>().UseHeal();
+            Data.Characters[0].GetComponent<UnitHealth>().UseHeal();
         }
     }
 

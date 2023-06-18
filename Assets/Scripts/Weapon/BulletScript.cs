@@ -44,17 +44,17 @@ public class BulletScript : MonoBehaviour
     {
         if (hitObj.gameObject.tag == "Circle") return;
 
-        if (hitObj.GetComponent<CharacterHealth>() != null)
+        if (hitObj.GetComponent<UnitHealth>() != null)
         {
             float damage = _damage;
-            if (hitObj.GetComponent<CharacterManager>().IsPlayer) damage *= Random.Range(.5f, .7f);
-            hitObj.GetComponent<CharacterHealth>().Damage(damage);
+            if (hitObj.GetComponent<UnitManager>().IsPlayer) damage *= Random.Range(.5f, .7f);
+            hitObj.GetComponent<UnitHealth>().Damage(damage);
             OnCharacterHit();
 
             if (IsPlayer)
             {
                 GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiRoundInfo>().Damage(damage);
-                if (!hitObj.GetComponent<CharacterHealth>().IsAlive()) GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiRoundInfo>().Kills(1);
+                if (!hitObj.GetComponent<UnitHealth>().IsAlive()) GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiRoundInfo>().Kills(1);
             }
         }
 

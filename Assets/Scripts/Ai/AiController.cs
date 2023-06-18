@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AiController : MonoBehaviour
 {
-    [SerializeField] private CharacterMovement _movement;
-    [SerializeField] private CharacterHand _characterHand;
-    [SerializeField] private CharacterHealth _characterHealth;
+    [SerializeField] private UnitMovement _movement;
+    [SerializeField] private UnitHand _characterHand;
+    [SerializeField] private UnitHealth _characterHealth;
     [Space(10)]
     [SerializeField] private float _range = 30f;
 
