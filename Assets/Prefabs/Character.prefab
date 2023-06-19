@@ -434,8 +434,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 1085993950949405565}
   _animator: {fileID: 3043767271084044836}
-  _moveSpeed: 12
-  _rotationSpeed: 500
+  _moveSpeed: 13
+  _rotationSpeed: 300
   _minDistance: 0.5
   _acceleration: 10
 --- !u!114 &1726194327236291656
