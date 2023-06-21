@@ -193,16 +193,6 @@ public class Inventory : MonoBehaviour
         return _items[index];
     }
 
-    private UiInventory GetUi()
-    {
-        return GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>();
-    }
-
-    public void UpdateProgress(float value)
-    {
-        if (_manager.IsPlayer) GetUi().GetItem(_activeIndex).GetComponent<UiProgress>().UpdateProgress(value);
-    }
-
     public bool HasEmptySlot()
     {
         for (int i = 0; i < _availableInventorySlots; i++)
@@ -211,5 +201,15 @@ public class Inventory : MonoBehaviour
         }
 
         return false;
+    }
+
+    private UiInventory GetUi()
+    {
+        return GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>();
+    }
+
+    public void UpdateProgress(float value)
+    {
+        if (_manager.IsPlayer) GetUi().GetItem(_activeIndex).GetComponent<UiProgress>().UpdateProgress(value);
     }
 }
