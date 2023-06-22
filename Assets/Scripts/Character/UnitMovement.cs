@@ -7,6 +7,7 @@ public class UnitMovement : MonoBehaviour
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private Animator _animator;
     [Header("Properties:")]
+    [SerializeField] private float _gravity = 9.8f; //TODO: Add this to fix the y = 0
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private float _minDistance = .5f;

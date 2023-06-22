@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class UnitHand : MonoBehaviour
 {
+    [SerializeField] private UnitHandItemMovement _itemMovment;
+    [Header("Properties:")]
+    [SerializeField] private float _pickupDistance = 3f;
+
     private int _currentItemIndex = 0;
 
     public GameObject CurrentItem { get; private set; }
@@ -27,12 +31,21 @@ public class UnitHand : MonoBehaviour
 
     public void Equip()
     {
-        
+        GameObject item = EquipableItem();
+        if (item == null) return;
+
+        CurrentItem = item;
+        _itemMovment.EquipItem(item);
+        CurrentItem.GetComponent<InventoryItem>().Equip();
     }
 
     public void ThrowActiveItem()
     {
-        
+        if (!HasItem()) return;
+
+        CurrentItem.GetComponent<InventoryItem>().Throw();
+        _itemMovment.ThrowItem(CurrentItem);
+        CurrentItem = null;
     }
 
     public void ChangeInventoryIndex(int index)
@@ -54,6 +67,14 @@ public class UnitHand : MonoBehaviour
     public bool HasItem()
     {
         return CurrentItem != null;
+    }
+
+    public GameObject EquipableItem() //TODO: use the Data.Items instead of FindGameObjects
+    {
+        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+        GameObject item = GameObjectUtil.FindClosest(items, transform.position);
+        if (Vector3.Distance(item.transform.position, transform.position) > _pickupDistance) return null;
+        return item;
     }
 }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InventoryItem : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     [Header("Properties:")]
     [SerializeField] private InventoryItemType _itemType;
-    [SerializeField] private float _throwForce = 1000f;
+    [SerializeField] private int _stackSize = 1;
     [Header("UI:")]
     [SerializeField] private GameObject _inventoryIcon;
 
@@ -16,50 +17,42 @@ public class InventoryItem : MonoBehaviour
     public GameObject InventoryIcon { get => _inventoryIcon; }
 
     public bool Equipped { get; private set; }
+    public Rigidbody Rigidbody { get => _rigidbody; }
 
     private void Start()
     {
         transform.parent = null;
     }
 
-    public void UseDown()
+    public virtual void UseDown()
     {
         //use down logic goes here
     }
 
-    public void UseUp()
+    public virtual void UseUp()
     {
         //use up logic goes here
     }
 
-    public void Equip()
+    public virtual void Equip()
     {
         gameObject.tag = "Untagged";
         Equipped = true;
 
-        DisableRigidbody();
+        EnableRigidbody(false);
     }
 
-    public void Throw()
+    public virtual void Throw()
     {
         gameObject.tag = "Item";
         Equipped = false;
 
-        EnableRigidBody();
+        EnableRigidbody(true);
     }
 
-    private void DisableRigidbody()
+    private void EnableRigidbody(bool value)
     {
-        _rigidbody.isKinematic = true;
-        _boxCollider.enabled = false;
-        transform.parent = null;
-    }
-
-    private void EnableRigidBody()
-    {
-        _rigidbody.isKinematic = false;
-        _boxCollider.enabled = true;
-        _rigidbody.AddForce(transform.forward * _throwForce + transform.up * _throwForce / 5f);
-        _rigidbody.AddTorque(transform.up * Random.Range(-_throwForce / 10f, _throwForce / 10f));
+        _rigidbody.isKinematic = !value;
+        _boxCollider.enabled = value;
     }
 }

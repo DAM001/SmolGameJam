@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum WeaponType { Light, Heavy, Shotgun, Sniper }
 
-public class WeaponScript : MonoBehaviour
+public class WeaponScript : InventoryItem
 {
     [SerializeField] private GameObject _bullet;
     [SerializeField] private WeaponMag _mag;
@@ -66,12 +66,12 @@ public class WeaponScript : MonoBehaviour
         }
     }
 
-    public void FireDown()
+    public override void UseDown()
     {
         _fireDown = true;
     }
 
-    public void FireUp()
+    public override void UseUp()
     {
         _fireDown = false;
         _nextFireEnabled = true;

@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class UnitHandItemMovement : MonoBehaviour
 {
-
-}
-
-/*
-public class UnitHandItemMovement : MonoBehaviour
-{
-    [SerializeField] private UnitHand _characterHand;
     [SerializeField] private UnitMovement _movement;
     [Header("Properties:")]
     [SerializeField] private float _movementSpeed = 10f;
     [SerializeField] private float _rotationSpeed = 10f;
+    [SerializeField] private float _throwForce = 1000f;
+
+    private GameObject _currentItem;
 
     private void Update()
     {
-        if (_characterHand.CurrentItem == null) return;
+        if (_currentItem == null) return;
 
-        Transform itemTransform = _characterHand.CurrentItem.transform;
-        Move(itemTransform);
-        Rotate(itemTransform);
-
-        if (Vector3.Distance(itemTransform.position, transform.position) > 2f) ResetPosition();
+        Move(_currentItem.transform);
+        Rotate(_currentItem.transform);
     }
 
     private void Move(Transform itemTransform)
@@ -39,21 +32,34 @@ public class UnitHandItemMovement : MonoBehaviour
         itemTransform.rotation = Quaternion.Slerp(itemTransform.rotation, transform.rotation, Time.deltaTime * _rotationSpeed);
     }
 
-    public void FireEffect()
+    public void EquipItem(GameObject item)
     {
-        if (_characterHand.CurrentItem == null) return;
-        Transform itemTransform = _characterHand.CurrentItem.transform;
-        float multiplier = _characterHand.GetWeapon().Damage / 10f;
-
-        itemTransform.position -= itemTransform.forward * Random.Range(.05f, .2f) * multiplier;
-        //itemTransform.Rotate(Random.Range(-1f, -5f) * multiplier, Random.Range(-1f, 1f) * multiplier, 0f, Space.Self);
-        _movement.KnockBack(_characterHand.GetWeapon().Damage / 100f);
+        _currentItem = item;
     }
 
-    public void ResetPosition()
+    private void ResetPosition(GameObject item)
     {
-        _characterHand.CurrentItem.transform.position = transform.position;
-        _characterHand.CurrentItem.transform.rotation = transform.rotation;
+        item.transform.position = transform.position;
+        item.transform.rotation = transform.rotation;
+    }
+
+    public void ThrowItem(GameObject item)
+    {
+        Rigidbody rigidbody = item.GetComponent<InventoryItem>().Rigidbody;
+        rigidbody.AddForce(transform.forward * _throwForce + transform.up * _throwForce / 5f);
+        rigidbody.AddTorque(transform.up * Random.Range(-_throwForce / 10f, _throwForce / 10f));
+
+        _currentItem = null;
+    }
+
+    public void KnockBack(float damage)
+    {
+        //if (!_characterHand.HasItem()) return;
+        //Transform itemTransform = _characterHand.CurrentItem.transform;
+        //float multiplier = damage / 10f;
+
+        //itemTransform.position -= itemTransform.forward * Random.Range(.05f, .2f) * multiplier;
+        ////itemTransform.Rotate(Random.Range(-1f, -5f) * multiplier, Random.Range(-1f, 1f) * multiplier, 0f, Space.Self);
+        //_movement.KnockBack(damage / 100f);
     }
 }
-*/

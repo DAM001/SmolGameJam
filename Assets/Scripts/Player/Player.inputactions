@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Scroll",
+                    "type": "PassThrough",
+                    "id": "10c3cac2-8412-4800-8551-13967e174e1a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Item0",
                     "type": "Button",
                     "id": "8a00cda2-29f0-4815-b27c-226af42e3672",
@@ -109,15 +118,6 @@
                     "type": "Button",
                     "id": "71c5ad0b-49b5-4324-b396-ea805b8db6f7",
                     "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Scroll",
-                    "type": "PassThrough",
-                    "id": "10c3cac2-8412-4800-8551-13967e174e1a",
-                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

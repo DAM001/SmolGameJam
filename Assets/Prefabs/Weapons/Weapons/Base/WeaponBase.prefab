@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 4547234119849987334}
   - component: {fileID: 6294086146242964677}
   - component: {fileID: 607558756718742500}
-  - component: {fileID: 2517314627603396285}
   - component: {fileID: 3463684100463376727}
   - component: {fileID: 624834902433639225}
   - component: {fileID: 3453255540595430477}
@@ -134,6 +133,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501708771f724244c930d2987e8ed4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boxCollider: {fileID: 3463684100463376727}
+  _rigidbody: {fileID: 624834902433639225}
+  _itemType: 0
+  _stackSize: 1
+  _inventoryIcon: {fileID: 0}
   _bullet: {fileID: 4122685758868025121, guid: bbbcf8fa0516d7741b5eae326897ba9e, type: 3}
   _mag: {fileID: 607558756718742500}
   _audioSource: {fileID: 3453255540595430477}
@@ -163,23 +167,6 @@ MonoBehaviour:
   _weaponScript: {fileID: 6294086146242964677}
   _magSize: 30
   _reloadTime: 2
---- !u!114 &2517314627603396285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4989073586844102621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a3bd57dd81adec48b6e7cbd1050b8ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _boxCollider: {fileID: 3463684100463376727}
-  _rigidbody: {fileID: 624834902433639225}
-  _itemType: 0
-  _throwForce: 5000
-  _inventoryIcon: {fileID: 338674888747996715, guid: e26613c24b2e6b146be5c742434019b5, type: 3}
 --- !u!65 &3463684100463376727
 BoxCollider:
   m_ObjectHideFlags: 0
