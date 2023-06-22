@@ -50,7 +50,6 @@ public class WeaponScript : MonoBehaviour
     public void Reload()
     {
         _mag.OnReload();
-        Debug.Log("Reload");
     }
 
 
@@ -83,7 +82,7 @@ public class WeaponScript : MonoBehaviour
         StartCoroutine(CreateBullet());
 
         if (_parent == null) return;
-        _parent.GetComponent<UnitHandItemMovement>().FireEffect();
+        //_parent.GetComponent<UnitHandItemMovement>().FireEffect();
         StartCoroutine(FireEffect());
         CreateShell();
         FireSound();

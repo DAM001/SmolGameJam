@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO: Refactor this
 public class UnitHealth : MonoBehaviour
 {
     [SerializeField] private UnitManager _manager;
@@ -103,7 +104,7 @@ public class UnitHealth : MonoBehaviour
     {
         DieEffect();
         Notify(Data.Names[Random.Range(0, Data.Names.Length)] + " died!");
-        _hand.ThrowEverything();
+        //_hand.ThrowEverything();
 
         StartCoroutine(DestroyHandler());
 

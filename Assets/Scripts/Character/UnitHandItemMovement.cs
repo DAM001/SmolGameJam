@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class UnitHandItemMovement : MonoBehaviour
 {
+
+}
+
+/*
+public class UnitHandItemMovement : MonoBehaviour
+{
     [SerializeField] private UnitHand _characterHand;
     [SerializeField] private UnitMovement _movement;
     [Header("Properties:")]
@@ -50,3 +56,4 @@ public class UnitHandItemMovement : MonoBehaviour
         _characterHand.CurrentItem.transform.rotation = transform.rotation;
     }
 }
+*/

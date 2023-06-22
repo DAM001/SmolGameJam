@@ -4,6 +4,62 @@ using UnityEngine;
 
 public class UnitHand : MonoBehaviour
 {
+    private int _currentItemIndex = 0;
+
+    public GameObject CurrentItem { get; private set; }
+
+    public void UseDown()
+    {
+        if (!HasItem()) return;
+
+        CurrentItem.GetComponent<InventoryItem>().UseDown();
+    }
+
+    public void UseUp()
+    {
+        CurrentItem.GetComponent<InventoryItem>().UseUp();
+    }
+
+    public void Reload()
+    {
+        
+    }
+
+    public void Equip()
+    {
+        
+    }
+
+    public void ThrowActiveItem()
+    {
+        
+    }
+
+    public void ChangeInventoryIndex(int index)
+    {
+        int maxValue = 6; //Get this from the inventory
+        if (_currentItemIndex < 0) _currentItemIndex = 0;
+        else if (_currentItemIndex > maxValue) _currentItemIndex = maxValue;
+
+        _currentItemIndex = index;
+    }
+
+    public void Scroll(int value)
+    {
+        _currentItemIndex += value;
+
+        ChangeInventoryIndex(_currentItemIndex);
+    }
+
+    public bool HasItem()
+    {
+        return CurrentItem != null;
+    }
+}
+
+/*
+public class UnitHand : MonoBehaviour
+{
     [SerializeField] private Inventory _inventory;
     [SerializeField] private UnitHealth _health;
     [Header("Properties:")]
@@ -161,3 +217,4 @@ public class UnitHand : MonoBehaviour
         }
     }
 }
+*/

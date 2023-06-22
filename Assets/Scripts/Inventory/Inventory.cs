@@ -7,6 +7,11 @@ public enum InventoryItemType { Weapon, Shield, Health, Ammo, Grenade, BackpackU
 
 public class Inventory : MonoBehaviour
 {
+
+}
+
+/*public class Inventory : MonoBehaviour
+{
     [SerializeField] private UnitManager _manager;
     [Space(10)]
     [SerializeField] private int _maxInventorySlots = 6;
@@ -213,3 +218,4 @@ public class Inventory : MonoBehaviour
         if (_manager.IsPlayer) GetUi().GetItem(_activeIndex).GetComponent<UiProgress>().UpdateProgress(value);
     }
 }
+*/

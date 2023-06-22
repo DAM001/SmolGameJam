@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
         _introManager.StartAnim();
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0f);
 
         _uiManager.GameScreen();
         _data.SetupData();

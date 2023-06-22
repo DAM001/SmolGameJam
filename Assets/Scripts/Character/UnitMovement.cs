@@ -30,13 +30,21 @@ public class UnitMovement : MonoBehaviour
 
     private void Update()
     {
+        AcceleratedMovement();
+        FixYPosToZero(); //TODO: Fix this
+        Anim();
+    }
+
+    private void AcceleratedMovement()
+    {
         Vector3 targetVelocity = _moveDirection;
         _velocity = Vector3.Lerp(_velocity, targetVelocity, _acceleration * Time.deltaTime);
         _characterController.Move(_velocity * Time.deltaTime);
+    }
 
+    private void FixYPosToZero()
+    {
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
-
-        Anim();
     }
 
     private void Anim()

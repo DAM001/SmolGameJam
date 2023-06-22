@@ -80,7 +80,7 @@ public class AiController : MonoBehaviour
 
     private void OutFromCircle()
     {
-        if (!_characterHand.HasAmmo()) _logicPhase--;
+        //if (!_characterHand.HasAmmo()) _logicPhase--;
         GameObject player = FindNearestPlayer();
         float distancePlayer = Vector3.Distance(player.transform.position, transform.position);
         if (_logicPhase >= 1 && _hasWeapon && distancePlayer < _range / 2f)
@@ -95,7 +95,7 @@ public class AiController : MonoBehaviour
 
     private void Phase1()
     {
-        if (_characterHand.IsWeapon() && !_characterHand.CurrentItem.GetComponent<WeaponScript>().HasAmmo())
+        //if (_characterHand.IsWeapon() && !_characterHand.CurrentItem.GetComponent<WeaponScript>().HasAmmo())
         {
             _target = FindNearestAmmo();
             _targetIsPlayer = false;
@@ -103,7 +103,7 @@ public class AiController : MonoBehaviour
             return;
         }
 
-        if (_characterHand.HasAmmo()) _logicPhase++;
+        //if (_characterHand.HasAmmo()) _logicPhase++;
 
         GameObject ammo = FindNearestAmmo();
         GameObject player = FindNearestPlayer();
@@ -123,7 +123,7 @@ public class AiController : MonoBehaviour
 
     private void Phase2()
     {
-        if (!_characterHand.HasAmmo()) _logicPhase--;
+        //if (!_characterHand.HasAmmo()) _logicPhase--;
         GameObject ammo = FindNearestAmmo();
         GameObject player = FindNearestPlayer();
         float distanceAmmo = ammo == null ? Mathf.Infinity : Vector3.Distance(ammo.transform.position, transform.position);
@@ -142,7 +142,8 @@ public class AiController : MonoBehaviour
 
     private void HandleItems()
     {
-        GameObject item = _characterHand.EquipableItem();
+        //GameObject item = _characterHand.EquipableItem();
+        GameObject item = null;
         if (item == null) return;
         if (item.tag != "Item") return;
 
@@ -163,7 +164,7 @@ public class AiController : MonoBehaviour
         }
         if (type == InventoryItemType.Grenade)
         {
-            _characterHand.OnEquip();
+            //_characterHand.OnEquip();
             return;
         }
         if (type == InventoryItemType.BackpackUpgrade)
@@ -174,7 +175,7 @@ public class AiController : MonoBehaviour
         }
         if (item != _target) return;
 
-        _characterHand.OnEquip();
+        //_characterHand.OnEquip();
         _logicPhase++;
     }
 
@@ -205,10 +206,10 @@ public class AiController : MonoBehaviour
 
     private IEnumerator ReleaseFireHandler()
     {
-        _characterHand.OnFireDown();
+        //_characterHand.OnFireDown();
         _isFireDown = true;
         yield return new WaitForSeconds(Random.Range(.3f, 1f));
-        _characterHand.OnFireUp();
+        //_characterHand.OnFireUp();
         _isFireDown = false;
     }
 
@@ -259,8 +260,8 @@ public class AiController : MonoBehaviour
             }
             else if (Data.Items[i].GetComponent<InventoryItem>().ItemType == InventoryItemType.Ammo)
             {
-                if (_characterHand.IsWeapon()
-                    && Data.Items[i].GetComponent<AmmoItem>().WeaponType == _characterHand.GetWeapon().WeaponType)
+                //_characterHand.IsWeapon() &&
+                //if (Data.Items[i].GetComponent<AmmoItem>().WeaponType == _characterHand.GetWeapon().WeaponType)
                 {
                     ammos.Add(Data.Items[i]);
                 }

@@ -21,14 +21,14 @@ public class PlayerController : MonoBehaviour
         _characterMovement.Move(inputValue.Get<Vector2>());
     }
 
-    private void OnFireDown()
+    private void OnUseDown()
     {
-        _characterHand.OnFireDown();
+        _characterHand.UseDown();
     }
 
-    private void OnFireUp()
+    private void OnUseUp()
     {
-        _characterHand.OnFireUp();
+        _characterHand.UseUp();
     }
 
     private void OnReload()
@@ -38,12 +38,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnInteraction()
     {
-        _characterHand.OnEquip();
+        _characterHand.Equip();
     }
 
     private void OnThrowActiveItem()
     {
-        _characterHand.OnThrow();
+        _characterHand.ThrowActiveItem();
+    }
+
+    private void OnScroll(InputValue inputValue)
+    {
+        float deadZone = .1f;
+        float actualValue = inputValue.Get<float>();
+        int value = actualValue > deadZone ? 1 : actualValue < -deadZone ? -1 : 0;
+        if (value == 0) return;
+
+        _characterHand.Scroll(value);
     }
 
     private void OnItem0()
@@ -74,15 +84,5 @@ public class PlayerController : MonoBehaviour
     private void OnItem5()
     {
         _characterHand.ChangeInventoryIndex(5);
-    }
-
-    private void OnScrollUp()
-    {
-        //Debug.Log("up");
-    }
-
-    private void OnScrollDown()
-    {
-        //Debug.Log("down");
     }
 }

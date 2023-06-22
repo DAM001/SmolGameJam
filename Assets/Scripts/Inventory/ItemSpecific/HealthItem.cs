@@ -39,7 +39,7 @@ public class HealthItem : MonoBehaviour
 
         if (_itemType == InventoryItemType.Shield) _health.UseShield();
         else _health.UseHeal();
-        Destroy(_hand.UsedUpItem());
+        //Destroy(_hand.UsedUpItem());
     }
 
     private IEnumerator UseHandler()

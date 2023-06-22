@@ -15,11 +15,21 @@ public class InventoryItem : MonoBehaviour
     public InventoryItemType ItemType { get => _itemType; }
     public GameObject InventoryIcon { get => _inventoryIcon; }
 
-    public bool Equipped { get; set; }
+    public bool Equipped { get; private set; }
 
     private void Start()
     {
         transform.parent = null;
+    }
+
+    public void UseDown()
+    {
+        //use down logic goes here
+    }
+
+    public void UseUp()
+    {
+        //use up logic goes here
     }
 
     public void Equip()
@@ -27,9 +37,7 @@ public class InventoryItem : MonoBehaviour
         gameObject.tag = "Untagged";
         Equipped = true;
 
-        _rigidbody.isKinematic = true;
-        _boxCollider.enabled = false;
-        transform.parent = null;
+        DisableRigidbody();
     }
 
     public void Throw()
@@ -37,6 +45,18 @@ public class InventoryItem : MonoBehaviour
         gameObject.tag = "Item";
         Equipped = false;
 
+        EnableRigidBody();
+    }
+
+    private void DisableRigidbody()
+    {
+        _rigidbody.isKinematic = true;
+        _boxCollider.enabled = false;
+        transform.parent = null;
+    }
+
+    private void EnableRigidBody()
+    {
         _rigidbody.isKinematic = false;
         _boxCollider.enabled = true;
         _rigidbody.AddForce(transform.forward * _throwForce + transform.up * _throwForce / 5f);

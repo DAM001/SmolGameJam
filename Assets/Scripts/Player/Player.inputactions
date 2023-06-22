@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FireDown",
+                    "name": "UseDown",
                     "type": "Button",
                     "id": "bf3d0d41-e037-4da9-ae34-660240e27299",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "FireUp",
+                    "name": "UseUp",
                     "type": "Button",
                     "id": "ad64b04e-2b3a-4fc4-b543-74716b904e18",
                     "expectedControlType": "Button",
@@ -114,22 +114,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ScrollUp",
-                    "type": "Value",
-                    "id": "931bf54f-6405-472b-b0b7-71d459a2984b",
-                    "expectedControlType": "Axis",
+                    "name": "Scroll",
+                    "type": "PassThrough",
+                    "id": "10c3cac2-8412-4800-8551-13967e174e1a",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "ScrollDown",
-                    "type": "Value",
-                    "id": "1339e705-7920-4bb9-9f24-532bc5a904ce",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -195,7 +186,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FireDown",
+                    "action": "UseDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -206,7 +197,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FireUp",
+                    "action": "UseUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -300,28 +291,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b0046b68-e38f-4a97-b3d7-36aea861078f",
-                    "path": "<Mouse>/scroll/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6a7bc4af-ed75-4fb5-a594-f6e4107adcb1",
-                    "path": "<Mouse>/scroll/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollDown",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ad785b4e-089b-4e66-a656-9ce6e2593aea",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -330,6 +299,39 @@
                     "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "82820874-d590-44fb-ae4f-323a6edce636",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "3ac10180-d335-4d90-b26e-7b4d97d3435b",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "24444e49-3bba-4ca9-9b47-bf0a6c2764fd",
+                    "path": "<Mouse>/scroll/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
