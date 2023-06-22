@@ -48,7 +48,7 @@ public class WeaponMag : MonoBehaviour
 
     private void Reload()
     {
-        if (!_isReloading || _weaponScript.Parent == null) return;
+        //if (!_isReloading || _weaponScript.Parent == null) return;
         //_weaponScript.Parent.GetComponent<UnitHand>().UseAmmo();
         _numberOfRoundsLeft = _magSize;
         _isReloading = false;

@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class UnitHand : MonoBehaviour
 {
-    [SerializeField] private UnitHandItemMovement _itemMovment;
+    [SerializeField] private UnitHandItemMovement _itemMovement;
+    [SerializeField] private Inventory _inventory;
     [Header("Properties:")]
     [SerializeField] private float _pickupDistance = 3f;
-
-    private int _currentItemIndex = 0;
 
     public GameObject CurrentItem { get; private set; }
 
@@ -21,12 +20,19 @@ public class UnitHand : MonoBehaviour
 
     public void UseUp()
     {
+        if (!HasItem()) return;
+
         CurrentItem.GetComponent<InventoryItem>().UseUp();
     }
 
     public void Reload()
     {
-        
+        if (!HasItem()) return;
+
+        if (ItemType(CurrentItem) == InventoryItemType.Weapon)
+        {
+            CurrentItem.GetComponent<WeaponScript>().Reload();
+        }
     }
 
     public void Equip()
@@ -34,45 +40,63 @@ public class UnitHand : MonoBehaviour
         GameObject item = EquipableItem();
         if (item == null) return;
 
-        CurrentItem = item;
-        _itemMovment.EquipItem(item);
-        CurrentItem.GetComponent<InventoryItem>().Equip();
+        if (!_inventory.EquipItem(item)) return;
+        item.GetComponent<InventoryItem>().Equip();
+
+        GameObject activeItem = _inventory.GetActiveItem();
+        if (activeItem != CurrentItem)
+        {
+            CurrentItem = _inventory.GetActiveItem();
+            _itemMovement.EquipItem(CurrentItem);
+        }
     }
 
     public void ThrowActiveItem()
     {
         if (!HasItem()) return;
 
+        if (!_inventory.ThrowActiveItem()) return;
+        UseUp();
         CurrentItem.GetComponent<InventoryItem>().Throw();
-        _itemMovment.ThrowItem(CurrentItem);
+        _itemMovement.ThrowItem(CurrentItem);
         CurrentItem = null;
     }
 
     public void ChangeInventoryIndex(int index)
     {
-        int maxValue = 6; //Get this from the inventory
-        if (_currentItemIndex < 0) _currentItemIndex = 0;
-        else if (_currentItemIndex > maxValue) _currentItemIndex = maxValue;
-
-        _currentItemIndex = index;
+        UseUp();
+        CurrentItem = _inventory.GetItem(index);
+        if (!HasItem()) return;
+        _itemMovement.SwitchItem(CurrentItem);
     }
 
     public void Scroll(int value)
     {
-        _currentItemIndex += value;
-
-        ChangeInventoryIndex(_currentItemIndex);
+        _inventory.ActiveIndex += value;
+        ChangeInventoryIndex(_inventory.ActiveIndex);
     }
 
     public bool HasItem()
     {
-        return CurrentItem != null;
+        return CurrentItem != null && CurrentItem.GetComponent<InventoryItem>() != null;
     }
 
-    public GameObject EquipableItem() //TODO: use the Data.Items instead of FindGameObjects
+    public InventoryItemType ItemType(GameObject item)
     {
-        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
-        GameObject item = GameObjectUtil.FindClosest(items, transform.position);
+        return item.GetComponent<InventoryItem>().ItemType;
+    }
+
+    public GameObject EquipableItem()
+    {
+        List<GameObject> notEquippedItems = new List<GameObject>();
+        for (int i = 0; i < Data.Items.Count; i++)
+        {
+            if (!Data.Items[i].GetComponent<InventoryItem>().Equipped)
+            {
+                notEquippedItems.Add(Data.Items[i]);
+            }
+        }
+        GameObject item = GameObjectUtil.FindClosest(notEquippedItems.ToArray(), transform.position);
         if (Vector3.Distance(item.transform.position, transform.position) > _pickupDistance) return null;
         return item;
     }

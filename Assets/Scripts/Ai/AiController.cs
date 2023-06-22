@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AiController : MonoBehaviour
 {
-    [SerializeField] private UnitMovement _movement;
+    /*[SerializeField] private UnitMovement _movement;
     [SerializeField] private UnitHand _characterHand;
     [SerializeField] private UnitHealth _characterHealth;
     [Space(10)]
@@ -269,5 +269,5 @@ public class AiController : MonoBehaviour
         }
 
         return GameObjectUtil.FindClosest(ammos.ToArray(), transform.position);
-    }
+    }*/
 }

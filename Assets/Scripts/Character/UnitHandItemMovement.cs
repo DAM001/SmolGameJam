@@ -37,7 +37,13 @@ public class UnitHandItemMovement : MonoBehaviour
         _currentItem = item;
     }
 
-    private void ResetPosition(GameObject item)
+    public void SwitchItem(GameObject item)
+    {
+        _currentItem = item;
+        ResetPosition(item);
+    }
+
+    public void ResetPosition(GameObject item)
     {
         item.transform.position = transform.position;
         item.transform.rotation = transform.rotation;

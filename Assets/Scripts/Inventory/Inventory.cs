@@ -7,7 +7,104 @@ public enum InventoryItemType { Weapon, Shield, Health, Ammo, Grenade, BackpackU
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] private int _maxAvailableSlots = 6;
+    [SerializeField] private int _currentlyAvailableSlots = 3;
 
+    private GameObject[] _items;
+    private int _activeIndex = 0;
+
+    public int ActiveIndex 
+    { 
+        get => _activeIndex; 
+        set { 
+            _activeIndex = value;
+            if (_activeIndex < 0) _activeIndex = 0;
+            else if (_activeIndex > _currentlyAvailableSlots - 1) _activeIndex = _currentlyAvailableSlots - 1;
+        }
+    }
+    public int AvailableSlots { get => _currentlyAvailableSlots; }
+
+    private void Start()
+    {
+        _items = new GameObject[_maxAvailableSlots];
+    }
+
+    public GameObject GetActiveItem()
+    {
+        return GetItem(ActiveIndex);
+    }
+
+    public bool ThrowActiveItem()
+    {
+        if (_items[_activeIndex] == null) return false;
+
+        ThrowItem(_activeIndex);
+        return true;
+    }
+
+    public bool EquipItem(GameObject item)
+    {
+        if (!HasEmptySlot()) return false;
+
+        AddItem(item, _activeIndex);
+        return true;
+    }
+
+    public void AddItem(GameObject item, int index)
+    {
+        if (_items[index] == null)
+        {
+            _items[index] = item;
+            return;
+        }
+
+        AddItemToEmptySlot(item);
+    }
+
+    private void AddItemToEmptySlot(GameObject item)
+    {
+        for (int i = 0; i < AvailableSlots; i++)
+        {
+            if (_items[i] == null)
+            {
+                _items[i] = item;
+                item.SetActive(false);
+                return;
+            }
+        }
+    }
+
+    public void ThrowItem(int index)
+    {
+        if (_items[index] == null) return;
+
+        _items[index] = null;
+    }
+
+    public GameObject GetItem(int index)
+    {
+        ActiveIndex = index;
+
+        for (int i = 0; i < AvailableSlots; i++)
+        {
+            if (_items[i] != null)
+            {
+                _items[i].SetActive(i == index);
+            }
+        }
+
+        return _items[index];
+    }
+
+    public bool HasEmptySlot()
+    {
+        for (int i = 0; i < AvailableSlots; i++)
+        {
+            if (_items[i] == null) return true;
+        }
+
+        return false;
+    }
 }
 
 /*public class Inventory : MonoBehaviour

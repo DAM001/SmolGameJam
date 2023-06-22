@@ -19,14 +19,14 @@ public class Data : MonoBehaviour
         GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
         for (int i = 0; i < items.Length; i++)
         {
-            Data.Items.Add(items[i]);
+            Items.Add(items[i]);
         }
 
         Characters.Add(GameObject.FindGameObjectWithTag("Player"));
         GameObject[] players = GameObject.FindGameObjectsWithTag("Character");
         for (int i = 0; i < players.Length; i++)
         {
-            Data.Characters.Add(players[i]);
+            Characters.Add(players[i]);
         }
     }
 

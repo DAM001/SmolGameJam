@@ -8,6 +8,100 @@ public class WeaponScript : InventoryItem
 {
     [SerializeField] private GameObject _bullet;
     [SerializeField] private WeaponMag _mag;
+
+    [Header("Weapon data:")]
+    [SerializeField] private WeaponType _weaponType;
+    [SerializeField] private float _fireRate = .1f;
+    [SerializeField] private float _accuracy = 5f;
+    [SerializeField] private bool _isFullAuto = true;
+    [SerializeField] private int _numberOfBullets = 1;
+    [Header("Bullet properties:")]
+    [SerializeField] private float _damage = 30f;
+    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _distance = 20f;
+
+    private GameObject _firePoint;
+    private float _nextTimeFire = 0f;
+    private bool _fireDown = false;
+    private bool _nextFireEnabled = true;
+
+    public float Damage { get => _damage; }
+    public WeaponType WeaponType { get => _weaponType; }
+
+    private void Start()
+    {
+        _firePoint = transform.GetChild(0).gameObject;
+    }
+
+    public void Reload()
+    {
+        //_mag.OnReload();
+    }
+
+    private void Update()
+    {
+        if (!_fireDown) return;
+
+        if (Time.time >= _nextTimeFire && _nextFireEnabled)
+        {
+            //if (!_mag.OnFire()) return;
+            FireFunction();
+            _nextTimeFire = Time.time + _fireRate;
+            if (!_isFullAuto) _nextFireEnabled = false;
+        }
+    }
+
+    public override void UseDown()
+    {
+        _fireDown = true;
+    }
+
+    public override void UseUp()
+    {
+        _fireDown = false;
+        _nextFireEnabled = true;
+    }
+
+    private void FireFunction()
+    {
+        CreateBullets();
+        StartCoroutine(FireEffect());
+    }
+
+    private IEnumerator FireEffect()
+    {
+        _firePoint.transform.GetChild(0).gameObject.SetActive(true);
+        _firePoint.transform.GetChild(0).Rotate(0f, 0f, Random.Range(-45f, 45f));
+        float scale = Random.Range(.5f, 1f);
+        _firePoint.transform.GetChild(0).localScale = new Vector3(scale, scale, .1f);
+        yield return new WaitForSeconds(Random.Range(.03f, .08f));
+        _firePoint.transform.GetChild(0).gameObject.SetActive(false);
+    }
+
+    private void CreateBullets()
+    {
+        for (int i = 0; i < _numberOfBullets; i++)
+        {
+            var bullet = Instantiate(_bullet, _firePoint.transform);
+            FireAccuracy(bullet, _accuracy);
+
+            bullet.GetComponent<BulletScript>().Damage = _damage * Random.Range(.8f, 1.1f);
+            bullet.GetComponent<BulletScript>().Speed = _speed * Random.Range(.8f, 1.1f);
+            bullet.GetComponent<BulletScript>().Distance = _distance * Random.Range(.8f, 1.1f);
+        }
+    }
+
+    private void FireAccuracy(GameObject obj, float accuracy)
+    {
+        //_firePoint.transform.rotation = Quaternion.Euler(0f, transform.localEulerAngles.y, 0f);
+        obj.transform.rotation = _firePoint.transform.rotation;
+        obj.transform.Rotate(0f, Random.Range(-accuracy, accuracy), 0f, Space.Self);
+    }
+}
+
+/*
+    [SerializeField] private GameObject _bullet;
+    [SerializeField] private WeaponMag _mag;
     [SerializeField] private AudioSource _audioSource;
 
     [Header("Weapon data:")]
@@ -131,7 +225,7 @@ public class WeaponScript : InventoryItem
             bullet.GetComponent<BulletScript>().Damage = _damage * Random.Range(.8f, 1.1f);
             bullet.GetComponent<BulletScript>().Speed = _speed * Random.Range(.8f, 1.1f);
             bullet.GetComponent<BulletScript>().Distance = _distance * Random.Range(.8f, 1.1f);
-            if (Parent.transform.root.GetComponent<UnitManager>().IsPlayer) bullet.GetComponent<BulletScript>().IsPlayer = true;
+            //if (Parent.transform.root.GetComponent<UnitManager>().IsPlayer) bullet.GetComponent<BulletScript>().IsPlayer = true;
             yield return new WaitForFixedUpdate();
         }
     }
@@ -151,4 +245,4 @@ public class WeaponScript : InventoryItem
     {
         return _mag.AmmoInPercentage() > 0f;
     }
-}
+*/

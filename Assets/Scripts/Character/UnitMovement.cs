@@ -7,11 +7,13 @@ public class UnitMovement : MonoBehaviour
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private Animator _animator;
     [Header("Properties:")]
-    [SerializeField] private float _gravity = 9.8f; //TODO: Add this to fix the y = 0
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private float _minDistance = .5f;
     [SerializeField] private float _acceleration = .05f;
+    [Space(10)]
+    [SerializeField] private float _gravity = 9.8f; //TODO: Add this to fix the y = 0
+    [SerializeField] private float _moveForce = 1000f;
 
     private Vector3 _moveDirection = Vector3.zero;
     private Vector3 _velocity = Vector3.zero;
@@ -56,5 +58,17 @@ public class UnitMovement : MonoBehaviour
     public void KnockBack(float power)
     {
         _velocity *= -power;
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body == null || body.isKinematic) return;
+
+        // We dont want to push objects below us
+        if (hit.moveDirection.y < 0f) return;
+
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.AddForce(pushDir * _moveForce * _characterController.velocity.magnitude);
     }
 }
