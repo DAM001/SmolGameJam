@@ -24,6 +24,7 @@ public class WeaponScript : InventoryItem
     private float _nextTimeFire = 0f;
     private bool _fireDown = false;
     private bool _nextFireEnabled = true;
+    public UnitHand _unitHand;
 
     public float Damage { get => _damage; }
     public WeaponType WeaponType { get => _weaponType; }
@@ -31,11 +32,6 @@ public class WeaponScript : InventoryItem
     private void Start()
     {
         _firePoint = transform.GetChild(0).gameObject;
-    }
-
-    public void Reload()
-    {
-        //_mag.OnReload();
     }
 
     private void Update()
@@ -49,6 +45,25 @@ public class WeaponScript : InventoryItem
             _nextTimeFire = Time.time + _fireRate;
             if (!_isFullAuto) _nextFireEnabled = false;
         }
+    }
+
+    public void Reload()
+    {
+        //_mag.OnReload();
+    }
+
+    public override void Equip(UnitHand hand)
+    {
+        _unitHand = hand;
+
+        base.Equip();
+    }
+
+    public override void Throw()
+    {
+        _unitHand = null;
+
+        base.Throw();
     }
 
     public override void UseDown()

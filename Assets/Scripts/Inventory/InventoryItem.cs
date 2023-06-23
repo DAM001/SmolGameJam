@@ -34,6 +34,11 @@ public class InventoryItem : MonoBehaviour
         //use up logic goes here
     }
 
+    public virtual void Equip(UnitHand unitHand)
+    {
+        Equip();
+    }
+
     public virtual void Equip()
     {
         gameObject.tag = "Untagged";

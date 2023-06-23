@@ -41,7 +41,7 @@ public class UnitHand : MonoBehaviour
         if (item == null) return;
 
         if (!_inventory.EquipItem(item)) return;
-        item.GetComponent<InventoryItem>().Equip();
+        item.GetComponent<InventoryItem>().Equip(this);
 
         GameObject activeItem = _inventory.GetActiveItem();
         if (activeItem != CurrentItem)
