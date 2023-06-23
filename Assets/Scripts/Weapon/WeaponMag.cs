@@ -40,28 +40,27 @@ public class WeaponMag : MonoBehaviour
     
     public void OnReload()
     {
-        //if (_weaponScript.Parent == null || !_weaponScript.Parent.GetComponent<UnitHand>().HasAmmo()) return;
-        if (_isReloading) return;
+        if (!_isReloading || !_weaponScript.Equipped) return;
         _numberOfRoundsLeft = 0;
         StartCoroutine(ReloadHandler());
     }
 
     private void Reload()
     {
-        //if (!_isReloading || _weaponScript.Parent == null) return;
-        //_weaponScript.Parent.GetComponent<UnitHand>().UseAmmo();
+        if (!_isReloading || !_weaponScript.Equipped) return;
         _numberOfRoundsLeft = _magSize;
         _isReloading = false;
     }
 
     private IEnumerator ReloadHandler()
     {
+        float updateSpeed = .1f;
         _isReloading = true;
         _reloadTimeSlider = 0f;
         while (_reloadTimeSlider < _reloadTime)
         {
-            yield return new WaitForSeconds(.1f);
-            _reloadTimeSlider += .1f;
+            yield return new WaitForSeconds(updateSpeed);
+            _reloadTimeSlider += updateSpeed;
         }
         Reload();
     }

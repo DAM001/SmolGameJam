@@ -6,9 +6,11 @@ public enum WeaponType { Light, Heavy, Shotgun, Sniper }
 
 public class WeaponScript : InventoryItem
 {
-    [SerializeField] private GameObject _bullet;
+    [Header("Scripts:")]
     [SerializeField] private WeaponMag _mag;
-
+    [SerializeField] private WeaponVisuals _visuals;
+    [Header("Bullet:")]
+    [SerializeField] private GameObject _bullet;
     [Header("Weapon data:")]
     [SerializeField] private WeaponType _weaponType;
     [SerializeField] private float _fireRate = .1f;
@@ -40,7 +42,7 @@ public class WeaponScript : InventoryItem
 
         if (Time.time >= _nextTimeFire && _nextFireEnabled)
         {
-            //if (!_mag.OnFire()) return;
+            if (!_mag.OnFire()) return;
             FireFunction();
             _nextTimeFire = Time.time + _fireRate;
             if (!_isFullAuto) _nextFireEnabled = false;
@@ -49,20 +51,18 @@ public class WeaponScript : InventoryItem
 
     public void Reload()
     {
-        //_mag.OnReload();
+        _mag.OnReload();
     }
 
     public override void Equip(UnitHand hand)
     {
         _unitHand = hand;
-
         base.Equip();
     }
 
     public override void Throw()
     {
         _unitHand = null;
-
         base.Throw();
     }
 
@@ -80,24 +80,17 @@ public class WeaponScript : InventoryItem
     private void FireFunction()
     {
         CreateBullets();
-        StartCoroutine(FireEffect());
-    }
-
-    private IEnumerator FireEffect()
-    {
-        _firePoint.transform.GetChild(0).gameObject.SetActive(true);
-        _firePoint.transform.GetChild(0).Rotate(0f, 0f, Random.Range(-45f, 45f));
-        float scale = Random.Range(.5f, 1f);
-        _firePoint.transform.GetChild(0).localScale = new Vector3(scale, scale, .1f);
-        yield return new WaitForSeconds(Random.Range(.03f, .08f));
-        _firePoint.transform.GetChild(0).gameObject.SetActive(false);
+        _visuals.MuzzleFlash(_firePoint.transform.GetChild(0).gameObject);
+        _visuals.CreateBulletShell(_firePoint);
+        _unitHand.KnockBack(_damage);
     }
 
     private void CreateBullets()
     {
         for (int i = 0; i < _numberOfBullets; i++)
         {
-            var bullet = Instantiate(_bullet, _firePoint.transform);
+            var bullet = Instantiate(_bullet, _unitHand.transform);
+            bullet.transform.position = _firePoint.transform.position;
             FireAccuracy(bullet, _accuracy);
 
             bullet.GetComponent<BulletScript>().Damage = _damage * Random.Range(.8f, 1.1f);
@@ -108,8 +101,7 @@ public class WeaponScript : InventoryItem
 
     private void FireAccuracy(GameObject obj, float accuracy)
     {
-        //_firePoint.transform.rotation = Quaternion.Euler(0f, transform.localEulerAngles.y, 0f);
-        obj.transform.rotation = _firePoint.transform.rotation;
+        obj.transform.rotation = Quaternion.Euler(0f, transform.localEulerAngles.y, 0f);
         obj.transform.Rotate(0f, Random.Range(-accuracy, accuracy), 0f, Space.Self);
     }
 }

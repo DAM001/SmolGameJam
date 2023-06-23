@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class UnitHand : MonoBehaviour
 {
+    [Header("Scripts:")]
     [SerializeField] private UnitHandItemMovement _itemMovement;
     [SerializeField] private Inventory _inventory;
     [Header("Properties:")]
+    [SerializeField] private GameObject _handObject;
     [SerializeField] private float _pickupDistance = 3f;
 
     public GameObject CurrentItem { get; private set; }
+    public GameObject HandObject { get => _handObject; }
 
     public void UseDown()
     {
@@ -96,9 +99,14 @@ public class UnitHand : MonoBehaviour
                 notEquippedItems.Add(Data.Items[i]);
             }
         }
-        GameObject item = GameObjectUtil.FindClosest(notEquippedItems.ToArray(), transform.position);
-        if (Vector3.Distance(item.transform.position, transform.position) > _pickupDistance) return null;
+        GameObject item = GameObjectUtil.FindClosest(notEquippedItems.ToArray(), _handObject.transform.position);
+        if (Vector3.Distance(item.transform.position, _handObject.transform.position) > _pickupDistance) return null;
         return item;
+    }
+
+    public void KnockBack(float damage)
+    {
+        _itemMovement.KnockBack(damage);
     }
 }
 
