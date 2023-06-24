@@ -135,7 +135,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 4441808056420892786}
   _rigidbody: {fileID: 4441808056420892787}
   _itemType: 1
-  _throwForce: 2000
+  _stackSize: 2
   _inventoryIcon: {fileID: 1049667140365600415, guid: 859bb403dafe5a14291734e17f23afdf, type: 3}
 --- !u!114 &8397966448403484074
 MonoBehaviour:

@@ -5,12 +5,46 @@ using UnityEngine;
 
 public enum InventoryItemType { Weapon, Shield, Health, Ammo, Grenade, BackpackUpgrade }
 
+[Serializable]
+public class StackableItems
+{
+    private List<GameObject> _items;
+
+    public int MaxSize { get; private set; }
+    public int CurrentSize { get => _items.Count; }
+    public GameObject Item
+    { 
+        get
+        {
+            if (_items.Count == 0) return null;
+            return _items[0];
+        }
+        set
+        {
+            if (value == null)
+            {
+                _items.Remove(_items[_items.Count - 1]);
+                return;
+            }
+
+            _items.Add(value);
+            MaxSize = value.GetComponent<InventoryItem>().StackSize;
+        }
+    }
+
+    public StackableItems()
+    {
+        _items = new List<GameObject>();
+        MaxSize = 0;
+    }
+}
+
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private int _maxAvailableSlots = 6;
     [SerializeField] private int _currentlyAvailableSlots = 3;
 
-    private GameObject[] _items;
+    private StackableItems[] _items;
     private int _activeIndex = 0;
 
     public int ActiveIndex
@@ -26,13 +60,17 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        _items = new GameObject[_maxAvailableSlots];
+        _items = new StackableItems[_maxAvailableSlots];
+        for (int i = 0; i < _items.Length; i++)
+        {
+            _items[i] = new StackableItems();
+        }
     }
 
     public GameObject ItemIcon(int index)
     {
-        if (_items[index] == null) return null;
-        return _items[index].GetComponent<InventoryItem>().InventoryIcon;
+        if (_items[index].Item == null) return null;
+        return _items[index].Item.GetComponent<InventoryItem>().InventoryIcon;
     }
 
     public GameObject GetActiveItem()
@@ -42,7 +80,7 @@ public class Inventory : MonoBehaviour
 
     public bool ThrowActiveItem()
     {
-        if (_items[_activeIndex] == null) return false;
+        if (_items[_activeIndex].Item == null) return false;
 
         ThrowItem(_activeIndex);
         return true;
@@ -58,9 +96,9 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(GameObject item, int index)
     {
-        if (_items[index] == null)
+        if (_items[index].Item == null)
         {
-            _items[index] = item;
+            _items[index].Item = item;
             return;
         }
 
@@ -71,9 +109,9 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < AvailableSlots; i++)
         {
-            if (_items[i] == null)
+            if (_items[i].Item == null)
             {
-                _items[i] = item;
+                _items[i].Item = item;
                 item.SetActive(false);
                 return;
             }
@@ -82,9 +120,9 @@ public class Inventory : MonoBehaviour
 
     public void ThrowItem(int index)
     {
-        if (_items[index] == null) return;
+        if (_items[index].Item == null) return;
 
-        _items[index] = null;
+        _items[index].Item = null;
     }
 
     public GameObject GetItem(int index)
@@ -93,20 +131,20 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < AvailableSlots; i++)
         {
-            if (_items[i] != null)
+            if (_items[i].Item != null)
             {
-                _items[i].SetActive(i == index);
+                _items[i].Item.SetActive(i == index);
             }
         }
 
-        return _items[index];
+        return _items[index].Item;
     }
 
     public bool HasEmptySlot()
     {
         for (int i = 0; i < AvailableSlots; i++)
         {
-            if (_items[i] == null) return true;
+            if (_items[i].Item == null) return true;
         }
 
         return false;
@@ -116,7 +154,20 @@ public class Inventory : MonoBehaviour
     {
         if (index < 0) index = 0;
         else if (index > AvailableSlots) index = AvailableSlots;
-        return _items[index];
+        return _items[index].Item;
+    }
+
+    private int Stackable(GameObject item)
+    {
+        for (int i = 0; i < _items.Length; i++)
+        {
+            if (_items[i].Item.GetComponent<InventoryItem>().ItemType == item.GetComponent<InventoryItem>().ItemType)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }
 

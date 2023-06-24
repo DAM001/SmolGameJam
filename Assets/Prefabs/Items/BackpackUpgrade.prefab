@@ -50,7 +50,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 1282840395023834278}
   _rigidbody: {fileID: 1282840395023834279}
   _itemType: 5
-  _stackSize: 1
+  _stackSize: 2
   _inventoryIcon: {fileID: 0}
 --- !u!65 &1282840395023834278
 BoxCollider:

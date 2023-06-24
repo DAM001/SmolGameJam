@@ -62,6 +62,6 @@ public class UnitHandItemMovement : MonoBehaviour
 
         itemTransform.position -= itemTransform.forward * Random.Range(.05f, .2f) * multiplier;
         itemTransform.Rotate(Random.Range(-1f, -5f) * multiplier, Random.Range(-1f, 1f) * multiplier, 0f, Space.Self);
-        _movement.KnockBack(damage / 100f);
+        //_movement.KnockBack(damage / 100f);
     }
 }

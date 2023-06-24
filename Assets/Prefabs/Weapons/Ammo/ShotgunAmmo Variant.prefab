@@ -12,6 +12,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1927063270505557456, guid: a2638ba366db81444880ef245de3f17c, type: 3}
+      propertyPath: _stackSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927063270505557456, guid: a2638ba366db81444880ef245de3f17c, type: 3}
       propertyPath: _inventoryIcon
       value: 
       objectReference: {fileID: 3188245422306569308, guid: 5805506c530f9a2479dc0cb86353e100, type: 3}

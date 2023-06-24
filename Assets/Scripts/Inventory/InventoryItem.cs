@@ -14,6 +14,7 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] private GameObject _inventoryIcon;
 
     public InventoryItemType ItemType { get => _itemType; }
+    public int StackSize { get => _stackSize; }
     public GameObject InventoryIcon { get => _inventoryIcon; }
 
     public bool Equipped { get; private set; }
