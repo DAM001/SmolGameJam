@@ -7,6 +7,18 @@ public class WeaponVisuals : MonoBehaviour
     [SerializeField] private GameObject _bulletShell;
     //[SerializeField] private AudioSource _audioSource;
 
+    private GameObject _muzzleFlash;
+
+    public GameObject MuzzleFlash { 
+        get => _muzzleFlash;
+        set
+        {
+            _muzzleFlash = value;
+            _muzzleFlash.SetActive(false);
+            _muzzleFlash.transform.parent = null;
+        }
+    }
+
     public void CreateBulletShell(GameObject firePoint)
     {
         GameObject shell = Instantiate(_bulletShell, firePoint.transform);
@@ -17,13 +29,16 @@ public class WeaponVisuals : MonoBehaviour
         Destroy(shell, 5f);
     }
 
-    public void MuzzleFlash(GameObject muzzleFlash)
+    public void ShowMuzzleFlash(GameObject firePoint)
     {
-        StartCoroutine(MuzzleFlashHandler(muzzleFlash));
+        StartCoroutine(MuzzleFlashHandler(_muzzleFlash, firePoint));
     }
 
-    private IEnumerator MuzzleFlashHandler(GameObject muzzleFlash)
+    private IEnumerator MuzzleFlashHandler(GameObject muzzleFlash, GameObject firePoint)
     {
+        muzzleFlash.transform.position = firePoint.transform.position;
+        muzzleFlash.transform.rotation = firePoint.transform.rotation;
+
         muzzleFlash.SetActive(true);
         muzzleFlash.transform.Rotate(0f, 0f, Random.Range(-45f, 45f));
         float scale = Random.Range(.5f, 1f);

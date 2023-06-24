@@ -34,6 +34,7 @@ public class WeaponScript : InventoryItem
     private void Start()
     {
         _firePoint = transform.GetChild(0).gameObject;
+        _visuals.MuzzleFlash = _firePoint.transform.GetChild(0).gameObject;
     }
 
     private void Update()
@@ -79,8 +80,8 @@ public class WeaponScript : InventoryItem
 
     private void FireFunction()
     {
+        _visuals.ShowMuzzleFlash(_firePoint);
         CreateBullets();
-        _visuals.MuzzleFlash(_firePoint.transform.GetChild(0).gameObject);
         _visuals.CreateBulletShell(_firePoint);
         _unitHand.KnockBack(_damage);
     }

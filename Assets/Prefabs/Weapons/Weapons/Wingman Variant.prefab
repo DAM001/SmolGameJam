@@ -153,8 +153,12 @@ PrefabInstance:
       value: Wingman Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6134947116450475021, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.347
+      objectReference: {fileID: 0}
+    - target: {fileID: 6134947116450475021, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.902
+      value: 0.759
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _speed

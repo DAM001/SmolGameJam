@@ -7,12 +7,26 @@ using UnityEngine.UI;
 public class UiInventory : MonoBehaviour
 {
     [SerializeField] private Transform _inventory;
+    [SerializeField] private int _inventorySize = 6;
 
-    private readonly int _maxItems = 6;
+    private GameObject _player;
+
+    private void Update()
+    {
+        if (_player == null) 
+        {
+            _player = GameObject.FindGameObjectWithTag("Player");
+            return;
+        }
+
+        SelectItem(_player.GetComponent<Inventory>().ActiveIndex);
+        SetInventorySize(_player.GetComponent<Inventory>().AvailableSlots);
+        //UpdateItem(0, _player.GetComponent<Inventory>().ItemIcon(0));
+    }
 
     public void SetInventorySize(int size)
     {
-        for (int i = _maxItems - 1; i >= 0; i--)
+        for (int i = _inventorySize - 1; i >= 0; i--)
         {
             _inventory.GetChild(i).gameObject.SetActive(i < size);
         }

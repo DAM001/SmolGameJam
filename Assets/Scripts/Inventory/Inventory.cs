@@ -13,10 +13,10 @@ public class Inventory : MonoBehaviour
     private GameObject[] _items;
     private int _activeIndex = 0;
 
-    public int ActiveIndex 
-    { 
-        get => _activeIndex; 
-        set { 
+    public int ActiveIndex
+    {
+        get => _activeIndex;
+        set {
             _activeIndex = value;
             if (_activeIndex < 0) _activeIndex = 0;
             else if (_activeIndex > _currentlyAvailableSlots - 1) _activeIndex = _currentlyAvailableSlots - 1;
@@ -27,6 +27,11 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         _items = new GameObject[_maxAvailableSlots];
+    }
+
+    public GameObject ItemIcon(int index)
+    {
+        return _items[ActiveIndex].GetComponent<InventoryItem>().InventoryIcon;
     }
 
     public GameObject GetActiveItem()
