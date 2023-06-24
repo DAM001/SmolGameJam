@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: _weaponType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: _inventoryIcon
+      value: 
+      objectReference: {fileID: 5107275722654198020, guid: a5762b992d66c794bab51cdbc83552e3, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
 --- !u!4 &2924115315096460872 stripped

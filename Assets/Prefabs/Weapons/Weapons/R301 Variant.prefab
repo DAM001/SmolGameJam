@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: _shootSound
       value: 
       objectReference: {fileID: 8300000, guid: 432768bc98428334eb7962bf422fc210, type: 3}
+    - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: _inventoryIcon
+      value: 
+      objectReference: {fileID: 6831545303335409827, guid: c4a408a759b4e6a479bd9cb44cf73a91, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
 --- !u!4 &789434016042001268 stripped

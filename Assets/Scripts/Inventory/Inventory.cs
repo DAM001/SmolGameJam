@@ -31,7 +31,8 @@ public class Inventory : MonoBehaviour
 
     public GameObject ItemIcon(int index)
     {
-        return _items[ActiveIndex].GetComponent<InventoryItem>().InventoryIcon;
+        if (_items[index] == null) return null;
+        return _items[index].GetComponent<InventoryItem>().InventoryIcon;
     }
 
     public GameObject GetActiveItem()
@@ -109,6 +110,13 @@ public class Inventory : MonoBehaviour
         }
 
         return false;
+    }
+
+    public GameObject GetInventoryItem(int index)
+    {
+        if (index < 0) index = 0;
+        else if (index > AvailableSlots) index = AvailableSlots;
+        return _items[index];
     }
 }
 

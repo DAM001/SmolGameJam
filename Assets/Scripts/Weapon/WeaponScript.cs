@@ -105,6 +105,11 @@ public class WeaponScript : InventoryItem
         obj.transform.rotation = Quaternion.Euler(0f, transform.localEulerAngles.y, 0f);
         obj.transform.Rotate(0f, Random.Range(-accuracy, accuracy), 0f, Space.Self);
     }
+
+    public float AmmoInPercentage()
+    {
+        return _mag.AmmoInPercentage();
+    }
 }
 
 /*

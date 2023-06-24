@@ -138,7 +138,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 624834902433639225}
   _itemType: 0
   _stackSize: 1
-  _inventoryIcon: {fileID: 0}
+  _inventoryIcon: {fileID: 695705333364768431, guid: f796011dc7e3b4f48a0e732b5b3c9eab, type: 3}
   _mag: {fileID: 607558756718742500}
   _visuals: {fileID: 8275302377451661692}
   _bullet: {fileID: 4122685758868025121, guid: bbbcf8fa0516d7741b5eae326897ba9e, type: 3}

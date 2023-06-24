@@ -20,8 +20,25 @@ public class UiInventory : MonoBehaviour
         }
 
         SelectItem(_player.GetComponent<Inventory>().ActiveIndex);
-        SetInventorySize(_player.GetComponent<Inventory>().AvailableSlots);
-        //UpdateItem(0, _player.GetComponent<Inventory>().ItemIcon(0));
+        int inventorySize = _player.GetComponent<Inventory>().AvailableSlots;
+        SetInventorySize(inventorySize);
+        for (int i = 0; i < inventorySize; i++)
+        {
+            GameObject itemIcon = _player.GetComponent<Inventory>().ItemIcon(i);
+            if (itemIcon == null) ClearItem(i);
+            else
+            {
+                UpdateItem(i, itemIcon);
+
+                GameObject item = _player.GetComponent<Inventory>().GetInventoryItem(i);
+                InventoryItemType itemType = item.GetComponent<InventoryItem>().ItemType;
+                if (itemType == InventoryItemType.Weapon)
+                {
+                    float value = item.GetComponent<WeaponScript>().AmmoInPercentage();
+                    GetItemIcon(i).GetComponent<UiProgress>().UpdateProgress(value);
+                }
+            }
+        }
     }
 
     public void SetInventorySize(int size)
@@ -34,6 +51,7 @@ public class UiInventory : MonoBehaviour
 
     public void UpdateItem(int index, GameObject item)
     {
+        if (GetInner(index).childCount > 0) return;
         GameObject itemImage = Instantiate(item, GetInner(index));
     }
 
@@ -56,7 +74,7 @@ public class UiInventory : MonoBehaviour
         return _inventory.GetChild(index).GetChild(1).GetComponent<RectTransform>();
     }
 
-    public GameObject GetItem(int index)
+    public GameObject GetItemIcon(int index)
     {
         if (_inventory.GetChild(index).GetChild(1).childCount == 0) return null;
         return _inventory.GetChild(index).GetChild(1).GetChild(0).gameObject;

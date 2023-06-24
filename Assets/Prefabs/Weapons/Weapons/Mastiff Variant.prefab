@@ -193,6 +193,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: _inventoryIcon
+      value: 
+      objectReference: {fileID: 5476623852287574992, guid: e0e7ab9050cb1cd46b046fb1ddef3875, type: 3}
+    - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _numberOfBullets
       value: 7
       objectReference: {fileID: 0}
