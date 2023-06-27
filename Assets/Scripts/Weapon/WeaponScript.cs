@@ -18,6 +18,7 @@ public class WeaponScript : InventoryItem
     [SerializeField] private bool _isFullAuto = true;
     [SerializeField] private int _numberOfBullets = 1;
     [Header("Bullet properties:")]
+    [SerializeField] private InventoryItemType _ammoType;
     [SerializeField] private float _damage = 30f;
     [SerializeField] private float _speed = 1f;
     [SerializeField] private float _distance = 20f;
@@ -30,6 +31,7 @@ public class WeaponScript : InventoryItem
 
     public float Damage { get => _damage; }
     public WeaponType WeaponType { get => _weaponType; }
+    public InventoryItemType AmmoType { get => _ammoType; }
 
     private void Start()
     {
@@ -52,6 +54,11 @@ public class WeaponScript : InventoryItem
 
     public void Reload()
     {
+        if (_mag.IsReloading) return;
+
+        int ammoIndex = _unitHand.GetGameObjectByType(_ammoType);
+        if (ammoIndex < 0) return;
+        _unitHand.ThrowItem(ammoIndex);
         _mag.OnReload();
     }
 

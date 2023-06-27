@@ -40,14 +40,14 @@ public class WeaponMag : MonoBehaviour
     
     public void OnReload()
     {
-        if (!_isReloading || !_weaponScript.Equipped) return;
+        if (!_isReloading) return;
         _numberOfRoundsLeft = 0;
         StartCoroutine(ReloadHandler());
     }
 
     private void Reload()
     {
-        if (!_isReloading || !_weaponScript.Equipped) return;
+        if (!_isReloading) return;
         _numberOfRoundsLeft = _magSize;
         _isReloading = false;
     }

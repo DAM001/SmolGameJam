@@ -6,6 +6,11 @@ public enum InventoryItemType
 {
     //MODERN WARFARE
     Gun,
+    Ammo,
+    LightGun,
+    HeavyGun,
+    SniperGun,
+    ShotgunGun,
     LightAmmo,
     HeavyAmmo,
     SniperAmmo,

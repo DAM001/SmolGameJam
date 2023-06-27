@@ -147,6 +147,7 @@ MonoBehaviour:
   _accuracy: 5
   _isFullAuto: 1
   _numberOfBullets: 1
+  _ammoType: 6
   _damage: 30
   _speed: 1
   _distance: 20

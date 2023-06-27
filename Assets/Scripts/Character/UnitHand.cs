@@ -71,6 +71,11 @@ public class UnitHand : MonoBehaviour
         _itemMovement.SwitchItem(currentItem);
     }
 
+    public void UseUpItem(int index)
+    {
+        _inventory.ThrowItem(index);
+    }
+
     public void ChangeInventoryIndex(int index)
     {
         UseUp();
@@ -114,6 +119,21 @@ public class UnitHand : MonoBehaviour
     public void KnockBack(float damage)
     {
         _itemMovement.KnockBack(damage);
+    }
+
+    public int GetGameObjectByType(InventoryItemType itemType)
+    {
+        return _inventory.GetGameObjectByType(itemType);
+    }
+
+    public GameObject GetItemByIndex(int index)
+    {
+        return _inventory.GetItem(index);
+    }
+
+    public void ThrowItem(int index)
+    {
+        _inventory.ThrowItem(index);
     }
 }
 
