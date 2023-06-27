@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthItem : MonoBehaviour
 {
-    [SerializeField] private InventoryItemType _itemType = InventoryItemType.Shield;
+    [SerializeField] private InventoryItemType _itemType = InventoryItemType.SmallShield;
     [SerializeField] private float _useTime = 2f;
 
     private bool _isUsing = false;
@@ -25,8 +25,8 @@ public class HealthItem : MonoBehaviour
     public void OnUse()
     {
         if (_isUsing) return;
-        if ((_itemType == InventoryItemType.Shield && _health.CanShield()) 
-            || (_itemType == InventoryItemType.Health && _health.CanHeal()))
+        if ((_itemType == InventoryItemType.SmallShield && _health.CanShield()) 
+            || (_itemType == InventoryItemType.BigMedkit && _health.CanHeal()))
         {
             StartCoroutine(UseHandler());
         }
@@ -37,7 +37,7 @@ public class HealthItem : MonoBehaviour
         if (!_isUsing) return;
         _isUsing = false;
 
-        if (_itemType == InventoryItemType.Shield) _health.UseShield();
+        if (_itemType == InventoryItemType.SmallShield) _health.UseShield();
         else _health.UseHeal();
         //Destroy(_hand.UsedUpItem());
     }

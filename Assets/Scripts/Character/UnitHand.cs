@@ -32,7 +32,7 @@ public class UnitHand : MonoBehaviour
     {
         if (!HasItem()) return;
 
-        if (ItemType(CurrentItem) == InventoryItemType.Weapon)
+        if (ItemType(CurrentItem) == InventoryItemType.Gun)
         {
             CurrentItem.GetComponent<WeaponScript>().Reload();
         }
@@ -63,11 +63,18 @@ public class UnitHand : MonoBehaviour
         CurrentItem.GetComponent<InventoryItem>().Throw();
         _itemMovement.ThrowItem(CurrentItem);
         CurrentItem = null;
+
+        //stackable inventory
+        GameObject currentItem = _inventory.GetActiveItem();
+        if (currentItem == null) return;
+        CurrentItem = currentItem;
+        _itemMovement.SwitchItem(currentItem);
     }
 
     public void ChangeInventoryIndex(int index)
     {
         UseUp();
+
         CurrentItem = _inventory.GetItem(index);
         if (!HasItem()) return;
         _itemMovement.SwitchItem(CurrentItem);

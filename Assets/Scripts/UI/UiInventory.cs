@@ -32,7 +32,7 @@ public class UiInventory : MonoBehaviour
 
                 GameObject item = _player.GetComponent<Inventory>().GetInventoryItem(i);
                 InventoryItemType itemType = item.GetComponent<InventoryItem>().ItemType;
-                if (itemType == InventoryItemType.Weapon)
+                if (itemType == InventoryItemType.Gun)
                 {
                     float value = item.GetComponent<WeaponScript>().AmmoInPercentage();
                     GetItemIcon(i).GetComponent<UiProgress>().UpdateProgress(value);

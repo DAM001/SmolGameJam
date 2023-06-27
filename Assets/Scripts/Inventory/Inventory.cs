@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum InventoryItemType { Weapon, Shield, Health, Ammo, Grenade, BackpackUpgrade }
-
 [Serializable]
 public class StackableItems
 {
@@ -23,12 +21,15 @@ public class StackableItems
         {
             if (value == null)
             {
-                _items.Remove(_items[_items.Count - 1]);
+                _items.Remove(_items[0]);
                 return;
             }
 
             _items.Add(value);
             MaxSize = value.GetComponent<InventoryItem>().StackSize;
+            value.SetActive(false);
+
+            Debug.Log(_items.Count);
         }
     }
 
@@ -88,6 +89,7 @@ public class Inventory : MonoBehaviour
 
     public bool EquipItem(GameObject item)
     {
+        if (AddToStack(item)) return true;
         if (!HasEmptySlot()) return false;
 
         AddItem(item, _activeIndex);
@@ -157,17 +159,24 @@ public class Inventory : MonoBehaviour
         return _items[index].Item;
     }
 
-    private int Stackable(GameObject item)
+    private bool AddToStack(GameObject item)
     {
         for (int i = 0; i < _items.Length; i++)
         {
-            if (_items[i].Item.GetComponent<InventoryItem>().ItemType == item.GetComponent<InventoryItem>().ItemType)
+            if (_items[i].Item != null)
             {
-                return i;
+                if (_items[i].MaxSize > _items[i].CurrentSize)
+                {
+                    if (_items[i].Item.GetComponent<InventoryItem>().ItemType == item.GetComponent<InventoryItem>().ItemType)
+                    {
+                        _items[i].Item = item;
+                        return true;
+                    }
+                }
             }
         }
 
-        return -1;
+        return false;
     }
 }
 

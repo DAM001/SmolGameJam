@@ -42,6 +42,7 @@ public class InventoryItem : MonoBehaviour
 
     public virtual void Equip()
     {
+        //Data.Items.Remove(gameObject);
         gameObject.tag = "Untagged";
         Equipped = true;
 
@@ -50,6 +51,7 @@ public class InventoryItem : MonoBehaviour
 
     public virtual void Throw()
     {
+        //Data.Items.Add(gameObject);
         gameObject.tag = "Item";
         Equipped = false;
 

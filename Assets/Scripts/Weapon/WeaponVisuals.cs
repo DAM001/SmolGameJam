@@ -21,6 +21,7 @@ public class WeaponVisuals : MonoBehaviour
 
     public void CreateBulletShell(GameObject firePoint)
     {
+        if (_bulletShell == null) return;
         GameObject shell = Instantiate(_bulletShell, firePoint.transform);
         shell.transform.parent = null;
         shell.transform.position = firePoint.transform.position + transform.forward * -.6f + transform.right * .3f;
