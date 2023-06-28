@@ -34,7 +34,7 @@ public class UnitHand : MonoBehaviour
 
         if (ItemType(CurrentItem) == InventoryItemType.Gun)
         {
-            CurrentItem.GetComponent<WeaponScript>().Reload();
+            CurrentItem.GetComponent<GunScript>().Reload();
         }
     }
 
@@ -106,7 +106,7 @@ public class UnitHand : MonoBehaviour
         List<GameObject> notEquippedItems = new List<GameObject>();
         for (int i = 0; i < Data.Items.Count; i++)
         {
-            if (!Data.Items[i].GetComponent<InventoryItem>().Equipped)
+            if (!Data.Items[i].GetComponent<InventoryItem>().IsEquipped)
             {
                 notEquippedItems.Add(Data.Items[i]);
             }

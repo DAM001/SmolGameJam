@@ -17,8 +17,9 @@ public class InventoryItem : MonoBehaviour
     public int StackSize { get => _stackSize; }
     public GameObject InventoryIcon { get => _inventoryIcon; }
 
-    public bool Equipped { get; private set; }
+    public bool IsEquipped { get; private set; }
     public Rigidbody Rigidbody { get => _rigidbody; }
+    public bool IsActive { get; private set; }
 
     private void Start()
     {
@@ -44,7 +45,7 @@ public class InventoryItem : MonoBehaviour
     {
         //Data.Items.Remove(gameObject);
         gameObject.tag = "Untagged";
-        Equipped = true;
+        IsEquipped = true;
 
         EnableRigidbody(false);
     }
@@ -53,9 +54,19 @@ public class InventoryItem : MonoBehaviour
     {
         //Data.Items.Add(gameObject);
         gameObject.tag = "Item";
-        Equipped = false;
+        IsEquipped = false;
 
         EnableRigidbody(true);
+    }
+
+    public virtual void Activate()
+    {
+        IsActive = true;
+    }
+
+    public virtual void Deactivate()
+    {
+        IsActive = false;
     }
 
     private void EnableRigidbody(bool value)

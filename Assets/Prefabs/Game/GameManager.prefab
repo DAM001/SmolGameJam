@@ -2187,6 +2187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventory: {fileID: 2192004087893564606}
+  _inventorySize: 6
 --- !u!114 &6529628538273819351
 MonoBehaviour:
   m_ObjectHideFlags: 0

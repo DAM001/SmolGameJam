@@ -122,6 +122,7 @@ public class Inventory : MonoBehaviour
     {
         if (_items[index].Item == null) return;
 
+        _items[index].Item.GetComponent<InventoryItem>().Deactivate();
         _items[index].Item = null;
     }
 
@@ -133,7 +134,7 @@ public class Inventory : MonoBehaviour
         {
             if (_items[i].Item != null)
             {
-                _items[i].Item.SetActive(i == index);
+                ActivateItemByIndex(i, i == index);
             }
         }
 
@@ -191,5 +192,12 @@ public class Inventory : MonoBehaviour
         }
 
         return -1;
+    }
+
+    public void ActivateItemByIndex(int index, bool active)
+    {
+        if (active) _items[index].Item.GetComponent<InventoryItem>().Activate();
+        else _items[index].Item.GetComponent<InventoryItem>().Deactivate();
+        _items[index].Item.SetActive(active);
     }
 }

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public enum WeaponType { Light, Heavy, Shotgun, Sniper }
 
-public class WeaponScript : InventoryItem
+public class GunScript : InventoryItem
 {
     [Header("Scripts:")]
-    [SerializeField] private WeaponMag _mag;
-    [SerializeField] private WeaponVisuals _visuals;
+    [SerializeField] private GunMag _mag;
+    [SerializeField] private GunVisuals _visuals;
     [Header("Bullet:")]
     [SerializeField] private GameObject _bullet;
     [Header("Weapon data:")]
@@ -58,8 +58,14 @@ public class WeaponScript : InventoryItem
 
         int ammoIndex = _unitHand.GetGameObjectByType(_ammoType);
         if (ammoIndex < 0) return;
+
+        _mag.ReloadStart();
+    }
+
+    public void ReloadEnd()
+    {
+        int ammoIndex = _unitHand.GetGameObjectByType(_ammoType);
         _unitHand.ThrowItem(ammoIndex);
-        _mag.OnReload();
     }
 
     public override void Equip(UnitHand hand)
@@ -83,6 +89,20 @@ public class WeaponScript : InventoryItem
     {
         _fireDown = false;
         _nextFireEnabled = true;
+    }
+
+    public override void Activate()
+    {
+        base.Activate();
+
+        _mag.Activate();
+    }
+
+    public override void Deactivate()
+    {
+        base.Deactivate();
+        
+        _mag.Deactivate();
     }
 
     private void FireFunction()

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponMag : MonoBehaviour
+public class GunMag : MonoBehaviour
 {
-    [SerializeField] private WeaponScript _weaponScript;
-
+    [Header("Scripts:")]
+    [SerializeField] private GunScript _weaponScript;
+    [Header("Properties:")]
     [SerializeField] private int _magSize = 30;
     [SerializeField] private float _reloadTime = 2f;
+    [SerializeField] private bool _autoReload = false;
 
     private int _numberOfRoundsLeft = 0;
     private bool _isReloading = false;
@@ -23,7 +25,13 @@ public class WeaponMag : MonoBehaviour
     public void Activate()
     {
         _isReloading = false;
-        if (_numberOfRoundsLeft == 0 && !_isReloading) OnReload();
+        if (_autoReload && _numberOfRoundsLeft == 0) ReloadStart();
+    }
+
+    public void Deactivate()
+    {
+        _isReloading = false;
+        StopCoroutine("ReloadHandler");
     }
 
     public bool OnFire()
@@ -31,25 +39,27 @@ public class WeaponMag : MonoBehaviour
         if (_numberOfRoundsLeft > 0)
         {
             _numberOfRoundsLeft--;
-            if (_numberOfRoundsLeft == 0) OnReload();
+            if (_autoReload && _numberOfRoundsLeft == 0) ReloadStart();
             return true;
         }
  
         return false;
     }
     
-    public void OnReload()
+    public void ReloadStart()
     {
-        if (!_isReloading) return;
+        if (_isReloading) return;
         _numberOfRoundsLeft = 0;
-        StartCoroutine(ReloadHandler());
+        StartCoroutine("ReloadHandler");
     }
 
-    private void Reload()
+    private void ReloadEnd()
     {
         if (!_isReloading) return;
         _numberOfRoundsLeft = _magSize;
         _isReloading = false;
+
+        _weaponScript.ReloadEnd();
     }
 
     private IEnumerator ReloadHandler()
@@ -62,7 +72,7 @@ public class WeaponMag : MonoBehaviour
             yield return new WaitForSeconds(updateSpeed);
             _reloadTimeSlider += updateSpeed;
         }
-        Reload();
+        ReloadEnd();
     }
 
     public float AmmoInPercentage()

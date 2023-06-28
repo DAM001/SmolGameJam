@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponVisuals : MonoBehaviour
+public class GunVisuals : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletShell;
     //[SerializeField] private AudioSource _audioSource;
