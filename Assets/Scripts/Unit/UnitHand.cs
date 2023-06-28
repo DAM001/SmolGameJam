@@ -7,6 +7,7 @@ public class UnitHand : MonoBehaviour
     [Header("Scripts:")]
     [SerializeField] private UnitHandItemMovement _itemMovement;
     [SerializeField] private Inventory _inventory;
+    [SerializeField] private PlayerController _playerController;
     [Header("Properties:")]
     [SerializeField] private GameObject _handObject;
     [SerializeField] private float _pickupDistance = 3f;
@@ -116,9 +117,15 @@ public class UnitHand : MonoBehaviour
         return item;
     }
 
+    //TODO: Rework this
     public void KnockBack(float damage)
     {
         _itemMovement.KnockBack(damage);
+
+        if (_playerController != null)
+        {
+            _playerController.RumbleController(damage / 50f, damage / 1000f);
+        }
     }
 
     public int GetGameObjectByType(InventoryItemType itemType)

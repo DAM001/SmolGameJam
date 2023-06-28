@@ -9,6 +9,7 @@ public class CameraPlayer : MonoBehaviour
     [SerializeField] private float _smoothSpeed = .1f;
 
     private GameObject _target;
+    private GameObject _cursor;
 
     private void Update()
     {
@@ -19,6 +20,12 @@ public class CameraPlayer : MonoBehaviour
         }
 
         Vector3 desiredPosition = _target.transform.position + _cameraPosition;
+        if (_cursor != null)
+        {
+            desiredPosition = Vector3.Lerp(_target.transform.position, _cursor.transform.position, .2f);
+            desiredPosition += _cameraPosition;
+        }
+
         Vector3 smoothedPostion = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);
         transform.position = smoothedPostion;
     }
@@ -29,11 +36,13 @@ public class CameraPlayer : MonoBehaviour
         if (player != null)
         {
             _target = player;
-            return;
         }
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Character");
-        if (players.Length == 0) return;
-        _target = players[Random.Range(0, players.Length)];
+
+        GameObject cursor = GameObject.FindGameObjectWithTag("Cursor");
+        if (cursor != null)
+        {
+            _cursor = cursor;
+        }
     }
 
     public void SetTarget(GameObject target)

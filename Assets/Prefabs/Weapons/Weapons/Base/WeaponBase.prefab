@@ -167,6 +167,7 @@ MonoBehaviour:
   _weaponScript: {fileID: 6294086146242964677}
   _magSize: 30
   _reloadTime: 2
+  _autoReload: 0
 --- !u!114 &8275302377451661692
 MonoBehaviour:
   m_ObjectHideFlags: 0

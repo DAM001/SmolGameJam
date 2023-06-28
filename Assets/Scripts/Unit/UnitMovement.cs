@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class UnitMovement : MonoBehaviour
 {
@@ -29,6 +30,14 @@ public class UnitMovement : MonoBehaviour
         if (Vector3.Distance(transform.position, pos) < _minDistance) return;
         Quaternion targetRot = Quaternion.LookRotation(pos - transform.position, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, _rotationSpeed * Time.deltaTime);
+    }
+
+    public void LookAtController(Vector2 lookDir)
+    {
+        Vector3 pos = new Vector3(lookDir.x, 0f, lookDir.y);
+        pos += transform.position;
+
+        LookAt(pos);
     }
 
     private void Update()
