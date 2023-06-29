@@ -8,12 +8,13 @@ public enum ControlType { Keyboard, Controller }
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private UnitMovement _characterMovement;
+    [SerializeField] private UnitMovement _movement;
     [SerializeField] private UnitHand _characterHand;
     [Space(10)]
     [SerializeField] private GameObject _cursor;
 
-    private Vector2 _lookPos = Vector3.zero;
+    private Vector2 _lookPos = Vector2.zero;
+    private Vector2 _movePos = Vector2.zero;
     private ControlType _controlType;
 
     public ControlType ControlType { get => _controlType; private set => _controlType = value; }
@@ -22,17 +23,43 @@ public class PlayerController : MonoBehaviour
     {
         CheckControllerInput();
         CheckKeyboardAndMouseInput();
+        CursorVisuals();
+    }
 
-        if (_cursor == null) _cursor = GameObject.FindGameObjectWithTag("Cursor");
+    private void CursorVisuals()
+    {
+        if (_cursor == null)
+        {
+            _cursor = GameObject.FindGameObjectWithTag("Cursor");
+            return;
+        }
         if (_controlType == ControlType.Keyboard)
         {
-            _characterMovement.LookAt(_cursor.transform.position);
+            _movement.MovementScript.LookAt(_cursor.transform.position);
+            _cursor.GetComponent<PlayerCursor>().Show();
         }
         else if (_controlType == ControlType.Controller)
         {
             float distance = 10f;
             _cursor.transform.position = transform.position + new Vector3(_lookPos.x * distance, 0f, _lookPos.y * distance);
-            _characterMovement.LookAt(_cursor.transform.position);
+            _movement.MovementScript.LookAt(_cursor.transform.position);
+
+            if (Vector2.Distance(_lookPos, Vector2.zero) < .1f)
+            {
+                _cursor.GetComponent<PlayerCursor>().Hide();
+                _movement.MovementScript.LookAt(transform.position + new Vector3(_movePos.x, 0f, _movePos.y));
+            }
+            else _cursor.GetComponent<PlayerCursor>().Show();
+        }
+
+        if (_characterHand.HasItem() && _characterHand.CurrentItem.GetComponent<InventoryItem>().ItemType == InventoryItemType.Gun)
+        {
+            float aimSize = Vector3.Distance(transform.position, _cursor.transform.position) * _characterHand.CurrentItem.GetComponent<GunScript>().Accuracy;
+            _cursor.GetComponent<PlayerCursor>().UpdateScale(aimSize);
+        }
+        else
+        {
+            _cursor.GetComponent<PlayerCursor>().UpdateScale(25f);
         }
     }
 
@@ -89,7 +116,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnMovement(InputValue inputValue)
     {
-        _characterMovement.Move(inputValue.Get<Vector2>());
+        _movePos = inputValue.Get<Vector2>();
+        _movement.MovementScript.Move(_movePos);
     }
 
     private void OnLook(InputValue inputValue)
@@ -114,7 +142,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnInteraction()
     {
-        _characterHand.Equip();
+        _characterHand.Interaction();
     }
 
     private void OnThrowActiveItem()

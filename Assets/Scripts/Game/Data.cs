@@ -6,6 +6,7 @@ public class Data : MonoBehaviour
 {
     public static List<GameObject> Items = new List<GameObject>();
     public static List<GameObject> Characters = new List<GameObject>();
+    public static List<GameObject> Vehicles = new List<GameObject>();
 
     public void SetupData()
     {
@@ -16,17 +17,23 @@ public class Data : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
 
+        Characters.Add(GameObject.FindGameObjectWithTag("Player"));
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Character");
+        for (int i = 0; i < players.Length; i++)
+        {
+            Characters.Add(players[i]);
+        }
+
         GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
         for (int i = 0; i < items.Length; i++)
         {
             Items.Add(items[i]);
         }
 
-        Characters.Add(GameObject.FindGameObjectWithTag("Player"));
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Character");
-        for (int i = 0; i < players.Length; i++)
+        GameObject[] vehicles = GameObject.FindGameObjectsWithTag("Vehicle");
+        for (int i = 0; i < vehicles.Length; i++)
         {
-            Characters.Add(players[i]);
+            Vehicles.Add(vehicles[i]);
         }
     }
 

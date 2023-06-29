@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 5482262065337802502}
   - component: {fileID: 3172157587475421191}
   - component: {fileID: 765909588168016608}
+  - component: {fileID: 858851128537756765}
   - component: {fileID: 1726194327236291656}
   - component: {fileID: 5040434816877611047}
   - component: {fileID: 5840690533849964831}
@@ -398,14 +399,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525e2f1dcc044ca438df60cc362ffa48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unitMovementScript: {fileID: 858851128537756765}
+--- !u!114 &858851128537756765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482262065337802497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1a01321ddcb8c40a3b1d93e7572046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _characterController: {fileID: 1085993950949405565}
   _animator: {fileID: 3043767271084044836}
   _moveSpeed: 13
   _rotationSpeed: 300
   _minDistance: 0.5
   _acceleration: 10
-  _gravity: 9.8
-  _moveForce: 10
+  _moveForce: 1000
 --- !u!114 &1726194327236291656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,6 +465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemMovement: {fileID: 7263985836045865227}
   _inventory: {fileID: 1726194327236291656}
+  _movement: {fileID: 765909588168016608}
+  _playerController: {fileID: 0}
   _handObject: {fileID: 5040191783853556403}
   _pickupDistance: 3
 --- !u!114 &7263985836045865227

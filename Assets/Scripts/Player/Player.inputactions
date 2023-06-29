@@ -257,7 +257,7 @@
                 {
                     "name": "",
                     "id": "35d0b59b-737d-499f-8a42-b9badfae3a1c",
-                    "path": "<XInputController>/rightShoulder",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -279,7 +279,7 @@
                 {
                     "name": "",
                     "id": "0258c1b8-ae9b-4468-8dd3-b97d2be39444",
-                    "path": "<XInputController>/leftTrigger",
+                    "path": "<XInputController>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",

@@ -29,7 +29,9 @@ public class GunScript : InventoryItem
     private bool _nextFireEnabled = true;
     public UnitHand _unitHand;
 
+    public float Accuracy { get => _accuracy; }
     public float Damage { get => _damage; }
+    public float FinalDamage { get => _damage * _numberOfBullets; }
     public WeaponType WeaponType { get => _weaponType; }
     public InventoryItemType AmmoType { get => _ammoType; }
 
@@ -110,7 +112,15 @@ public class GunScript : InventoryItem
         _visuals.ShowMuzzleFlash(_firePoint);
         CreateBullets();
         _visuals.CreateBulletShell(_firePoint);
-        _unitHand.KnockBack(_damage);
+        KnockBack();
+    }
+
+    private void KnockBack()
+    {
+        float knockBack = _damage * _numberOfBullets;
+        if (knockBack < 50f) knockBack = 50f;
+        else if (knockBack > 150f) knockBack = 150f;
+        _unitHand.KnockBack(knockBack);
     }
 
     private void CreateBullets()

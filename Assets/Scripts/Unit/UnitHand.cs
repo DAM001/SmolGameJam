@@ -7,11 +7,13 @@ public class UnitHand : MonoBehaviour
     [Header("Scripts:")]
     [SerializeField] private UnitHandItemMovement _itemMovement;
     [SerializeField] private Inventory _inventory;
+    [SerializeField] private UnitMovement _movement;
     [SerializeField] private PlayerController _playerController;
     [Header("Properties:")]
     [SerializeField] private GameObject _handObject;
     [SerializeField] private float _pickupDistance = 3f;
 
+    public GameObject CurrentVehicle;
     public GameObject CurrentItem { get; private set; }
     public GameObject HandObject { get => _handObject; }
 
@@ -39,12 +41,26 @@ public class UnitHand : MonoBehaviour
         }
     }
 
-    public void Equip()
+    public void Interaction()
+    {
+        if (CurrentVehicle != null)
+        {
+            CurrentVehicle.GetComponent<VehicleBase>().NotUse();
+            _movement.MovementScript = null;
+            CurrentVehicle = null;
+            return;
+        }
+
+        if (EquipItem()) return;
+        if (EnterVehicle()) return;
+    }
+
+    private bool EquipItem()
     {
         GameObject item = EquipableItem();
-        if (item == null) return;
+        if (item == null) return false;
 
-        if (!_inventory.EquipItem(item)) return;
+        if (!_inventory.EquipItem(item)) return false;
         item.GetComponent<InventoryItem>().Equip(this);
 
         GameObject activeItem = _inventory.GetActiveItem();
@@ -53,6 +69,19 @@ public class UnitHand : MonoBehaviour
             CurrentItem = _inventory.GetActiveItem();
             _itemMovement.EquipItem(CurrentItem);
         }
+        return true;
+    }
+
+    private bool EnterVehicle()
+    {
+        GameObject vehicle = AvailableVehicles();
+        if (vehicle == null) return false;
+        CurrentVehicle = vehicle;
+
+        _movement.MovementScript = vehicle.GetComponent<VehicleBase>();
+        vehicle.GetComponent<VehicleBase>().Use(gameObject);
+
+        return true;
     }
 
     public void ThrowActiveItem()
@@ -115,6 +144,21 @@ public class UnitHand : MonoBehaviour
         GameObject item = GameObjectUtil.FindClosest(notEquippedItems.ToArray(), _handObject.transform.position);
         if (Vector3.Distance(item.transform.position, _handObject.transform.position) > _pickupDistance) return null;
         return item;
+    }
+
+    public GameObject AvailableVehicles()
+    {
+        List<GameObject> notUsedVehicles = new List<GameObject>();
+        for (int i = 0; i < Data.Vehicles.Count; i++)
+        {
+            if (!Data.Vehicles[i].GetComponent<VehicleBase>().InUse)
+            {
+                notUsedVehicles.Add(Data.Vehicles[i]);
+            }
+        }
+        GameObject vehicle = GameObjectUtil.FindClosest(notUsedVehicles.ToArray(), _handObject.transform.position);
+        if (Vector3.Distance(vehicle.transform.position, _handObject.transform.position) > _pickupDistance) return null;
+        return vehicle;
     }
 
     //TODO: Rework this

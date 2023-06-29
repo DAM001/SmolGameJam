@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c63432bd24962041ba9967d4ce95c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterMovement: {fileID: 8932922437520404772}
+  _movement: {fileID: 8932922437520404772}
   _characterHand: {fileID: 2330434749954921179}
   _cursor: {fileID: 0}
 --- !u!114 &8932922437520404772 stripped

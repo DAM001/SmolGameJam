@@ -580,3 +580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f6bd5aabea1f54186accb68f51a644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _visuals: {fileID: 5812835203648683647}
+  _middle: {fileID: 5812835203357470899}
+  _aimSize: 1
