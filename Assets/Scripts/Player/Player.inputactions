@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Mount",
+                    "type": "Button",
+                    "id": "adcff9d2-31dc-4eed-bb73-7fdd8154dde9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ThrowActiveItem",
                     "type": "Button",
                     "id": "b46b182d-c88c-40b3-848d-76d4e33326ff",
@@ -449,6 +458,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d20e0f1-b71b-4c7d-9743-3cc003b9f8ef",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Mount",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79b2e002-9787-40b2-9096-39b25db82ec5",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Mount",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

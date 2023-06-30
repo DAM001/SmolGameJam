@@ -418,7 +418,7 @@ MonoBehaviour:
   _rotationSpeed: 300
   _minDistance: 0.5
   _acceleration: 10
-  _moveForce: 1000
+  _moveForce: 2
 --- !u!114 &1726194327236291656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,6 +469,7 @@ MonoBehaviour:
   _playerController: {fileID: 0}
   _handObject: {fileID: 5040191783853556403}
   _pickupDistance: 3
+  CurrentVehicle: {fileID: 0}
 --- !u!114 &7263985836045865227
 MonoBehaviour:
   m_ObjectHideFlags: 0

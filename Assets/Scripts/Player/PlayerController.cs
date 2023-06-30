@@ -125,6 +125,11 @@ public class PlayerController : MonoBehaviour
         _lookPos = inputValue.Get<Vector2>();
     }
 
+    private void OnMount()
+    {
+        _characterHand.Mount();
+    }
+
     private void OnUseDown()
     {
         _characterHand.UseDown();

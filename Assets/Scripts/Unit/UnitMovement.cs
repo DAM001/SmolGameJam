@@ -19,15 +19,17 @@ public class UnitMovement : MonoBehaviour
             if (value == null)
             {
                 _movementScript = _unitMovementScript;
+                _movementScript.Enable();
                 return;
             }
 
+            _movementScript.Disable();
             _movementScript = value.GetComponent<MovementBase>();
         } 
     }
 
     private void Start()
     {
-        MovementScript = _unitMovementScript;
+        _movementScript = _unitMovementScript;
     }
 }

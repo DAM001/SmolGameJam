@@ -43,16 +43,7 @@ public class UnitHand : MonoBehaviour
 
     public void Interaction()
     {
-        if (CurrentVehicle != null)
-        {
-            CurrentVehicle.GetComponent<VehicleBase>().NotUse();
-            _movement.MovementScript = null;
-            CurrentVehicle = null;
-            return;
-        }
-
         if (EquipItem()) return;
-        if (EnterVehicle()) return;
     }
 
     private bool EquipItem()
@@ -70,6 +61,19 @@ public class UnitHand : MonoBehaviour
             _itemMovement.EquipItem(CurrentItem);
         }
         return true;
+    }
+
+    public void Mount()
+    {
+        if (CurrentVehicle != null)
+        {
+            CurrentVehicle.GetComponent<VehicleBase>().NotUse();
+            _movement.MovementScript = null;
+            CurrentVehicle = null;
+            return;
+        }
+
+        if (EnterVehicle()) return;
     }
 
     private bool EnterVehicle()

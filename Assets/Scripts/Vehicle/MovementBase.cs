@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class MovementBase : MonoBehaviour
 {
-    [SerializeField] private CharacterController _characterController;
-    [SerializeField] private Animator _animator;
+    [SerializeField] protected CharacterController _characterController;
+    [SerializeField] protected Animator _animator;
     [Header("Properties:")]
-    [SerializeField] private float _moveSpeed = 13f;
-    [SerializeField] private float _rotationSpeed = 300f;
-    [SerializeField] private float _minDistance = .5f;
-    [SerializeField] private float _acceleration = 10f;
+    [SerializeField] protected float _moveSpeed = 13f;
+    [SerializeField] protected float _rotationSpeed = 300f;
+    [SerializeField] protected float _minDistance = .5f;
+    [SerializeField] protected float _acceleration = 10f;
     [Space(10)]
     //[SerializeField] private float _gravity = 9.8f; //TODO: Add this to fix the y = 0
-    [SerializeField] private float _moveForce = 1000f;
+    [SerializeField] protected float _moveForce = 2f;
 
     protected Vector3 _moveDirection = Vector3.zero;
     protected Vector3 _velocity = Vector3.zero;
+    protected bool _enabled = true;
 
     protected virtual void Update()
     {
+        if (!_enabled) return;
+
         AcceleratedMovement();
         Anim();
 
@@ -60,7 +63,7 @@ public class MovementBase : MonoBehaviour
 
     protected virtual void Anim()
     {
-        if (_animator == null) return;
+        if (_animator == null || !_enabled) return;
         _animator.speed = _characterController.velocity.magnitude / _moveSpeed;
     }
 
@@ -83,5 +86,20 @@ public class MovementBase : MonoBehaviour
 
         Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
         body.AddForce(pushDir * _moveForce * _characterController.velocity.magnitude);
+    }
+
+    public void Disable()
+    {
+        _animator.speed = 0f;
+        _characterController.enabled = false;
+        _moveDirection = Vector3.zero;
+        _enabled = false;
+    }
+
+    public void Enable()
+    {
+        _characterController.enabled = true;
+        _moveDirection = Vector3.zero;
+        _enabled = true;
     }
 }

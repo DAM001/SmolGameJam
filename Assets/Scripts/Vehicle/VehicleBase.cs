@@ -4,28 +4,32 @@ using UnityEngine;
 
 public class VehicleBase : MovementBase
 {
+    [Header("Vehicle:")]
     [SerializeField] private Vector3 _passangerPos = Vector3.zero;
+    [SerializeField] private GameObject _visualsFolder;
 
     private GameObject _passanger;
 
     public bool InUse { get; set; }
 
-    private void Start()
+    protected virtual void Start()
     {
-        InUse = false;
+        transform.parent = null;
+
+        NotUse();
     }
 
-    private void LateUpdate()
+    protected virtual void LateUpdate()
     {
         if (_passanger == null) return;
 
-        _passanger.transform.position = transform.position + _passangerPos;
-        _passanger.transform.rotation = transform.rotation;
+        _passanger.transform.position = _visualsFolder.transform.position + _visualsFolder.transform.TransformDirection(_passangerPos);
+        _passanger.transform.rotation = _visualsFolder.transform.rotation;
     }
 
     public virtual void Use(GameObject passanger)
     {
-        InUse= true;
+        InUse = true;
 
         _passanger = passanger;
     }

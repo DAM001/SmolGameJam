@@ -11,7 +11,7 @@ public class UnitHandItemMovement : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private float _throwForce = 1000f;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (!_hand.HasItem()) return;
 
