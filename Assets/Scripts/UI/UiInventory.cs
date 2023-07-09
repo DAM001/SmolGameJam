@@ -24,19 +24,36 @@ public class UiInventory : MonoBehaviour
         SetInventorySize(inventorySize);
         for (int i = 0; i < inventorySize; i++)
         {
-            GameObject itemIcon = _player.GetComponent<Inventory>().ItemIcon(i);
-            if (itemIcon == null) ClearItem(i);
-            else
-            {
-                UpdateItem(i, itemIcon);
+            UpdateIcon(i);
+        }
+    }
 
-                GameObject item = _player.GetComponent<Inventory>().GetInventoryItem(i);
-                InventoryItemType itemType = item.GetComponent<InventoryItem>().ItemType;
-                if (itemType == InventoryItemType.Gun)
-                {
-                    float value = item.GetComponent<GunScript>().AmmoInPercentage();
-                    GetItemIcon(i).GetComponent<UiProgress>().UpdateProgress(value);
-                }
+    private void UpdateIcon(int index)
+    {
+        Inventory inventory = _player.GetComponent<Inventory>();
+        GameObject itemIcon = inventory.ItemIcon(index);
+        if (itemIcon == null) ClearItem(index);
+        else
+        {
+            UpdateItem(index, itemIcon);
+
+            GameObject item = _player.GetComponent<Inventory>().GetInventoryItem(index);
+            InventoryItemType itemType = item.GetComponent<InventoryItem>().ItemType;
+            int stackSize = item.GetComponent<InventoryItem>().StackSize;
+
+            if (itemType == InventoryItemType.Gun)
+            {
+                float value = item.GetComponent<GunScript>().AmmoInPercentage();
+                UiProgress uiProgress = GetItemIcon(index).GetComponent<UiProgress>();
+                uiProgress.Show(true);
+                uiProgress.UpdateProgress(value);
+            }
+            else if (stackSize > 1)
+            {
+                int quantity = inventory.NumberOfItems(index);
+                UiCounter uiCounter = GetItemIcon(index).GetComponent<UiCounter>();
+                uiCounter.Show(true);
+                uiCounter.UpdateText(quantity + "/" + stackSize);
             }
         }
     }

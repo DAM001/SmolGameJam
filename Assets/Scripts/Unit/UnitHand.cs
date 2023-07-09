@@ -37,7 +37,12 @@ public class UnitHand : MonoBehaviour
 
         if (ItemType(CurrentItem) == InventoryItemType.Gun)
         {
-            CurrentItem.GetComponent<GunScript>().Reload();
+            float reloadTime = CurrentItem.GetComponent<GunScript>().Reload();
+            if (reloadTime > 0f)
+            {
+                _itemMovement.UseAnimation(true, 0f);
+                _itemMovement.UseAnimation(false, reloadTime);
+            }
         }
     }
 
@@ -117,6 +122,7 @@ public class UnitHand : MonoBehaviour
         CurrentItem = _inventory.GetItem(index);
         if (!HasItem()) return;
         _itemMovement.SwitchItem(CurrentItem);
+        _itemMovement.UseAnimation(false, 0f);
     }
 
     public void Scroll(int value)

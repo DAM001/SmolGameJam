@@ -12,7 +12,8 @@ public class UiManager : MonoBehaviour
 
     public void MainMenu()
     {
-        SetScreen(0);
+        SetScreen(1);
+        HideMenu();
     }
 
     public void HideMenu()

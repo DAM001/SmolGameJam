@@ -16,6 +16,7 @@ public class GunMag : MonoBehaviour
     private float _reloadTimeSlider = 0f;
 
     public bool IsReloading { get => _isReloading; }
+    public float ReloadTime { get => _reloadTime; }
 
     private void Start()
     {

@@ -200,4 +200,9 @@ public class Inventory : MonoBehaviour
         else _items[index].Item.GetComponent<InventoryItem>().Deactivate();
         _items[index].Item.SetActive(active);
     }
+
+    public int NumberOfItems(int index)
+    {
+        return _items[index].CurrentSize;
+    }
 }

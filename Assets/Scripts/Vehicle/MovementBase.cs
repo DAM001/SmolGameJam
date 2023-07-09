@@ -19,6 +19,8 @@ public class MovementBase : MonoBehaviour
     protected Vector3 _velocity = Vector3.zero;
     protected bool _enabled = true;
 
+    public Animator Animator { get => _animator; }
+
     protected virtual void Update()
     {
         if (!_enabled) return;

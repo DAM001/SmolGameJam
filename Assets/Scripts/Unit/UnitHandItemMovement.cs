@@ -10,6 +10,9 @@ public class UnitHandItemMovement : MonoBehaviour
     [SerializeField] private float _movementSpeed = 10f;
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private float _throwForce = 1000f;
+    [Header("HandPos:")]
+    [SerializeField] private Vector3[] _handPosDefault;
+    [SerializeField] private Vector3[] _handPosUse;
 
     private void LateUpdate()
     {
@@ -63,5 +66,27 @@ public class UnitHandItemMovement : MonoBehaviour
         itemTransform.position -= itemTransform.forward * Random.Range(.05f, .2f) * multiplier;
         itemTransform.Rotate(Random.Range(-1f, -5f) * multiplier, Random.Range(-1f, 1f) * multiplier, 0f, Space.Self);
         //_movement.KnockBack(damage / 100f);
+    }
+
+
+    public void UseAnimation(bool use, float time)
+    {
+        StartCoroutine(UseHandler(use, time));
+    }
+
+    private IEnumerator UseHandler(bool use, float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (use)
+        {
+            _hand.HandObject.transform.localPosition = _handPosUse[0];
+            _hand.HandObject.transform.Rotate(_handPosUse[1]);
+        }
+        else
+        {
+            _hand.HandObject.transform.localPosition = _handPosDefault[0];
+            _hand.HandObject.transform.localRotation = Quaternion.identity;
+            _hand.HandObject.transform.Rotate(_handPosDefault[1]);
+        }
     }
 }

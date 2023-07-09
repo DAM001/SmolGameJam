@@ -9,6 +9,7 @@ public class GunScript : InventoryItem
     [Header("Scripts:")]
     [SerializeField] private GunMag _mag;
     [SerializeField] private GunVisuals _visuals;
+    [SerializeField] private GunAudio _audio;
     [Header("Bullet:")]
     [SerializeField] private GameObject _bullet;
     [Header("Weapon data:")]
@@ -54,14 +55,15 @@ public class GunScript : InventoryItem
         }
     }
 
-    public void Reload()
+    public float Reload()
     {
-        if (_mag.IsReloading) return;
+        if (_mag.IsReloading) return -1f;
 
         int ammoIndex = _unitHand.GetGameObjectByType(_ammoType);
-        if (ammoIndex < 0) return;
+        if (ammoIndex < 0) return -1f;
 
         _mag.ReloadStart();
+        return _mag.ReloadTime;
     }
 
     public void ReloadEnd()
@@ -112,6 +114,8 @@ public class GunScript : InventoryItem
         _visuals.ShowMuzzleFlash(_firePoint);
         CreateBullets();
         _visuals.CreateBulletShell(_firePoint);
+        _audio.Fire();
+
         KnockBack();
     }
 
