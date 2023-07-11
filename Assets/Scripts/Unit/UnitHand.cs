@@ -22,6 +22,7 @@ public class UnitHand : MonoBehaviour
         if (!HasItem()) return;
 
         CurrentItem.GetComponent<InventoryItem>().UseDown();
+        CheckIfHaveItem();
     }
 
     public void UseUp()
@@ -29,13 +30,7 @@ public class UnitHand : MonoBehaviour
         if (!HasItem()) return;
 
         CurrentItem.GetComponent<InventoryItem>().UseUp();
-
-        if (!CurrentItem.GetComponent<InventoryItem>().IsEquipped)
-        {
-            _inventory.ThrowActiveItem();
-            CurrentItem = null;
-            GetNextStackedItems();
-        }
+        CheckIfHaveItem();
     }
 
     public void Reload()
@@ -206,6 +201,16 @@ public class UnitHand : MonoBehaviour
     public void ThrowItem(int index)
     {
         _inventory.ThrowItem(index);
+    }
+
+    protected void CheckIfHaveItem()
+    {
+        if (!CurrentItem.GetComponent<InventoryItem>().IsEquipped)
+        {
+            _inventory.ThrowActiveItem();
+            CurrentItem = null;
+            GetNextStackedItems();
+        }
     }
 }
 

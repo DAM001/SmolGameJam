@@ -94,7 +94,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8992227232968020096}
   - component: {fileID: 8992227232968020103}
-  - component: {fileID: 5432924828152670768}
   - component: {fileID: 8992227232968020098}
   - component: {fileID: 8992227232968020099}
   m_Layer: 0
@@ -132,30 +131,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b6b80129968e3459db9ccad4df34cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boxCollider: {fileID: 8992227232968020098}
   _rigidbody: {fileID: 8992227232968020099}
+  _itemType: 10
+  _stackSize: 1
+  _inventoryIcon: {fileID: 6612584617077161223, guid: f1a0672ed2aabda4da1c411a7ca31af3, type: 3}
   _throwForce: 7000
   _countdown: 1
   _damage: 100
   _damageRange: 8
   _explotionForce: 3000
   _explotionEffect: {fileID: 684845760705067805, guid: 0ba66a59b205c334b8393878c5cb6b06, type: 3}
---- !u!114 &5432924828152670768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8992227232968020097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a3bd57dd81adec48b6e7cbd1050b8ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _boxCollider: {fileID: 8992227232968020098}
-  _rigidbody: {fileID: 8992227232968020099}
-  _itemType: 4
-  _stackSize: 2
-  _inventoryIcon: {fileID: 2215955479087004445, guid: 2fd9dec45b0c2c145b6301404f6caba8, type: 3}
 --- !u!65 &8992227232968020098
 BoxCollider:
   m_ObjectHideFlags: 0

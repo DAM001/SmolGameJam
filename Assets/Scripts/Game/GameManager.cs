@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
         _data.SetupData();
 
 
-        GameObject player = Instantiate(_player, transform);
-        player.transform.parent = null;
+        //GameObject player = Instantiate(_player, transform);
+        //player.transform.parent = null;
     }
 
     public void RestartGame()

@@ -9,6 +9,6 @@ public class BawlingPin : InventoryItem
         Throw();
 
         _rigidbody.velocity = Vector3.zero;
-        transform.rotation = Quaternion.identity;
+        //transform.rotation = Quaternion.identity;
     }
 }
