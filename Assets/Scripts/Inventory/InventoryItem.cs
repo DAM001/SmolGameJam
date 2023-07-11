@@ -5,25 +5,26 @@ using System;
 
 public class InventoryItem : MonoBehaviour
 {
-    [SerializeField] private BoxCollider _boxCollider;
-    [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] protected BoxCollider _boxCollider;
+    [SerializeField] protected Rigidbody _rigidbody;
     [Header("Properties:")]
-    [SerializeField] private InventoryItemType _itemType;
-    [SerializeField] private int _stackSize = 1;
+    [SerializeField] protected InventoryItemType _itemType;
+    [SerializeField] protected int _stackSize = 1;
     [Header("UI:")]
-    [SerializeField] private GameObject _inventoryIcon;
+    [SerializeField] protected GameObject _inventoryIcon;
 
     public InventoryItemType ItemType { get => _itemType; }
     public int StackSize { get => _stackSize; }
     public GameObject InventoryIcon { get => _inventoryIcon; }
 
-    public bool IsEquipped { get; private set; }
+    public bool IsEquipped { get; protected set; }
     public Rigidbody Rigidbody { get => _rigidbody; }
-    public bool IsActive { get; private set; }
+    public bool IsActive { get; protected set; }
 
-    private void Start()
+    protected virtual void Start()
     {
         transform.parent = null;
+        gameObject.tag = "Item";
     }
 
     public virtual void UseDown()
@@ -69,7 +70,7 @@ public class InventoryItem : MonoBehaviour
         IsActive = false;
     }
 
-    private void EnableRigidbody(bool value)
+    protected virtual void EnableRigidbody(bool value)
     {
         _rigidbody.isKinematic = !value;
         _boxCollider.enabled = value;

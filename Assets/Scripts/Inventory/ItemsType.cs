@@ -30,6 +30,10 @@ public enum InventoryItemType
     Sword,
     Spear,
 
+    //BOWLING
+    BowlingBall,
+    BowlingPin,
+
     //FOOD
     Carrot
 }

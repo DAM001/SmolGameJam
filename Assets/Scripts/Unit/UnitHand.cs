@@ -29,6 +29,13 @@ public class UnitHand : MonoBehaviour
         if (!HasItem()) return;
 
         CurrentItem.GetComponent<InventoryItem>().UseUp();
+
+        if (!CurrentItem.GetComponent<InventoryItem>().IsEquipped)
+        {
+            _inventory.ThrowActiveItem();
+            CurrentItem = null;
+            GetNextStackedItems();
+        }
     }
 
     public void Reload()
@@ -103,7 +110,11 @@ public class UnitHand : MonoBehaviour
         _itemMovement.ThrowItem(CurrentItem);
         CurrentItem = null;
 
-        //stackable inventory
+        GetNextStackedItems();
+    }
+
+    protected void GetNextStackedItems()
+    {
         GameObject currentItem = _inventory.GetActiveItem();
         if (currentItem == null) return;
         CurrentItem = currentItem;
