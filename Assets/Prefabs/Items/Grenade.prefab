@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8992227232968020096}
   - component: {fileID: 8992227232968020103}
+  - component: {fileID: 8245008342127693817}
   - component: {fileID: 8992227232968020098}
   - component: {fileID: 8992227232968020099}
   m_Layer: 0
@@ -138,9 +139,22 @@ MonoBehaviour:
   _inventoryIcon: {fileID: 6612584617077161223, guid: f1a0672ed2aabda4da1c411a7ca31af3, type: 3}
   _throwForce: 7000
   _countdown: 1
+  _explotion: {fileID: 8245008342127693817}
+--- !u!114 &8245008342127693817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8992227232968020097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e5833aeea2620408c1846b023844d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _damage: 100
-  _damageRange: 8
-  _explotionForce: 3000
+  _damageRange: 5
+  _explotionForce: 1000
   _explotionEffect: {fileID: 684845760705067805, guid: 0ba66a59b205c334b8393878c5cb6b06, type: 3}
 --- !u!65 &8992227232968020098
 BoxCollider:

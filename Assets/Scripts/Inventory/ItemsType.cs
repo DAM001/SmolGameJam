@@ -17,6 +17,7 @@ public enum InventoryItemType
     ShotgunAmmo,
     Grenade,
     BackpackUpgrade,
+    Landmine,
 
     //HEALTH
     SmallShield,
