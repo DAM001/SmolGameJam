@@ -130,7 +130,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4417463181679013061}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c63432bd24962041ba9967d4ce95c18, type: 3}
   m_Name: 
@@ -138,6 +138,23 @@ MonoBehaviour:
   _movement: {fileID: 8932922437520404772}
   _characterHand: {fileID: 2330434749954921179}
   _cursor: {fileID: 0}
+--- !u!114 &7484776983348368430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4417463181679013061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec7057e9e0fa524badcc65ec6437952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movement: {fileID: 8932922437520404772}
+  _characterHand: {fileID: 2330434749954921179}
+  _cursor: {fileID: 0}
+  _mobileController: {fileID: 0}
+  _equipButton: {fileID: 0}
 --- !u!114 &8932922437520404772 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 765909588168016608, guid: 41cc9c5adbfd4b54299b9b7ff8f093f5, type: 3}
