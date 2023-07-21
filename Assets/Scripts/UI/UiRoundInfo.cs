@@ -30,14 +30,6 @@ public class UiRoundInfo : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (Data.Characters.Count == 1)
-        {
-            Data.Characters[0].GetComponent<UnitHealth>().UseHeal();
-        }
-    }
-
     public void Damage(float value)
     {
         _damageVal += value;
