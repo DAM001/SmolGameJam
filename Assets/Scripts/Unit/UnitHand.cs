@@ -13,8 +13,9 @@ public class UnitHand : MonoBehaviour
     [SerializeField] private GameObject _handObject;
     [SerializeField] private float _pickupDistance = 3f;
 
-    public GameObject CurrentVehicle;
+    public Inventory Inventory { get => _inventory; }
     public GameObject CurrentItem { get; private set; }
+    public GameObject CurrentVehicle { get; set; }
     public GameObject HandObject { get => _handObject; }
 
     public void UseDown()

@@ -23,4 +23,18 @@ public class GameObjectUtil : MonoBehaviour
         }
         return closest;
     }
+
+    public static GameObject[] FindObjectsByTpye(InventoryItemType itemType, GameObject[] objects, Vector3 position)
+    {
+        List<GameObject> targetOjects = new List<GameObject>();
+        for (int i = 0; i < objects.Length; i++)
+        {
+            if (objects[i].GetComponent<InventoryItem>().ItemType == itemType)
+            {
+                targetOjects.Add(objects[i]);
+            }
+        }
+
+        return targetOjects.ToArray();
+    }
 }
