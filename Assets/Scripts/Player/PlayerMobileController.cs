@@ -19,9 +19,6 @@ public class PlayerMobileController : PlayerController
             ControlType = ControlType.Mobile;
         }
 
-        IsMobile = true;
-        ControlType = ControlType.Mobile;
-
         _mobileController.SetActive(IsMobile);
         _equipButton.SetActive(false);
     }

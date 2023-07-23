@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     protected Vector2 _lookPos = Vector2.zero;
     protected Vector2 _movePos = Vector2.zero;
-    protected ControlType _controlType;
+    protected ControlType _controlType = ControlType.Keyboard;
 
     public ControlType ControlType { get => _controlType; protected set => _controlType = value; }
 
@@ -31,11 +31,19 @@ public class PlayerController : MonoBehaviour
 
     protected void MouseLook()
     {
-        RaycastHit hit;
+        /*RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out hit, 500, LayerMask.GetMask("Ground")))
         {
             _lookPos = new Vector3(hit.point.x, 0f, hit.point.z);
+            _cursor.transform.position = _lookPos;
+        }*/
+
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out hit, 500, LayerMask.GetMask("Ground")))
+        {
+            _cursor.transform.position = new Vector3(hit.point.x, 0f, hit.point.z);
         }
     }
 
@@ -46,6 +54,7 @@ public class PlayerController : MonoBehaviour
             _cursor = GameObject.FindGameObjectWithTag("Cursor");
             return;
         }
+
         if (_controlType == ControlType.Keyboard)
         {
             _movement.MovementScript.LookAt(_cursor.transform.position);

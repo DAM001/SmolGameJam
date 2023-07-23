@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2669038301279131800}
   m_Layer: 0
-  m_Name: StateMachine
+  m_Name: BattleRoyaleStateMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,12 +28,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1260420643876754033}
-  - {fileID: 2193853180518520884}
+  - {fileID: 7131078997482841105}
+  - {fileID: 3292133266885333152}
   m_Father: {fileID: 1845393449715624250}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7640433398007529377
+--- !u!1 &5331117460392131550
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,22 +41,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1260420643876754033}
-  - component: {fileID: 5438555258591490612}
+  - component: {fileID: 7131078997482841105}
+  - component: {fileID: 3949721454943521386}
   m_Layer: 0
-  m_Name: StateIdle
+  m_Name: StateSearchForWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1260420643876754033
+--- !u!4 &7131078997482841105
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7640433398007529377}
+  m_GameObject: {fileID: 5331117460392131550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -65,20 +65,21 @@ Transform:
   m_Father: {fileID: 2669038301279131800}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5438555258591490612
+--- !u!114 &3949721454943521386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7640433398007529377}
+  m_GameObject: {fileID: 5331117460392131550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b37152d1585b3d488b9054e9ca0ed64, type: 3}
+  m_Script: {fileID: 11500000, guid: ff7f960597da81e4c8a80e73d04c77d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 2568432550956473095}
---- !u!1 &8942169851679188288
+  _searchForUsefulItem: {fileID: 6505905481417552125}
+--- !u!1 &6839634054492609919
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,22 +87,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2193853180518520884}
-  - component: {fileID: 4719517710024492364}
+  - component: {fileID: 3292133266885333152}
+  - component: {fileID: 6505905481417552125}
   m_Layer: 0
-  m_Name: StateFollowPlayer
+  m_Name: StateSearchForUsefulItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2193853180518520884
+--- !u!4 &3292133266885333152
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8942169851679188288}
+  m_GameObject: {fileID: 6839634054492609919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -110,23 +111,19 @@ Transform:
   m_Father: {fileID: 2669038301279131800}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4719517710024492364
+--- !u!114 &6505905481417552125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8942169851679188288}
+  m_GameObject: {fileID: 6839634054492609919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326468eb14f0168419bd5ca83f937b53, type: 3}
+  m_Script: {fileID: 11500000, guid: 670d711a0c49d634397711373b02bc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 2568432550956473095}
-  _minDistance: 1
-  _maxDistance: 1000
-  _nearState: {fileID: 4719517710024492364}
-  _farState: {fileID: 4719517710024492364}
 --- !u!1001 &6163404642096969276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitHand: {fileID: 326091807969761059}
   _unitMovement: {fileID: 6857224575369671900}
-  _startState: {fileID: 4719517710024492364}
+  _startState: {fileID: 3949721454943521386}
 --- !u!114 &6857224575369671900 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 765909588168016608, guid: 41cc9c5adbfd4b54299b9b7ff8f093f5, type: 3}

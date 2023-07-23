@@ -153,6 +153,8 @@ public class Inventory : MonoBehaviour
 
     public GameObject GetInventoryItem(int index)
     {
+        if (_items == null) return null;
+
         if (index < 0) index = 0;
         else if (index > AvailableSlots) index = AvailableSlots;
         return _items[index].Item;
