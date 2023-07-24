@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 3702558394491601074}
   - component: {fileID: 5682883589777351094}
   - component: {fileID: 1757214441742065025}
+  - component: {fileID: 6664773719038640727}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -213,6 +214,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6664773719038640727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471073508610036214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2984293698898115698
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +243,7 @@ GameObject:
   - component: {fileID: 6891435674470277069}
   - component: {fileID: 3877397857725356438}
   - component: {fileID: 4114650075087587397}
+  - component: {fileID: 8224661878281483401}
   m_Layer: 0
   m_Name: BodyVisuals
   m_TagString: Untagged
@@ -296,6 +316,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8224661878281483401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2984293698898115698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &5040191783853556403
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +506,6 @@ MonoBehaviour:
   _playerController: {fileID: 0}
   _handObject: {fileID: 5040191783853556403}
   _pickupDistance: 3
-  CurrentVehicle: {fileID: 0}
 --- !u!114 &7263985836045865227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,6 +673,7 @@ GameObject:
   - component: {fileID: 687767984320229049}
   - component: {fileID: 6642764057807703425}
   - component: {fileID: 4565632395333556273}
+  - component: {fileID: 3471822431425192032}
   m_Layer: 0
   m_Name: Backpack
   m_TagString: Untagged
@@ -708,6 +746,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3471822431425192032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525796811492226409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8874281558814166239
 GameObject:
   m_ObjectHideFlags: 0
