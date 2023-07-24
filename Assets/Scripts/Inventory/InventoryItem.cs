@@ -12,6 +12,9 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] protected int _stackSize = 1;
     [Header("UI:")]
     [SerializeField] protected GameObject _inventoryIcon;
+    [SerializeField] protected Sprite _iconSprite;
+    [SerializeField] protected Color32 _iconBackgroundColor;
+    [SerializeField] protected float _iconScale = .03f;
 
     public InventoryItemType ItemType { get => _itemType; }
     public int StackSize { get => _stackSize; }
@@ -25,6 +28,16 @@ public class InventoryItem : MonoBehaviour
     {
         transform.parent = null;
         gameObject.tag = "Item";
+
+        UpdateUiIcon();
+    }
+
+    protected void UpdateUiIcon()
+    {
+        UiInventoryItem itemIcon = _inventoryIcon.GetComponent<UiInventoryItem>();
+        itemIcon.SetIconImage(_iconSprite);
+        itemIcon.SetBackgroundColor(_iconBackgroundColor);
+        itemIcon.SetIconScale(_iconScale);
     }
 
     public virtual void UseDown()

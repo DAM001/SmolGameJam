@@ -20,9 +20,9 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1927063270505557456, guid: a2638ba366db81444880ef245de3f17c, type: 3}
-      propertyPath: _inventoryIcon
-      value: 
-      objectReference: {fileID: 4836930120646036329, guid: 64c49d0df8523404ba8fea1851854602, type: 3}
+      propertyPath: _iconBackgroundColor.rgba
+      value: 6143
+      objectReference: {fileID: 0}
     - target: {fileID: 3247414788920711008, guid: a2638ba366db81444880ef245de3f17c, type: 3}
       propertyPath: m_RootOrder
       value: 0
