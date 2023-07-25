@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1927063270505557456, guid: a2638ba366db81444880ef245de3f17c, type: 3}
       propertyPath: _iconBackgroundColor.rgba
-      value: 32511
+      value: 4278222591
       objectReference: {fileID: 0}
     - target: {fileID: 3247414788920711008, guid: a2638ba366db81444880ef245de3f17c, type: 3}
       propertyPath: m_RootOrder

@@ -36,8 +36,10 @@ public class GunScript : InventoryItem
     public WeaponType WeaponType { get => _weaponType; }
     public InventoryItemType AmmoType { get => _ammoType; }
 
-    private void Start()
+    protected virtual void Start()
     {
+        base.Start();
+
         _firePoint = transform.GetChild(0).gameObject;
         _visuals.MuzzleFlash = _firePoint.transform.GetChild(0).gameObject;
     }

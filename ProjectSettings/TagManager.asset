@@ -12,6 +12,7 @@ TagManager:
   - Circle
   - Vehicle
   - MobileControl
+  - Shell
   layers:
   - Default
   - TransparentFX

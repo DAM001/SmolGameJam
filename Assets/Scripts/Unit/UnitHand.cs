@@ -160,6 +160,7 @@ public class UnitHand : MonoBehaviour
             }
         }
         GameObject item = GameObjectUtil.FindClosest(notEquippedItems.ToArray(), _handObject.transform.position);
+        if (item == null) return null;
         if (Vector3.Distance(item.transform.position, _handObject.transform.position) > _pickupDistance) return null;
         return item;
     }
@@ -175,6 +176,7 @@ public class UnitHand : MonoBehaviour
             }
         }
         GameObject vehicle = GameObjectUtil.FindClosest(notUsedVehicles.ToArray(), _handObject.transform.position);
+        if (vehicle == null) return null;
         if (Vector3.Distance(vehicle.transform.position, _handObject.transform.position) > _pickupDistance) return null;
         return vehicle;
     }

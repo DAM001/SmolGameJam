@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 5840690533849964831, guid: 41cc9c5adbfd4b54299b9b7ff8f093f5, type: 3}
       propertyPath: _playerController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7484776983348368430}
     - target: {fileID: 7925550707630500757, guid: 41cc9c5adbfd4b54299b9b7ff8f093f5, type: 3}
       propertyPath: _isPlayer
       value: 1

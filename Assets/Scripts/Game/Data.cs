@@ -24,11 +24,11 @@ public class Data : MonoBehaviour
             Characters.Add(players[i]);
         }
 
-        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+        /*GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
         for (int i = 0; i < items.Length; i++)
         {
             Items.Add(items[i]);
-        }
+        }*/
 
         GameObject[] vehicles = GameObject.FindGameObjectsWithTag("Vehicle");
         for (int i = 0; i < vehicles.Length; i++)

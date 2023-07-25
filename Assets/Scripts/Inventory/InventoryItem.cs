@@ -10,6 +10,8 @@ public class InventoryItem : MonoBehaviour
     [Header("Properties:")]
     [SerializeField] protected InventoryItemType _itemType;
     [SerializeField] protected int _stackSize = 1;
+    [Space(5)]
+    [SerializeField] protected float _throwForce = 1000f;
     [Header("UI:")]
     [SerializeField] protected GameObject _inventoryIcon;
     [SerializeField] protected Sprite _iconSprite;
@@ -18,6 +20,7 @@ public class InventoryItem : MonoBehaviour
 
     public InventoryItemType ItemType { get => _itemType; }
     public int StackSize { get => _stackSize; }
+    public float ThrowForce { get => _throwForce; }
     public GameObject InventoryIcon { get => _inventoryIcon; }
 
     public bool IsEquipped { get; protected set; }
@@ -28,13 +31,17 @@ public class InventoryItem : MonoBehaviour
     {
         transform.parent = null;
         gameObject.tag = "Item";
+        Data.Items.Add(gameObject);
 
         UpdateUiIcon();
     }
 
     protected void UpdateUiIcon()
     {
-        UiInventoryItem itemIcon = _inventoryIcon.GetComponent<UiInventoryItem>();
+        GameObject icon = Instantiate(_inventoryIcon);
+        _inventoryIcon = icon;
+
+        UiInventoryItem itemIcon = icon.GetComponent<UiInventoryItem>();
         itemIcon.SetIconImage(_iconSprite);
         itemIcon.SetBackgroundColor(_iconBackgroundColor);
         itemIcon.SetIconScale(_iconScale);

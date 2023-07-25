@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grenade : InventoryItem
 {
     [Header("Grenade:")]
-    [SerializeField] private float _throwForce = 1000f;
+    [SerializeField] private float _activatedThrowForce = 1000f;
     [SerializeField] private float _countdown = 1f;
     [Header("Explotion:")]
     [SerializeField] private Explotion _explotion;
@@ -16,8 +16,8 @@ public class Grenade : InventoryItem
         IsEquipped = false;
         Data.Items.Remove(gameObject);
 
-        _rigidbody.AddForce(transform.forward * _throwForce + transform.up * _throwForce / 5f);
-        _rigidbody.AddTorque(transform.up * Random.Range(-_throwForce / 10f, _throwForce / 10f));
+        _rigidbody.AddForce(transform.forward * _activatedThrowForce + transform.up * _activatedThrowForce / 5f);
+        _rigidbody.AddTorque(transform.up * Random.Range(-_activatedThrowForce / 10f, _activatedThrowForce / 10f));
 
         StartCoroutine(ExplotionHandler());
     }

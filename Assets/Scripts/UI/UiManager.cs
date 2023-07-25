@@ -48,5 +48,6 @@ public class UiManager : MonoBehaviour
         _mainMenuScreen.SetActive(idx == 0);
         _gameScreen.SetActive(idx == 1);
         _gameOverScreen.SetActive(idx == 2);
+        _spectateScreen.SetActive(idx == 3);
     }
 }

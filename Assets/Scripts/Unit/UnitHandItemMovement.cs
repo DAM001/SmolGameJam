@@ -9,7 +9,7 @@ public class UnitHandItemMovement : MonoBehaviour
     [Header("Properties:")]
     [SerializeField] private float _movementSpeed = 10f;
     [SerializeField] private float _rotationSpeed = 10f;
-    [SerializeField] private float _throwForce = 1000f;
+    //[SerializeField] private float _throwForce = 1000f;
     [Header("HandPos:")]
     [SerializeField] private Vector3[] _handPosDefault;
     [SerializeField] private Vector3[] _handPosUse;
@@ -52,9 +52,10 @@ public class UnitHandItemMovement : MonoBehaviour
 
     public void ThrowItem(GameObject item)
     {
+        float throwForce = item.GetComponent<InventoryItem>().ThrowForce;
         Rigidbody rigidbody = item.GetComponent<InventoryItem>().Rigidbody;
-        rigidbody.AddForce(_hand.HandObject.transform.forward * _throwForce + _hand.HandObject.transform.up * _throwForce / 5f);
-        rigidbody.AddTorque(_hand.HandObject.transform.up * Random.Range(-_throwForce / 10f, _throwForce / 10f));
+        rigidbody.AddForce(_hand.HandObject.transform.forward * throwForce + _hand.HandObject.transform.up * throwForce / 5f);
+        rigidbody.AddTorque(_hand.HandObject.transform.up * Random.Range(-throwForce / 10f, throwForce / 10f));
     }
 
     public void KnockBack(float damage)

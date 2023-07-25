@@ -13,7 +13,7 @@ public class CameraTopdown : MonoBehaviour
 
     private void Update()
     {
-        if (_target == null)
+        if (_target == null || _cursor == null)
         {
             FindNewTarget();
             return;

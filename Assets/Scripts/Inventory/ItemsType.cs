@@ -36,7 +36,10 @@ public enum InventoryItemType
     BowlingPin,
 
     //FOOD
-    Carrot
+    Carrot,
+
+    //OFFICE
+    Laptop
 }
 
 public class ItemsType : MonoBehaviour

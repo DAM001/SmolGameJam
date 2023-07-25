@@ -163,7 +163,7 @@ MonoBehaviour:
   _iconSprite: {fileID: 0}
   _iconBackgroundColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4278190080
   _iconScale: 0.03
   _mag: {fileID: 607558756718742500}
   _visuals: {fileID: 8275302377451661692}
