@@ -48,13 +48,13 @@ public class MovementBase : MonoBehaviour
         //knockback code goes here
     }
 
-    public void Disable()
+    public virtual void Disable()
     {
         _animator.speed = 0f;
         _enabled = false;
     }
 
-    public void Enable()
+    public virtual void Enable()
     {
         _enabled = true;
     }

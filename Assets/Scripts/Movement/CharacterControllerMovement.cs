@@ -5,50 +5,19 @@ using UnityEngine;
 public class CharacterControllerMovement : MovementBase
 {
     [SerializeField] protected CharacterController _characterController;
-    [SerializeField] protected Animator _animator;
     [Header("Properties:")]
-    [SerializeField] protected float _moveSpeed = 13f;
-    [SerializeField] protected float _rotationSpeed = 300f;
-    [SerializeField] protected float _minDistance = .5f;
     [SerializeField] protected float _acceleration = 10f;
-    [Space(10)]
-    //[SerializeField] private float _gravity = 9.8f; //TODO: Add this to fix the y = 0
-    [SerializeField] protected float _moveForce = 2f;
 
-    protected Vector3 _moveDirection = Vector3.zero;
     protected Vector3 _velocity = Vector3.zero;
-    protected bool _enabled = true;
-
-    public Animator Animator { get => _animator; }
 
     protected virtual void Update()
     {
         if (!_enabled) return;
 
         AcceleratedMovement();
-        Anim();
+        Anim(_velocity.magnitude / _moveSpeed);
 
         FixYPosToZero(); //TODO: Fix this
-    }
-
-    public virtual void Move(Vector2 direction)
-    {
-        _moveDirection = new Vector3(direction.x, 0f, direction.y) * _moveSpeed;
-    }
-
-    public virtual void LookAt(Vector3 pos)
-    {
-        pos = new Vector3(pos.x, 0f, pos.z);
-        if (Vector3.Distance(transform.position, pos) < _minDistance) return;
-        Quaternion targetRot = Quaternion.LookRotation(pos - transform.position, Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, _rotationSpeed * Time.deltaTime);
-    }
-
-    public virtual void LookAtController(Vector2 lookDir)
-    {
-        Vector3 pos = new Vector3(lookDir.x, 0f, lookDir.y);
-        pos += transform.position;
-        LookAt(pos);
     }
 
     protected virtual void AcceleratedMovement()
@@ -63,13 +32,7 @@ public class CharacterControllerMovement : MovementBase
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
     }
 
-    protected virtual void Anim()
-    {
-        if (_animator == null || !_enabled) return;
-        _animator.speed = _characterController.velocity.magnitude / _moveSpeed;
-    }
-
-    public virtual void KnockBack(float power)
+    public override void KnockBack(float power)
     {
         _velocity *= -power;
     }
@@ -90,18 +53,17 @@ public class CharacterControllerMovement : MovementBase
         body.AddForce(pushDir * _moveForce * _characterController.velocity.magnitude);
     }
 
-    public void Disable()
+    public override void Disable()
     {
-        _animator.speed = 0f;
+        base.Disable();
         _characterController.enabled = false;
         _moveDirection = Vector3.zero;
-        _enabled = false;
     }
 
-    public void Enable()
+    public override void Enable()
     {
+        base.Enable();
         _characterController.enabled = true;
         _moveDirection = Vector3.zero;
-        _enabled = true;
     }
 }

@@ -193,6 +193,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: _iconSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 812be5d7e907864429c4e0b94f1bc32f, type: 3}
+    - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _isFullAuto
       value: 0
       objectReference: {fileID: 0}
@@ -207,7 +211,11 @@ PrefabInstance:
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _inventoryIcon
       value: 
-      objectReference: {fileID: 6214635313737253130, guid: 6caf01356d01c4844a327560358c9fdb, type: 3}
+      objectReference: {fileID: 7442185596978516732, guid: fb9b483e4b880b04bab286e9f4428ce9, type: 3}
+    - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: _iconBackgroundColor.rgba
+      value: 4294901884
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
 --- !u!4 &2924115315096460872 stripped

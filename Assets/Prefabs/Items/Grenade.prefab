@@ -154,9 +154,15 @@ MonoBehaviour:
   _boxCollider: {fileID: 8992227232968020098}
   _rigidbody: {fileID: 8992227232968020099}
   _itemType: 10
-  _stackSize: 1
-  _inventoryIcon: {fileID: 6612584617077161223, guid: f1a0672ed2aabda4da1c411a7ca31af3, type: 3}
-  _throwForce: 7000
+  _stackSize: 2
+  _throwForce: 1000
+  _inventoryIcon: {fileID: 7442185596978516732, guid: fb9b483e4b880b04bab286e9f4428ce9, type: 3}
+  _iconSprite: {fileID: 21300000, guid: c742634dcf43a8e439ba9ec3d1e88084, type: 3}
+  _iconBackgroundColor:
+    serializedVersion: 2
+    rgba: 4278705103
+  _iconScale: 0.03
+  _activatedThrowForce: 7000
   _countdown: 1
   _explotion: {fileID: 8245008342127693817}
 --- !u!114 &8245008342127693817
@@ -173,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 100
   _damageRange: 5
-  _explotionForce: 1000
+  _explotionForce: 5000
   _explotionEffect: {fileID: 684845760705067805, guid: 0ba66a59b205c334b8393878c5cb6b06, type: 3}
 --- !u!65 &8992227232968020098
 BoxCollider:

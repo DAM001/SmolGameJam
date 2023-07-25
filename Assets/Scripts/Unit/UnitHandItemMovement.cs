@@ -9,10 +9,6 @@ public class UnitHandItemMovement : MonoBehaviour
     [Header("Properties:")]
     [SerializeField] private float _movementSpeed = 10f;
     [SerializeField] private float _rotationSpeed = 10f;
-    //[SerializeField] private float _throwForce = 1000f;
-    [Header("HandPos:")]
-    [SerializeField] private Vector3[] _handPosDefault;
-    [SerializeField] private Vector3[] _handPosUse;
 
     private void LateUpdate()
     {
@@ -20,6 +16,15 @@ public class UnitHandItemMovement : MonoBehaviour
 
         Move(_hand.CurrentItem.transform);
         Rotate(_hand.CurrentItem.transform);
+
+        if (_hand.ItemType(_hand.CurrentItem) == InventoryItemType.Gun)
+        {
+            ReloadAnimation(_hand.CurrentItem.GetComponent<GunMag>().IsReloading);
+        }
+        else
+        {
+            ReloadAnimation(false);
+        }
     }
 
     private void Move(Transform itemTransform)
@@ -70,24 +75,15 @@ public class UnitHandItemMovement : MonoBehaviour
     }
 
 
-    public void UseAnimation(bool use, float time)
+    protected void ReloadAnimation(bool use)
     {
-        StartCoroutine(UseHandler(use, time));
-    }
-
-    private IEnumerator UseHandler(bool use, float time)
-    {
-        yield return new WaitForSeconds(time);
         if (use)
         {
-            _hand.HandObject.transform.localPosition = _handPosUse[0];
-            _hand.HandObject.transform.Rotate(_handPosUse[1]);
+            _hand.HandObject.transform.Rotate(-3f, 0f, 0f);
         }
         else
         {
-            _hand.HandObject.transform.localPosition = _handPosDefault[0];
             _hand.HandObject.transform.localRotation = Quaternion.identity;
-            _hand.HandObject.transform.Rotate(_handPosDefault[1]);
         }
     }
 }

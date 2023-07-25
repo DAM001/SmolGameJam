@@ -184,6 +184,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: _iconSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bb830d2121fa11140b860af0fb42c891, type: 3}
+    - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _shootSound
       value: 
       objectReference: {fileID: 8300000, guid: 95d61d885c746af4c9553029177bba2a, type: 3}
@@ -194,7 +198,11 @@ PrefabInstance:
     - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
       propertyPath: _inventoryIcon
       value: 
-      objectReference: {fileID: 4570198536462586247, guid: 78229616a61bdba4ca0310906b89db85, type: 3}
+      objectReference: {fileID: 7442185596978516732, guid: fb9b483e4b880b04bab286e9f4428ce9, type: 3}
+    - target: {fileID: 6294086146242964677, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
+      propertyPath: _iconBackgroundColor.rgba
+      value: 4282878223
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0b62c9df70056847a3f762357cf359f, type: 3}
 --- !u!4 &1478386650447337585 stripped
