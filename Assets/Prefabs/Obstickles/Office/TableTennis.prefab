@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2967177962845124620}
   - component: {fileID: 5196305252032473093}
   - component: {fileID: 4540486216089596798}
+  - component: {fileID: 141389213905552543}
   m_Layer: 0
   m_Name: TableTennis
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 93071de1e2aaa5c488bfdf52b33cf772, type: 2}
-  - {fileID: 2926557707537190794, guid: a9bdd5108bacecb4ebdf0fb553a66c62, type: 3}
+  - {fileID: 2100000, guid: 6f01f84e4d3e8ae458e8570181823f16, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,6 +104,22 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!208 &141389213905552543
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3485892647832260831}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.6000001, y: 4.072, z: 0.82900006}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.32900003}
+  m_TimeToStationary: 0.5
 --- !u!1 &7575268164715013281
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +132,7 @@ GameObject:
   - component: {fileID: 7575268164715013282}
   - component: {fileID: 7575268164715013283}
   m_Layer: 0
-  m_Name: TabbleTennis
+  m_Name: TableTennis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

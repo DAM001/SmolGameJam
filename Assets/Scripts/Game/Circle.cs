@@ -68,7 +68,7 @@ public class Circle : MonoBehaviour
         string tag = other.gameObject.tag;
         if (tag == "Player" || tag == "Character")
         {
-            other.gameObject.GetComponent<UnitHealth>().InCircle(true, _data[_currentStep].Damage);
+            //other.gameObject.GetComponent<UnitHealth>().InCircle(true, _data[_currentStep].Damage);
         }
     }
 
@@ -77,7 +77,7 @@ public class Circle : MonoBehaviour
         string tag = other.gameObject.tag;
         if (tag == "Player" || tag == "Character")
         {
-            other.gameObject.GetComponent<UnitHealth>().InCircle(false, _data[_currentStep].Damage);
+            //other.gameObject.GetComponent<UnitHealth>().InCircle(false, _data[_currentStep].Damage);
         }
     }
 

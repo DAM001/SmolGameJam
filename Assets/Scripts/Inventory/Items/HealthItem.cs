@@ -25,8 +25,7 @@ public class HealthItem : MonoBehaviour
     public void OnUse()
     {
         if (_isUsing) return;
-        if ((_itemType == InventoryItemType.SmallShield && _health.CanShield()) 
-            || (_itemType == InventoryItemType.BigMedkit && _health.CanHeal()))
+        if (_itemType == InventoryItemType.BigMedkit && _health.CanHeal())
         {
             StartCoroutine(UseHandler());
         }
@@ -37,8 +36,7 @@ public class HealthItem : MonoBehaviour
         if (!_isUsing) return;
         _isUsing = false;
 
-        if (_itemType == InventoryItemType.SmallShield) _health.UseShield();
-        else _health.UseHeal();
+        _health.UseHeal();
         //Destroy(_hand.UsedUpItem());
     }
 

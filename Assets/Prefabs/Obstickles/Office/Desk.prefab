@@ -14,11 +14,12 @@ GameObject:
   - component: {fileID: 3534752311626220541}
   - component: {fileID: 4501700176221815669}
   - component: {fileID: 1379023845712301285}
+  - component: {fileID: 9046904052299729500}
   m_Layer: 0
   m_Name: DeskBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1410492076238297753
@@ -134,6 +135,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &9046904052299729500
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182984575553854736}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.644, y: 0.79200006, z: 0.74}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.009000001, z: -0.29500002}
+  m_TimeToStationary: 0.5
 --- !u!1 &5574371946443091734
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,11 +196,12 @@ GameObject:
   - component: {fileID: 3735882937205933597}
   - component: {fileID: 3735882937205933596}
   - component: {fileID: 4023082249725476320}
+  - component: {fileID: 8660627828254010177}
   m_Layer: 0
   m_Name: DeskTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1562473948102054839
@@ -282,3 +300,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.6, y: 1.9999998, z: 1.4070612}
   m_Center: {x: 0, y: 0, z: 0.2964693}
+--- !u!208 &8660627828254010177
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7712600475112991327}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.8000001, y: 1, z: 0.70400006}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.296}
+  m_TimeToStationary: 0.5

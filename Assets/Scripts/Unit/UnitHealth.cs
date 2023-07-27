@@ -2,57 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//TODO: Refactor this
 public class UnitHealth : MonoBehaviour
 {
-    [SerializeField] private UnitManager _manager;
-    [SerializeField] private UnitHand _hand;
     [SerializeField] private GameObject _damagePopup;
     [Space(10)]
     [SerializeField] private float _maxHealth = 100f;
-    [SerializeField] private float _maxShield = 150f;
     [Header("Visuals:")]
     [SerializeField] private GameObject _dieEffect;
 
     private float _currentHealth;
-    private float _currentShield;
-    private bool _inCircle = true;
-    private float _circleDamage = 0f;
 
-    public bool IsInCircle { get => _inCircle; }
+    public bool IsAlive { get => _currentHealth > 0f; }
 
     private void Start()
     {
         _currentHealth = _maxHealth;
-        _currentShield = _maxShield / 3f;
-
-        UpdateUi();
-    }
-
-    private void FixedUpdate()
-    {
-        if (_inCircle) return;
-        DamageHealth(_circleDamage * Time.fixedDeltaTime);
-    }
-
-    public void InCircle(bool inCircle, float damage)
-    {
-        _inCircle = inCircle;
-        _circleDamage = damage;
-
-        if (_manager.IsPlayer) GetUi().GetComponent<UiHealthAndShield>().OutFromCircle(!inCircle);
-    }
-
-    public bool CanShield()
-    {
-        return _currentShield < _maxShield;
-    }
-
-    public void UseShield()
-    {
-        _currentShield += _maxShield / 3f;
-        if (_currentShield > _maxShield) _currentShield = _maxShield;
-        UpdateUi();
     }
 
     public bool CanHeal()
@@ -63,81 +27,39 @@ public class UnitHealth : MonoBehaviour
     public void UseHeal()
     {
         _currentHealth = _maxHealth;
-        UpdateUi();
     }
 
     public void Damage(float damage)
     {
         CreateDamagePopup(damage);
 
-        if (_manager.IsPlayer) GetUi().GetComponent<UiHealthAndShield>().DamageShield();
-
-        if (_currentShield > 0f)
-        {
-            if (_currentShield < damage)
-            {
-                damage -= _currentShield;
-                _currentShield = 0;
-            }
-            else
-            {
-                _currentShield -= damage;
-                UpdateUi();
-                return;
-            }
-        }
-
         DamageHealth(damage);
     }
 
     private void DamageHealth(float damage)
     {
-        if (_manager.IsPlayer) GetUi().GetComponent<UiHealthAndShield>().DamageHealth();
-
         _currentHealth -= damage;
         if (_currentHealth < 0f) _currentHealth = 0f;
-        UpdateUi();
         if (_currentHealth <= 0f) Die();
     }
 
     public void Die()
     {
+        _currentHealth = 0f;
+
         DieEffect();
-        Notify(Data.Names[Random.Range(0, Data.Names.Length)] + " died!");
-        //_hand.ThrowEverything();
-
         StartCoroutine(DestroyHandler());
-
-        if (_manager.IsPlayer) GetUiManager().Spectate();
     }
 
     private IEnumerator DestroyHandler()
     {
+        if (GetComponent<IKillable>() != null)
+        {
+            GetComponent<IKillable>().Die();
+        }
+
         yield return new WaitForFixedUpdate();
         Destroy(gameObject);
-    }
-
-    private void UpdateUi()
-    {
-        if (!_manager.IsPlayer) return;
-
-        GetUi().GetComponent<UiHealthAndShield>().UpdateHealth(_currentHealth, _maxHealth);
-        GetUi().GetComponent<UiHealthAndShield>().UpdateShield(_currentShield, _maxShield);
-    }
-
-    private UiInventory GetUi()
-    {
-        return GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiInventory>();
-    }
-
-    private UiManager GetUiManager()
-    {
-        return GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiManager>();
-    }
-
-    private void Notify(string info)
-    {
-        GameObject.FindGameObjectWithTag("Canvas").GetComponent<UiNotifications>().Notify(info, 3f);
     }
 
     private void CreateDamagePopup(float damage)
@@ -154,15 +76,5 @@ public class UnitHealth : MonoBehaviour
         hitEffect.transform.parent = null;
         hitEffect.transform.position += Vector3.up;
         Destroy(hitEffect, 5f);
-    }
-
-    public bool NeedsHeal()
-    {
-        return _currentHealth != _maxHealth;
-    }
-
-    public bool IsAlive()
-    {
-        return _currentHealth != 0f;
     }
 }

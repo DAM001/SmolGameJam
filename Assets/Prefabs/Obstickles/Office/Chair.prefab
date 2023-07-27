@@ -12,11 +12,12 @@ GameObject:
   - component: {fileID: 8347032535977027961}
   - component: {fileID: 6076612883061865588}
   - component: {fileID: 2812900899134784910}
+  - component: {fileID: 3586344890904267851}
   m_Layer: 0
   m_Name: ChairBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7158397349658852126
@@ -102,6 +103,22 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!208 &3586344890904267851
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812900899134784905}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.70000005, y: 0.70000005, z: 0.45900002}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: -0.541}
+  m_TimeToStationary: 0.5
 --- !u!1 &3102289765061447501
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,11 +134,12 @@ GameObject:
   - component: {fileID: 3102289765061447537}
   - component: {fileID: 3102289765061447536}
   - component: {fileID: 3102289765061447542}
+  - component: {fileID: 7212915872768683170}
   m_Layer: 0
   m_Name: ChairTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1986607199737785487
@@ -273,6 +291,22 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!208 &7212915872768683170
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3102289765061447501}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.734, y: 0.554, z: 1.264}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.046000004, z: 0.721}
+  m_TimeToStationary: 0.5
 --- !u!1 &5674973568311740910
 GameObject:
   m_ObjectHideFlags: 0

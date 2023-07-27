@@ -79,7 +79,7 @@ public class UnitHandItemMovement : MonoBehaviour
     {
         if (use)
         {
-            _hand.HandObject.transform.Rotate(-3f, 0f, 0f);
+            _hand.HandObject.transform.Rotate(-5f, 0f, 0f);
         }
         else
         {

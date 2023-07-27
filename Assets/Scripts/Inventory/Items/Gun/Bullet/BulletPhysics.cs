@@ -20,12 +20,9 @@ public class BulletPhysics : BulletBase
         OnCollision(collision.gameObject, transform.position);
     }
 
-    protected virtual void OnCollision(GameObject hitObj, Vector3 hitPos)
+    protected override void OnCollision(GameObject hitObj, Vector3 hitPos)
     {
-        if (hitObj.GetComponent<Rigidbody>() != null)
-        {
-            hitObj.GetComponent<Rigidbody>().AddForce(transform.forward * _impactForce);
-        }
+        base.OnCollision(hitObj, hitPos);
 
         Destroy(gameObject);
     }

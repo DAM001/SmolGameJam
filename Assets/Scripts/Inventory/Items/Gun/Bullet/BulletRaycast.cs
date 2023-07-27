@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BulletRaycast : BulletBase
 {
+    [Header("Visuals:")]
     [SerializeField] private LineRenderer _lineRenderer;
 
     protected override void Start()
@@ -26,13 +27,5 @@ public class BulletRaycast : BulletBase
         _lineRenderer.SetPosition(1, endPos);
 
         Destroy(gameObject, .05f);
-    }
-
-    protected virtual void OnCollision(GameObject hitObj, Vector3 hitPos)
-    {
-        if (hitObj.GetComponent<Rigidbody>() != null)
-        {
-            hitObj.GetComponent<Rigidbody>().AddForce(transform.forward * _impactForce);
-        }
     }
 }

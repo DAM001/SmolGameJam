@@ -31,6 +31,10 @@ public enum InventoryItemType
     Sword,
     Spear,
 
+    //MAGIC
+    MagicOrb,
+    MagicWand,
+
     //BOWLING
     BowlingBall,
     BowlingPin,

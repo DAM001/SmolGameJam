@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6271462822589239755}
   - component: {fileID: 454740171546265381}
   - component: {fileID: 4055462768139220829}
-  - component: {fileID: 5565534409595789025}
   m_Layer: 0
   m_Name: MuzzleFlash
   m_TagString: Untagged
@@ -84,24 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5565534409595789025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033546503821645118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0, g: 0, b: 0, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &4989073586844102621
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +140,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 624834902433639225}
   _itemType: 0
   _stackSize: 1
-  _throwForce: 1000
+  _throwForce: 5000
   _inventoryIcon: {fileID: 7442185596978516732, guid: fb9b483e4b880b04bab286e9f4428ce9, type: 3}
   _iconSprite: {fileID: 0}
   _iconBackgroundColor:
