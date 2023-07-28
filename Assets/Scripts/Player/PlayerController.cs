@@ -140,6 +140,7 @@ public class PlayerController : MonoBehaviour
     public void RumbleController(float intensity, float duration)
     {
         StartCoroutine(RumbleHandler(intensity, duration));
+        GameObject.FindGameObjectWithTag("CameraFolder").GetComponent<CameraShake>().Shake(transform.position, intensity, duration * 5f);
     }
 
     protected IEnumerator RumbleHandler(float intensity, float duration)
