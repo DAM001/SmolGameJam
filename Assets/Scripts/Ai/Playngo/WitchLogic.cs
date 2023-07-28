@@ -47,5 +47,9 @@ public class WitchLogic : MonoBehaviour, IKillable
     public void Die()
     {
         _unitHand.ThrowActiveItem();
+
+        Transform folder = transform.parent;
+        transform.parent = null;
+        Destroy(folder.gameObject);
     }
 }

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5660101460925116444}
   - component: {fileID: 2967177962845124620}
   - component: {fileID: 5196305252032473093}
-  - component: {fileID: 4540486216089596798}
   - component: {fileID: 141389213905552543}
+  - component: {fileID: 7091756315379484773}
   m_Layer: 0
   m_Name: TableTennis
   m_TagString: Untagged
@@ -86,7 +86,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4540486216089596798
+--- !u!208 &141389213905552543
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3485892647832260831}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.6000001, y: 4.072, z: 0.82900006}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.32900003}
+  m_TimeToStationary: 0.5
+--- !u!114 &7091756315379484773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,22 +120,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!208 &141389213905552543
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3485892647832260831}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 2.6000001, y: 4.072, z: 0.82900006}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.32900003}
-  m_TimeToStationary: 0.5
 --- !u!1 &7575268164715013281
 GameObject:
   m_ObjectHideFlags: 0
