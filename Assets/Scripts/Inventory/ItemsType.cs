@@ -43,7 +43,9 @@ public enum InventoryItemType
     Carrot,
 
     //OFFICE
-    Laptop
+    Laptop,
+    Mug,
+    TuroRudi
 }
 
 public class ItemsType : MonoBehaviour
