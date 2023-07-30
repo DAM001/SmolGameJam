@@ -18,6 +18,6 @@ public class MusicManager : AudioBase
     {
         if (id >= _musics.Length) return;
 
-        PlaySound(_musics[id]);
+        PlaySoundWithoutPitch(_musics[id]);
     }
 }

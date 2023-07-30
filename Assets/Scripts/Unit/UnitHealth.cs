@@ -8,14 +8,18 @@ public class UnitHealth : MonoBehaviour
     [Space(10)]
     [SerializeField] private float _maxHealth = 100f;
     [Header("Visuals:")]
+    [SerializeField] private GameObject _hitEffect;
     [SerializeField] private GameObject _dieEffect;
 
     private float _currentHealth;
 
+    public GameObject HitEffect { get => _hitEffect; }
     public bool IsAlive { get => _currentHealth > 0f; }
+    public float CurrentHealth { get => _currentHealth; }
 
     private void Start()
     {
+        Data.Characters.Add(gameObject);
         _currentHealth = _maxHealth;
     }
 
@@ -45,6 +49,8 @@ public class UnitHealth : MonoBehaviour
 
     public void Die()
     {
+        Data.Characters.Remove(gameObject);
+
         _currentHealth = 0f;
 
         DieEffect();

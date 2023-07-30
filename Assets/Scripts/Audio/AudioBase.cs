@@ -18,12 +18,19 @@ public class AudioBase : MonoBehaviour
         }
     }
 
-    public void PlaySound(AudioClip sound)
+    public void PlaySoundWithoutPitch(AudioClip sound)
     {
         if (sound == null) return;
 
         _audioSource.clip = sound;
-        _audioSource.pitch = Random.Range(.8f, 1.1f);
         _audioSource.Play();
+    }
+
+    public void PlaySound(AudioClip sound)
+    {
+        if (sound == null) return;
+
+        _audioSource.pitch = Random.Range(.8f, 1.1f);
+        PlaySoundWithoutPitch(sound);
     }
 }

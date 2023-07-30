@@ -672,6 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damagePopup: {fileID: 150377463960279157, guid: dda692b3269a8f34fb016504464bf463, type: 3}
   _maxHealth: 100
+  _hitEffect: {fileID: 4175561382613598792, guid: ca20bedfe9660c742a9aa8d50e389ea4, type: 3}
   _dieEffect: {fileID: 796722587795427016, guid: 974c1e7b2057f9043bd07b5f5d284ba8, type: 3}
 --- !u!114 &5840690533849964831
 MonoBehaviour:

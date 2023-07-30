@@ -17,12 +17,12 @@ public class Data : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
 
-        Characters.Add(GameObject.FindGameObjectWithTag("Player"));
+        /*Characters.Add(GameObject.FindGameObjectWithTag("Player"));
         GameObject[] players = GameObject.FindGameObjectsWithTag("Character");
         for (int i = 0; i < players.Length; i++)
         {
             Characters.Add(players[i]);
-        }
+        }*/
 
         /*GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
         for (int i = 0; i < items.Length; i++)

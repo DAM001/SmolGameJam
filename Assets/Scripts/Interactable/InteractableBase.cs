@@ -6,6 +6,6 @@ public class InteractableBase : MonoBehaviour
 {
     public virtual void Use()
     {
-
+        Debug.Log("Interactable use");
     }
 }

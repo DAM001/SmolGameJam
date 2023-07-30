@@ -9,7 +9,6 @@ public class BulletBase : MonoBehaviour
     [SerializeField] protected float _impactForce = 1000f;
     [SerializeField] protected string[] _ignoreCollisionTags;
     [Header("Visuals:")]
-    [SerializeField] protected GameObject _bloodEffect;
     [SerializeField] protected GameObject _bulletImpactEffect;
 
     protected float _distance = 0f;
@@ -62,7 +61,7 @@ public class BulletBase : MonoBehaviour
         }
 
         health.Damage(damage);
-        ImpactEffect(_bloodEffect, hitPos);
+        ImpactEffect(health.HitEffect, hitPos);
         UpdatePlayerUi(hitObj, damage);
     }
 

@@ -98,9 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0, g: 0, b: 0, a: 1}
-  outlineWidth: 2
+  outlineMode: 2
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 4
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -200,9 +200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0, g: 0, b: 0, a: 1}
-  outlineWidth: 2
+  outlineMode: 2
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 4
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -291,6 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _navmeshAgent: {fileID: 6804967283704893876}
   _moveSpeed: 10
+  _damage: 10
   _fireEffect: {fileID: 1836796384487305973}
 --- !u!114 &6556919448459082333
 MonoBehaviour:
@@ -305,7 +306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damagePopup: {fileID: 150377463960279157, guid: dda692b3269a8f34fb016504464bf463, type: 3}
-  _maxHealth: 50
+  _maxHealth: 30
+  _hitEffect: {fileID: 7346042556181608456, guid: e5ffedaae8993a34ebe68c575c9c1608, type: 3}
   _dieEffect: {fileID: 2936864701052483675, guid: 585ad9b24c1ec2b45b17093348e7b35c, type: 3}
 --- !u!195 &6804967283704893876
 NavMeshAgent:
