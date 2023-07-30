@@ -8,22 +8,21 @@ public class CameraShake : MonoBehaviour
     [Header("Properties:")]
     [SerializeField] private float _intensity = 1f;
     [SerializeField] private float _frequency = 10f;
-    [SerializeField] private float _duration = 2f;
 
     public void Shake(Vector3 pos, float intensityMultiplier, float duration)
     {
         float distance = Vector3.Distance(transform.position, pos);
         float shakeUntilTime = Time.time + duration;
 
-        StartCoroutine(ShakeHandler(distance, shakeUntilTime, intensityMultiplier));
+        StartCoroutine(ShakeHandler(distance, shakeUntilTime, intensityMultiplier, duration));
     }
 
-    private IEnumerator ShakeHandler(float distance, float shakeUntilTime, float intensityMultiplier)
+    private IEnumerator ShakeHandler(float distance, float shakeUntilTime, float intensityMultiplier, float duration)
     {
         while (shakeUntilTime > Time.time)
         {
             float distanceMultiplier = 1f / distance;
-            float intensity = (shakeUntilTime - Time.time) / _duration * _intensity * distanceMultiplier * intensityMultiplier;
+            float intensity = (shakeUntilTime - Time.time) / duration * _intensity * distanceMultiplier * intensityMultiplier;
 
             float x = intensity * Mathf.Sin(Time.time * _frequency);
             float y = intensity * Mathf.Sin(Time.time * _frequency * 1.3f);

@@ -31,14 +31,6 @@ public class PlayerController : MonoBehaviour
 
     protected void MouseLook()
     {
-        /*RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out hit, 500, LayerMask.GetMask("Ground")))
-        {
-            _lookPos = new Vector3(hit.point.x, 0f, hit.point.z);
-            _cursor.transform.position = _lookPos;
-        }*/
-
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out hit, 500, LayerMask.GetMask("Ground")))
@@ -134,20 +126,6 @@ public class PlayerController : MonoBehaviour
                 _controlType = ControlType.Keyboard;
             }
         }
-    }
-
-    //TODO: Rework this
-    public void RumbleController(float intensity, float duration)
-    {
-        StartCoroutine(RumbleHandler(intensity, duration));
-        GameObject.FindGameObjectWithTag("CameraFolder").GetComponent<CameraShake>().Shake(transform.position, intensity, duration * 5f);
-    }
-
-    protected IEnumerator RumbleHandler(float intensity, float duration)
-    {
-        Gamepad.current?.SetMotorSpeeds(intensity, intensity);
-        yield return new WaitForSeconds(duration);
-        Gamepad.current?.SetMotorSpeeds(0f, 0f);
     }
 
     public void OnMovement(InputValue inputValue)

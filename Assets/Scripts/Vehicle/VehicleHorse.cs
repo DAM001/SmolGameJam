@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class VehicleHorse : VehicleBase
 {
-    public override void Use(GameObject passanger)
+    public override void Enter(GameObject passanger)
     {
-        base.Use(passanger);
+        base.Enter(passanger);
 
         _animator.Play("Move");
     }
 
-    public override void NotUse()
+    public override void Exit()
     {
-        base.NotUse();
+        base.Exit();
 
         _animator.Play("Idle");
     }

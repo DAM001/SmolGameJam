@@ -16,7 +16,7 @@ public class VehicleBase : MovementBase
     {
         transform.parent = null;
 
-        NotUse();
+        Exit();
     }
 
     protected virtual void LateUpdate()
@@ -27,14 +27,14 @@ public class VehicleBase : MovementBase
         _passanger.transform.rotation = _visualsFolder.transform.rotation;
     }
 
-    public virtual void Use(GameObject passanger)
+    public virtual void Enter(GameObject passanger)
     {
         InUse = true;
 
         _passanger = passanger;
     }
 
-    public virtual void NotUse()
+    public virtual void Exit()
     {
         InUse = false;
 

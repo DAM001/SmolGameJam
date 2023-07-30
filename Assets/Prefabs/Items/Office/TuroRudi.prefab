@@ -62,9 +62,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8442957057975247127, guid: a9bdd5108bacecb4ebdf0fb553a66c62, type: 3}
-  - {fileID: -9196327937813977842, guid: a9bdd5108bacecb4ebdf0fb553a66c62, type: 3}
-  - {fileID: 2926557707537190794, guid: a9bdd5108bacecb4ebdf0fb553a66c62, type: 3}
+  - {fileID: 2100000, guid: f3945189bba32a14aabad99406668bc1, type: 2}
+  - {fileID: 2100000, guid: fafe2b78e7a87bd4ea32025b7fcffa53, type: 2}
+  - {fileID: 2100000, guid: f70874ab31d584e45a31812e1e5d847c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   _iconSprite: {fileID: 21300000, guid: 25e9127a69ed0ca46bec612d9e936cec, type: 3}
   _iconBackgroundColor:
     serializedVersion: 2
-    rgba: 4284769380
+    rgba: 4284777471
   _iconScale: 0.05
 --- !u!65 &6288753942596014249
 BoxCollider:

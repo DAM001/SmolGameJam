@@ -20,6 +20,8 @@ public class Explotion : MonoBehaviour
 
         ExplotionForce(_explotionForce);
         ExplotionEffect();
+
+        GameObject.FindGameObjectWithTag("CameraFolder").GetComponent<CameraManager>().Shake(transform.position, _damage / 50f, _damageRange / 10f);
     }
 
     private void CheckCharacter(GameObject character)

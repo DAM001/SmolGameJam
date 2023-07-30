@@ -451,6 +451,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Bumper",
+                    "id": "ff9e5c4b-93f5-4991-85fa-0fe6b8a2c22f",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "73c7fb45-3c50-45f5-aa72-248710e810f7",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "764affea-e7ac-47aa-b3c0-c03a48167826",
+                    "path": "<XInputController>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "b5feee7c-a175-4c29-b032-e8491e036a5c",
                     "path": "<XInputController>/rightStick",

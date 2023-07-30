@@ -71,7 +71,7 @@ public class UnitHand : MonoBehaviour
     {
         if (CurrentVehicle != null)
         {
-            CurrentVehicle.GetComponent<VehicleBase>().NotUse();
+            CurrentVehicle.GetComponent<VehicleBase>().Exit();
             _movement.MovementScript = null;
             CurrentVehicle = null;
             return;
@@ -87,7 +87,7 @@ public class UnitHand : MonoBehaviour
         CurrentVehicle = vehicle;
 
         _movement.MovementScript = vehicle.GetComponent<VehicleBase>();
-        vehicle.GetComponent<VehicleBase>().Use(gameObject);
+        vehicle.GetComponent<VehicleBase>().Enter(gameObject);
 
         return true;
     }
@@ -182,7 +182,7 @@ public class UnitHand : MonoBehaviour
 
         if (_playerController != null)
         {
-            _playerController.RumbleController(damage / 50f, damage / 1000f);
+            GameObject.FindGameObjectWithTag("CameraFolder").GetComponent<CameraManager>().Shake(transform.position, damage / 50f, damage / 1000f);
         }
     }
 
