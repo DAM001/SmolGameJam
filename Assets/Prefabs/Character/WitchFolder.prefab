@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5040434816877611047, guid: 41cc9c5adbfd4b54299b9b7ff8f093f5, type: 3}
+      propertyPath: _dieEffect
+      value: 
+      objectReference: {fileID: 3307270176249389494, guid: ade741b47ec696c4b902634fd7a89008, type: 3}
     - target: {fileID: 5386537247644860551, guid: 41cc9c5adbfd4b54299b9b7ff8f093f5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
