@@ -141,6 +141,7 @@ MonoBehaviour:
   _itemType: 0
   _stackSize: 1
   _throwForce: 5000
+  _progressType: 1
   _inventoryIcon: {fileID: 7442185596978516732, guid: fb9b483e4b880b04bab286e9f4428ce9, type: 3}
   _iconSprite: {fileID: 0}
   _iconBackgroundColor:

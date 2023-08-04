@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+
+public enum ProgressType { Nope, Controlled, Automatic }
 
 public class InventoryItem : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class InventoryItem : MonoBehaviour
     [Space(5)]
     [SerializeField] protected float _throwForce = 1000f;
     [Header("UI:")]
+    [SerializeField] protected ProgressType _progressType = ProgressType.Nope;
+    [Space(10)]
     [SerializeField] protected GameObject _inventoryIcon;
     [SerializeField] protected Sprite _iconSprite;
     [SerializeField] protected Color32 _iconBackgroundColor;
@@ -21,6 +24,8 @@ public class InventoryItem : MonoBehaviour
     public InventoryItemType ItemType { get => _itemType; }
     public int StackSize { get => _stackSize; }
     public float ThrowForce { get => _throwForce; }
+    public ProgressType ProgressType { get => _progressType; }
+
     public GameObject InventoryIcon { get => _inventoryIcon; }
 
     public bool IsEquipped { get; protected set; }
@@ -94,5 +99,15 @@ public class InventoryItem : MonoBehaviour
     {
         _rigidbody.isKinematic = !value;
         _boxCollider.enabled = value;
+    }
+
+    public virtual float Progress()
+    {
+        return 0f;
+    }
+
+    public virtual float Cooldown()
+    {
+        return 0f;
     }
 }

@@ -19,6 +19,11 @@ public class UnitHand : MonoBehaviour
     public GameObject CurrentVehicle { get; set; }
     public GameObject HandObject { get => _handObject; }
 
+    private void FixedUpdate()
+    {
+        CheckIfHaveItem();
+    }
+
     public void UseDown()
     {
         if (!HasItem()) return;
@@ -203,6 +208,7 @@ public class UnitHand : MonoBehaviour
 
     protected void CheckIfHaveItem()
     {
+        if (CurrentItem == null) return;
         if (!CurrentItem.GetComponent<InventoryItem>().IsEquipped)
         {
             _inventory.ThrowActiveItem();

@@ -8,7 +8,6 @@ public class WitchLogic : MonoBehaviour, IKillable
     [SerializeField] protected UnitHand _unitHand;
     [SerializeField] protected UnitMovement unitMovement;
     [SerializeField] protected NavMeshAgent _navmeshAgent;
-    [SerializeField] protected float _orbUseTimer = 10f;
 
     private GameObject _target;
 
@@ -37,7 +36,7 @@ public class WitchLogic : MonoBehaviour, IKillable
 
         while (true)
         {
-            yield return new WaitForSeconds(_orbUseTimer);
+            yield return new WaitForSeconds(1f);
             _unitHand.UseDown();
             yield return new WaitForFixedUpdate();
             _unitHand.UseUp();

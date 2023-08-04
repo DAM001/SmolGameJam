@@ -65,7 +65,7 @@ public class GunMag : MonoBehaviour
 
     private IEnumerator ReloadHandler()
     {
-        float updateSpeed = .1f;
+        float updateSpeed = .02f;
         _isReloading = true;
         _reloadTimeSlider = 0f;
         while (_reloadTimeSlider < _reloadTime)

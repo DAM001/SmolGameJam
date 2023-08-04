@@ -149,7 +149,7 @@ public class GunScript : InventoryItem
         obj.transform.Rotate(0f, Random.Range(-accuracy, accuracy), 0f, Space.Self);
     }
 
-    public float AmmoInPercentage()
+    public override float Progress()
     {
         return _mag.AmmoInPercentage();
     }

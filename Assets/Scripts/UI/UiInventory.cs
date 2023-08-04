@@ -38,12 +38,23 @@ public class UiInventory : MonoBehaviour
             UpdateItem(index, itemIcon);
 
             GameObject item = _player.GetComponent<Inventory>().GetInventoryItem(index);
-            InventoryItemType itemType = item.GetComponent<InventoryItem>().ItemType;
+            ProgressType progressType = item.GetComponent<InventoryItem>().ProgressType;
             int stackSize = item.GetComponent<InventoryItem>().StackSize;
 
-            if (itemType == InventoryItemType.Gun)
+            if (progressType != ProgressType.Nope)
             {
-                float value = item.GetComponent<GunScript>().AmmoInPercentage();
+                float value = item.GetComponent<InventoryItem>().Progress();
+                if (progressType == ProgressType.Controlled)
+                {
+                    // nothing here
+                }
+                else if (progressType == ProgressType.Automatic)
+                {
+                    float cooldown = item.GetComponent<InventoryItem>().Cooldown();
+                    value = (value - Time.time) / cooldown * 100f;
+                    if (value < 0f) value = 0f;
+                }
+
                 UiProgress uiProgress = GetItemIcon(index).GetComponent<UiProgress>();
                 uiProgress.Show(true);
                 uiProgress.UpdateProgress(value);

@@ -10,6 +10,13 @@ public class UnitHandItemMovement : MonoBehaviour
     [SerializeField] private float _movementSpeed = 10f;
     [SerializeField] private float _rotationSpeed = 10f;
 
+    private Vector3 _handStartPosition;
+
+    private void Start()
+    {
+        _handStartPosition = _hand.HandObject.transform.localPosition;
+    }
+
     private void LateUpdate()
     {
         if (!_hand.HasItem()) return;
@@ -17,14 +24,7 @@ public class UnitHandItemMovement : MonoBehaviour
         Move(_hand.CurrentItem.transform);
         Rotate(_hand.CurrentItem.transform);
 
-        if (_hand.ItemType(_hand.CurrentItem) == InventoryItemType.Gun)
-        {
-            ReloadAnimation(_hand.CurrentItem.GetComponent<GunMag>().IsReloading);
-        }
-        else
-        {
-            ReloadAnimation(false);
-        }
+        HandleAnimations();
     }
 
     private void Move(Transform itemTransform)
@@ -74,6 +74,19 @@ public class UnitHandItemMovement : MonoBehaviour
         //_movement.KnockBack(damage / 100f);
     }
 
+    private void HandleAnimations()
+    {
+        if (_hand.ItemType(_hand.CurrentItem) == InventoryItemType.Gun)
+        {
+            ReloadAnimation(_hand.CurrentItem.GetComponent<GunMag>().IsReloading);
+        }
+        else
+        {
+            ReloadAnimation(false);
+            //EatAnimation(false);
+        }
+    }
+
 
     protected void ReloadAnimation(bool use)
     {
@@ -86,4 +99,16 @@ public class UnitHandItemMovement : MonoBehaviour
             _hand.HandObject.transform.localRotation = Quaternion.identity;
         }
     }
+
+    /*protected void EatAnimation(bool use)
+    {
+        if (use)
+        {
+            _hand.HandObject.transform.localPosition = _handStartPosition + Vector3.up * .3f;
+        }
+        else
+        {
+            _hand.HandObject.transform.localPosition = _handStartPosition;
+        }
+    }*/
 }
