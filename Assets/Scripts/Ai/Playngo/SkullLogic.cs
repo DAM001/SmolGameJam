@@ -9,6 +9,7 @@ public class SkullLogic : MonoBehaviour, IKillable
     [Header("Properties:")]
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _damage = 10f;
+    [SerializeField] private float _pushDamage = 1000f;
     [Header("Visuals:")]
     [SerializeField] private GameObject _fireEffect;
 

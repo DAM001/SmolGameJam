@@ -7,6 +7,8 @@ public class TuroRudi : InventoryItem
     [SerializeField] private Animator _animator;
     [SerializeField] private float _eatTime = 1.5f;
 
+    private bool _isEated = false;
+
     protected override void Start()
     {
         base.Start();
@@ -17,6 +19,8 @@ public class TuroRudi : InventoryItem
     public override void Deactivate()
     {
         base.Deactivate();
+
+        if (!_isEated) return;
         Destroy(gameObject);
     }
 
@@ -42,5 +46,6 @@ public class TuroRudi : InventoryItem
         EnableRigidbody(true);
         IsEquipped = false;
         Data.Items.Remove(gameObject);
+        _isEated = true;
     }
 }
