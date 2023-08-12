@@ -114,6 +114,7 @@ public class GunScript : InventoryItem
     private void FireFunction()
     {
         _visuals.ShowMuzzleFlash(_firePoint);
+        _visuals.SmokeOnFire(_damage);
         CreateBullets();
         _visuals.CreateBulletShell(_firePoint);
         _audio.Fire();

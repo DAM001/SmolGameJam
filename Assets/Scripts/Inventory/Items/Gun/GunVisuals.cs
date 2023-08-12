@@ -5,11 +5,16 @@ using UnityEngine;
 public class GunVisuals : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletShell;
-    //[SerializeField] private AudioSource _audioSource;
+    [Header("Smoke:")]
+    [SerializeField] private ParticleSystem _smokeEffect;
+    [SerializeField] private float _smokeIntensityModifier = .03f;
+    [SerializeField] private float _smokeDecrease = 1f;
 
     private GameObject _muzzleFlash;
+    private float _smokeIntensity = 0f;
 
-    public GameObject MuzzleFlash { 
+    public GameObject MuzzleFlash
+    { 
         get => _muzzleFlash;
         set
         {
@@ -17,6 +22,27 @@ public class GunVisuals : MonoBehaviour
             _muzzleFlash.SetActive(false);
             _muzzleFlash.transform.parent = null;
         }
+    }
+
+    public ParticleSystem SmokeEffect
+    {
+        get => _smokeEffect;
+        set
+        {
+            _smokeEffect = value;
+            var emission = _smokeEffect.emission;
+            emission.rateOverTime = 0f;
+        }
+    }
+
+    private void Start()
+    {
+        SmokeEffect = _smokeEffect;
+    }
+
+    private void FixedUpdate()
+    {
+        UpdateSmoke();
     }
 
     public void CreateBulletShell(GameObject firePoint)
@@ -46,5 +72,24 @@ public class GunVisuals : MonoBehaviour
         muzzleFlash.transform.localScale = new Vector3(scale, scale, .1f);
         yield return new WaitForSeconds(Random.Range(.03f, .08f));
         muzzleFlash.gameObject.SetActive(false);
+    }
+
+    private void UpdateSmoke()
+    {
+        var emission = _smokeEffect.emission;
+        emission.rateOverTime = _smokeIntensity;
+
+        if (_smokeIntensity <= 0f)
+        {
+            _smokeIntensity = 0f;
+            return;
+        }
+
+        _smokeIntensity -= Time.fixedDeltaTime * (1f / _smokeDecrease);
+    }
+
+    public void SmokeOnFire(float damage)
+    {
+        _smokeIntensity += damage * _smokeIntensityModifier;
     }
 }

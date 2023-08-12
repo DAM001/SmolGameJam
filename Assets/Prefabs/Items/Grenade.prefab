@@ -156,7 +156,7 @@ MonoBehaviour:
   _itemType: 10
   _stackSize: 2
   _throwForce: 2000
-  _hasProgress: 0
+  _progressType: 0
   _inventoryIcon: {fileID: 7442185596978516732, guid: fb9b483e4b880b04bab286e9f4428ce9, type: 3}
   _iconSprite: {fileID: 21300000, guid: c742634dcf43a8e439ba9ec3d1e88084, type: 3}
   _iconBackgroundColor:
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 100
-  _damageRange: 10
+  _damageRange: 5
   _explotionForce: 5000
   _explotionEffect: {fileID: 684845760705067805, guid: 0ba66a59b205c334b8393878c5cb6b06, type: 3}
 --- !u!65 &8992227232968020098
