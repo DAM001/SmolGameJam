@@ -1,41 +1,88 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
+
+[Serializable]
+public class Loot
+{
+    [SerializeField] private GameObject[] _lootArray;
+    [SerializeField] private float _probability = 100f;
+
+    public float Probability
+    {
+        get => _probability;
+        set => _probability = value;
+    }
+
+    public int NumberOfLootType
+    {
+        get => _lootArray.Length;
+    }
+
+    public GameObject RandomLoot
+    {
+        get
+        {
+            int index = UnityEngine.Random.Range(0, _lootArray.Length);
+            return _lootArray[index];
+        }
+    }
+}
 
 public class LootSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _ammo;
-    [SerializeField] private GameObject[] _weapons;
-    [SerializeField] private GameObject[] _other;
+    [SerializeField] private Loot[] _loot;
+
+    private void Start()
+    {
+        if (_loot.Length <= 1) return;
+
+        for (int i = 1; i < _loot.Length; i++)
+        {
+            _loot[i].Probability += _loot[i - 1].Probability;
+        }
+    }
 
     public GameObject[] Spawn(int numberOfSpawn)
     {
-        GameObject[] loots = new GameObject[numberOfSpawn];
+        if (numberOfSpawn <= 0) return null;
 
-        /*for (int i = 0; i < numberOfSpawn; i++)
-        {
-            loots[i] = Instantiate(_loots[UnityEngine.Random.Range(0, _loots.Length)]);
-            loots[i].transform.parent = null;
-            float distance = 1f;
-            loots[i].transform.position = transform.position + new Vector3(UnityEngine.Random.Range(-distance, distance), 1f, UnityEngine.Random.Range(-distance, distance));
-        }*/
+        GameObject[] lootArray = new GameObject[numberOfSpawn];
 
         for (int i = 0; i < numberOfSpawn; i++)
         {
-            if (i < numberOfSpawn / 2) loots[i] = CreateItem(_ammo);
-            else if ((i < numberOfSpawn / 2 + numberOfSpawn / 3)) loots[i] = CreateItem(_weapons);
-            else loots[i] = CreateItem(_other);
+            float currentProbability = UnityEngine.Random.Range(0f, AllLootProbability());
+
+            bool created = false;
+            for (int j = _loot.Length - 1; j >= 0; j--)
+            {
+                if (!created && currentProbability > (_loot[j].Probability - _loot[0].Probability))
+                {
+                    lootArray[i] = CreateItem(_loot[j]);
+                    created = true;
+                }
+            }
         }
 
-        return loots;
+        return lootArray;
     }
 
-    private GameObject CreateItem(GameObject[] items)
+    private float AllLootProbability()
     {
-        GameObject item = Instantiate(items[UnityEngine.Random.Range(0, items.Length)]);
-        item.transform.parent = null;
+        float allLootProbability = 0f;
+        for (int i = 0; i < _loot.Length; i++)
+        {
+            allLootProbability += _loot[i].Probability;
+        }
+
+        return allLootProbability;
+    }
+
+    private GameObject CreateItem(Loot loot)
+    {
         float distance = 1f;
+        GameObject item = Instantiate(loot.RandomLoot);
+
+        item.transform.parent = null;
         item.transform.position = transform.position + new Vector3(UnityEngine.Random.Range(-distance, distance), 1f, UnityEngine.Random.Range(-distance, distance));
         return item;
     }

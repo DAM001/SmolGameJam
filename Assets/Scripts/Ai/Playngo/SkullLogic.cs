@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class SkullLogic : MonoBehaviour, IKillable
 {
     [SerializeField] private NavMeshAgent _navmeshAgent;
+    [SerializeField] private LootSpawner _lootSpawner;
     [Header("Properties:")]
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _damage = 10f;
@@ -53,6 +54,9 @@ public class SkullLogic : MonoBehaviour, IKillable
 
     public void Die()
     {
+        int numberOfLoot = (int)Random.Range(0, 3);
+        _lootSpawner.Spawn(1);
+
         Destroy(_fireEffect, 5f);
         _fireEffect.GetComponent<ParticleSystem>().Stop();
         _fireEffect.transform.parent = null;

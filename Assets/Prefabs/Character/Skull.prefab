@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 6804967283704893877}
   - component: {fileID: 6804967283704893879}
   - component: {fileID: 6556919448459082333}
+  - component: {fileID: 3040025727537612199}
   - component: {fileID: 6804967283704893876}
   - component: {fileID: 7368242948290808876}
   - component: {fileID: 3219881444517729233}
@@ -290,8 +291,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navmeshAgent: {fileID: 6804967283704893876}
+  _lootSpawner: {fileID: 3040025727537612199}
   _moveSpeed: 10
   _damage: 10
+  _pushDamage: 1000
   _fireEffect: {fileID: 1836796384487305973}
 --- !u!114 &6556919448459082333
 MonoBehaviour:
@@ -309,6 +312,25 @@ MonoBehaviour:
   _maxHealth: 30
   _hitEffect: {fileID: 7346042556181608456, guid: e5ffedaae8993a34ebe68c575c9c1608, type: 3}
   _dieEffect: {fileID: 2936864701052483675, guid: 585ad9b24c1ec2b45b17093348e7b35c, type: 3}
+--- !u!114 &3040025727537612199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6804967283704893874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b77d0da4de6b54d93662ab0310cdb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loot:
+  - _lootArray:
+    - {fileID: 8788462547520677595, guid: 6480e1d12bf347e4187487d20bdc9409, type: 3}
+    _probability: 100
+  - _lootArray:
+    - {fileID: 8992227232968020097, guid: b6cc98399a12b07439cfba6e19b692ed, type: 3}
+    _probability: 50
 --- !u!195 &6804967283704893876
 NavMeshAgent:
   m_ObjectHideFlags: 0
