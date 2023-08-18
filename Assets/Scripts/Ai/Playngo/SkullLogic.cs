@@ -54,8 +54,8 @@ public class SkullLogic : MonoBehaviour, IKillable
 
     public void Die()
     {
-        int numberOfLoot = (int)Random.Range(0, 3);
-        _lootSpawner.Spawn(1);
+        int numberOfLoot = (int)Random.Range(0, 8) - 4;
+        _lootSpawner.Spawn(numberOfLoot);
 
         Destroy(_fireEffect, 5f);
         _fireEffect.GetComponent<ParticleSystem>().Stop();

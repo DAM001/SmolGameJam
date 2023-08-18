@@ -55,7 +55,8 @@ public class LootSpawner : MonoBehaviour
             bool created = false;
             for (int j = _loot.Length - 1; j >= 0; j--)
             {
-                if (!created && currentProbability > (_loot[j].Probability - _loot[0].Probability))
+                currentProbability -= _loot[j].Probability;
+                if (!created && currentProbability <= 0)
                 {
                     lootArray[i] = CreateItem(_loot[j]);
                     created = true;
