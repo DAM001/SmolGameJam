@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameObjectUtil : MonoBehaviour
@@ -36,5 +37,15 @@ public class GameObjectUtil : MonoBehaviour
         }
 
         return targetOjects.ToArray();
+    }
+
+    public static Vector3 GetRandomPositionInCircle(float range)
+    {
+        return new Vector3(Random.Range(-range, range), 0f, Random.Range(-range, range));
+    }
+
+    public static Vector3 GetRandomPositionInSphere(float range)
+    {
+        return new Vector3(Random.Range(-range, range), Random.Range(-range, range), Random.Range(-range, range));
     }
 }

@@ -33,7 +33,7 @@ public class WaveSpawner : SpawnerBase
 
         if (_spawnedObjects.Count == 0)
         {
-            if (_waves.Length < _currentWave - 1) return;
+            if (_waves.Length < _currentWave) return;
 
             StartWave();
         }
@@ -61,11 +61,16 @@ public class WaveSpawner : SpawnerBase
         {
             WaveObjects data = _waves[_currentWave].WaveData[i];
             GameObject[] spawnedObjects = CreateMultipleObjects(data.Quantity, data.SpawnObject);
+            float range = 1f;
 
             for (int j = 0; j < spawnedObjects.Length; j++)
             {
-                _spawnedObjects.Add(spawnedObjects[j]);
-                spawnedObjects[j].transform.position = _spawnpoints[UnityEngine.Random.Range(0, _spawnpoints.Length)].transform.position;
+                Transform spawnedObject = spawnedObjects[j].transform;
+
+                _spawnedObjects.Add(spawnedObject.gameObject);
+                spawnedObject.position = _spawnpoints[UnityEngine.Random.Range(0, _spawnpoints.Length)].transform.position;
+                spawnedObject.position += GameObjectUtil.GetRandomPositionInCircle(range);
+                spawnedObject.Rotate(0f, UnityEngine.Random.Range(-180f, 180f), 0f);
             }
         }
 

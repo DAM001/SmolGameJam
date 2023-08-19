@@ -54,11 +54,32 @@ public class SkullLogic : MonoBehaviour, IKillable
 
     public void Die()
     {
-        int numberOfLoot = (int)Random.Range(0, 8) - 4;
-        _lootSpawner.Spawn(numberOfLoot);
+        CreateLoot();
 
         Destroy(_fireEffect, 5f);
         _fireEffect.GetComponent<ParticleSystem>().Stop();
         _fireEffect.transform.parent = null;
+    }
+
+    private void CreateLoot()
+    {
+        int numberOfLoot = Random.Range(0, 10) - 7;
+        GameObject[] loot = _lootSpawner.Spawn(numberOfLoot);
+        if (loot == null) return;
+        for (int i = 0; i < loot.Length; i++)
+        {
+            loot[i].transform.Rotate(Random.Range(-180f, 180f), Random.Range(-180f, 180f), Random.Range(-180f, 180f));
+            loot[i].GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0f, Random.Range(0f, 500f), 0f));
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        Rigidbody rigidbody = collision.gameObject.GetComponent<Rigidbody>();
+
+        if (rigidbody != null)
+        {
+            rigidbody.AddForce(transform.forward * 5000f);
+        }
     }
 }

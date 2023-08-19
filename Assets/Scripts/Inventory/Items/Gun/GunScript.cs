@@ -134,6 +134,8 @@ public class GunScript : InventoryItem
     {
         for (int i = 0; i < _numberOfBullets; i++)
         {
+            if (_unitHand == null) return;
+
             var bullet = Instantiate(_bullet, _unitHand.transform);
             bullet.transform.position = _firePoint.transform.position;
             FireAccuracy(bullet, _accuracy);

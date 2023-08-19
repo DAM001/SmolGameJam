@@ -43,7 +43,7 @@ public class MagicOrb : InventoryItem
         for (int i = 0; i < monsters.Length; i++)
         {
             monsters[i].transform.position += new Vector3(Random.Range(-distance, distance), 0f, Random.Range(-distance, distance));
-            CreateEffect(_spawnEffect, monsters[i].transform.position);
+            CreateEffect(_spawnEffect, monsters[i].transform.position + Vector3.up);
             _summonEffect.GetComponent<ParticleSystem>().Play();
         }
     }

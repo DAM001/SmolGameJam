@@ -52,14 +52,13 @@ public class LootSpawner : MonoBehaviour
         {
             float currentProbability = UnityEngine.Random.Range(0f, AllLootProbability());
 
-            bool created = false;
             for (int j = _loot.Length - 1; j >= 0; j--)
             {
                 currentProbability -= _loot[j].Probability;
-                if (!created && currentProbability <= 0)
+                if (currentProbability <= 0)
                 {
                     lootArray[i] = CreateItem(_loot[j]);
-                    created = true;
+                    break;
                 }
             }
         }
@@ -80,11 +79,13 @@ public class LootSpawner : MonoBehaviour
 
     private GameObject CreateItem(Loot loot)
     {
-        float distance = 1f;
+        float range = 1f;
         GameObject item = Instantiate(loot.RandomLoot);
+        Transform itemTransform = item.transform;
 
-        item.transform.parent = null;
-        item.transform.position = transform.position + new Vector3(UnityEngine.Random.Range(-distance, distance), 1f, UnityEngine.Random.Range(-distance, distance));
+        itemTransform.parent = null;
+        itemTransform.position = transform.position + Vector3.up + GameObjectUtil.GetRandomPositionInCircle(range);
+        itemTransform.Rotate(0f, UnityEngine.Random.Range(-180f, 180f), 0f);
         return item;
     }
 }
