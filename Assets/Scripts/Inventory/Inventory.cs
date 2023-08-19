@@ -182,7 +182,7 @@ public class Inventory : MonoBehaviour
 
     public int GetGameObjectByType(InventoryItemType type)
     {
-        for (int i = 0; i < _items.Length; i++)
+        for (int i = _items.Length - 1; i > 0; i--)
         {
             if (_items[i].Item != null)
             {

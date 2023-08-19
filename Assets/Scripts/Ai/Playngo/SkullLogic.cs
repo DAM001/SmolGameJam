@@ -73,7 +73,7 @@ public class SkullLogic : MonoBehaviour, IKillable
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    /*private void OnCollisionStay(Collision collision)
     {
         Rigidbody rigidbody = collision.gameObject.GetComponent<Rigidbody>();
 
@@ -81,5 +81,5 @@ public class SkullLogic : MonoBehaviour, IKillable
         {
             rigidbody.AddForce(transform.forward * 5000f);
         }
-    }
+    }*/
 }

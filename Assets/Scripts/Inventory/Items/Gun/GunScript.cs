@@ -124,9 +124,12 @@ public class GunScript : InventoryItem
 
     private void KnockBack()
     {
+        float minKnockBackVal = 50f;
+        float maxKnockBackVal = 150f;
         float knockBack = _damage * _numberOfBullets;
-        if (knockBack < 50f) knockBack = 50f;
-        else if (knockBack > 150f) knockBack = 150f;
+
+        if (knockBack < minKnockBackVal) knockBack = minKnockBackVal;
+        else if (knockBack > maxKnockBackVal) knockBack = maxKnockBackVal;
         _unitHand.KnockBack(knockBack);
     }
 
