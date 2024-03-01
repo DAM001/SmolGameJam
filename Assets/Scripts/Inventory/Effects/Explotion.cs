@@ -13,9 +13,15 @@ public class Explotion : MonoBehaviour
 
     public void Explode()
     {
-        for (int i = 0; i < Data.Characters.Count; i++)
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _damageRange);
+        foreach (Collider hitCollider in colliders)
         {
-            CheckCharacter(Data.Characters[i]);
+            UnitHealth unitHealth = hitCollider.GetComponent<UnitHealth>();
+
+            if (unitHealth != null)
+            {
+                unitHealth.Damage(_damage * Random.Range(.7f, 1.3f));
+            }
         }
 
         ExplotionForce(_explotionForce);
@@ -24,16 +30,7 @@ public class Explotion : MonoBehaviour
         GameObject.FindGameObjectWithTag("CameraFolder").GetComponent<CameraManager>().Shake(transform.position, _damage / 50f, _damageRange / 10f);
     }
 
-    private void CheckCharacter(GameObject character)
-    {
-        if (character == null) return;
-        if (Vector3.Distance(character.transform.position, transform.position) < _damageRange)
-        {
-            character.GetComponent<UnitHealth>().Damage(_damage * Random.Range(.7f, 1.3f));
-        }
-    }
-
-    private void ExplotionForce(float force)
+    private void ExplotionForce(float force)    
     {
         Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, _damageRange);

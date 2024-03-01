@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 100
-  _damageRange: 5
+  _damageRange: 3
   _explotionForce: 5000
   _explotionEffect: {fileID: 684845760705067805, guid: 0ba66a59b205c334b8393878c5cb6b06, type: 3}
 --- !u!65 &8992227232968020098
