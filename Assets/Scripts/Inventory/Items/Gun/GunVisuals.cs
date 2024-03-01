@@ -5,6 +5,7 @@ using UnityEngine;
 public class GunVisuals : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletShell;
+    [SerializeField] private float _bulletShellDestroyTime = 10f;
     [Header("Smoke:")]
     [SerializeField] private ParticleSystem _smokeEffect;
     [SerializeField] private float _smokeIntensityModifier = .03f;
@@ -53,7 +54,7 @@ public class GunVisuals : MonoBehaviour
         shell.transform.position = firePoint.transform.position + transform.forward * -.6f + transform.right * .3f;
         shell.transform.Rotate(Random.Range(2f, 15f), Random.Range(-15f, 15f), 0f);
         shell.GetComponent<Rigidbody>().AddForce(shell.transform.right * Random.Range(200f, 500f));
-        Destroy(shell, 5f);
+        Destroy(shell, _bulletShellDestroyTime);
     }
 
     public void ShowMuzzleFlash(GameObject firePoint)

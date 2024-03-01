@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f70874ab31d584e45a31812e1e5d847c, type: 2}
+    - target: {fileID: 1757214441742065025, guid: 41cc9c5adbfd4b54299b9b7ff8f093f5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f96a3c43f56288447bbc646bdbe94d78, type: 2}
     - target: {fileID: 2618620917263091332, guid: 41cc9c5adbfd4b54299b9b7ff8f093f5, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -188,7 +192,6 @@ MonoBehaviour:
   _unitHand: {fileID: 2891360880721171281}
   unitMovement: {fileID: 8326996045080277166}
   _navmeshAgent: {fileID: 8732022824044442188}
-  _orbUseTimer: 10
 --- !u!114 &8326996045080277166 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 765909588168016608, guid: 41cc9c5adbfd4b54299b9b7ff8f093f5, type: 3}
