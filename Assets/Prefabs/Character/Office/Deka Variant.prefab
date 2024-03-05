@@ -13,11 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3453278758782544035, guid: 8cd522d125754bd46a1c95a9e24e7230, type: 3}
       propertyPath: m_Text
-      value: Dekka
+      value: Deka
       objectReference: {fileID: 0}
     - target: {fileID: 3453278759082055078, guid: 8cd522d125754bd46a1c95a9e24e7230, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 140
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 3706766537913350861, guid: 8cd522d125754bd46a1c95a9e24e7230, type: 3}
       propertyPath: m_Enabled
@@ -29,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4221777243810983403, guid: 8cd522d125754bd46a1c95a9e24e7230, type: 3}
       propertyPath: m_Name
-      value: Dekka Variant
+      value: Deka Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4221777243810983404, guid: 8cd522d125754bd46a1c95a9e24e7230, type: 3}
       propertyPath: m_RootOrder
